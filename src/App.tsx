@@ -1,57 +1,63 @@
-import React from 'react';
-import ml5 from 'ml5';
+import React from "react";
+import ml5 from "ml5";
+import { Provider } from "react-redux";
+import store from "./store";
+import Test from "./components/Test";
 
 function App() {
   return (
-    <div className='container'>
-      <div className='circle'>
-        <div className='dial'>
-          {/* NOTCHES */}
-          {/* FREQUENCIES */}
-          {/* NOTES */}
+    <Provider store={store}>
+      <div className="container">
+        <div className="circle">
+          <div className="dial">
+            {/* NOTCHES */}
+            {/* FREQUENCIES */}
+            {/* NOTES */}
+          </div>
+          <div className="housing">
+            <div className="housing__bottom"></div>
+          </div>
+          <div className="center"></div>
+          <div className="hand-container">
+            <div className="hand"></div>
+          </div>
         </div>
-        <div className='housing'>
-          <div className='housing__bottom'></div>
+        <div className="tuning">
+          <div className="tuning__string">
+            <span className="tuning__note">E</span>
+          </div>
+          <div className="tuning__string active">
+            <span className="tuning__note">A</span>
+          </div>
+          <div className="tuning__string">
+            <span className="tuning__note">D</span>
+          </div>
+          <div className="tuning__string">
+            <span className="tuning__note">G</span>
+          </div>
+          <div className="tuning__string">
+            <span className="tuning__note">B</span>
+          </div>
+          <div className="tuning__string">
+            <span className="tuning__note">E</span>
+          </div>
         </div>
-        <div className='center'></div>
-        <div className='hand-container'>
-          <div className='hand'></div>
+        <div className="pitch-data">
+          <h1>Pitch Detection</h1>
+          <p id="status">Loading Model...</p>
+          <p id="pitch">pitch: 0</p>
+          <p id="octave">octave: 0</p>
+          <p id="closest_note">closest_note: 0</p>
+          <p id="closest_pitch">closest_pitch: 0</p>
         </div>
       </div>
-      <div className='tuning'>
-        <div className='tuning__string'>
-          <span className='tuning__note'>E</span>
-        </div>
-        <div className='tuning__string active'>
-          <span className='tuning__note'>A</span>
-        </div>
-        <div className='tuning__string'>
-          <span className='tuning__note'>D</span>
-        </div>
-        <div className='tuning__string'>
-          <span className='tuning__note'>G</span>
-        </div>
-        <div className='tuning__string'>
-          <span className='tuning__note'>B</span>
-        </div>
-        <div className='tuning__string'>
-          <span className='tuning__note'>E</span>
-        </div>
-      </div>
-      <div className='pitch-data'>
-        <h1>Pitch Detection</h1>
-        <p id='status'>Loading Model...</p>
-        <p id='pitch'>pitch: 0</p>
-        <p id='octave'>octave: 0</p>
-        <p id='closest_note'>closest_note: 0</p>
-        <p id='closest_pitch'>closest_pitch: 0</p>
-      </div>
-    </div>
+    </Provider>
   );
 }
 
 export default App;
 
+/* 
 let audioContext;
 let mic;
 let pitch: any;
@@ -70,38 +76,43 @@ async function setup() {
 setup();
 
 function startPitch(stream: any, audioContext: any) {
-  pitch = ml5.pitchDetection('./model', audioContext, stream, modelLoaded); // modelLoaded
+  pitch = ml5.pitchDetection("./model", audioContext, stream, modelLoaded); // modelLoaded
 }
 
 function modelLoaded() {
-  (document.querySelector('#status') as HTMLParagraphElement).textContent =
-    'Model Loaded';
+  (document.querySelector("#status") as HTMLParagraphElement).textContent =
+    "Model Loaded";
   getPitch();
 }
 
 function getPitch() {
   pitch.getPitch(function (err: Error, pitch: number) {
     if (pitch) {
-      const i = Math.round(Math.log2(Math.round(pitch) / concertPitch) * 12);
+      const i = Math.round(
+        Math.log2(Math.round(pitch) / concertPitch) * 12
+      );
       let steps = Math.abs(i);
       let dir = Math.sign(i) >= 0;
 
       const closest_note = allNotes[(dir ? i : (i % 12) + 12) % 12];
       const closest_pitch = Math.round(concertPitch * 2 ** (i / 12));
 
-      const octave = 4 + Math.sign(i) * Math.floor((steps + (dir ? 9 : 2)) / 12);
+      const octave =
+        4 + Math.sign(i) * Math.floor((steps + (dir ? 9 : 2)) / 12);
 
       (document.querySelector(
-        '#pitch'
-      ) as HTMLParagraphElement).textContent = `pitch: ${Math.round(pitch)}Hz`;
+        "#pitch"
+      ) as HTMLParagraphElement).textContent = `pitch: ${Math.round(
+        pitch
+      )}Hz`;
       (document.querySelector(
-        '#octave'
+        "#octave"
       ) as HTMLParagraphElement).textContent = `octave: ${octave}`;
       (document.querySelector(
-        '#closest_note'
+        "#closest_note"
       ) as HTMLParagraphElement).textContent = `closest_note: ${closest_note}`;
       (document.querySelector(
-        '#closest_pitch'
+        "#closest_pitch"
       ) as HTMLParagraphElement).textContent = `closest_pitch: ${closest_pitch}`;
     }
     getPitch();
@@ -109,11 +120,29 @@ function getPitch() {
 }
 
 const concertPitch = 440;
-const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
+const allNotes = [
+  "A",
+  "A#",
+  "B",
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "G#",
+];
 
 let i = Math.round(Math.log2(Math.round(523.25) / concertPitch) * 12);
 let steps = Math.abs(i);
 let dir = Math.sign(i) >= 0;
+ */
+
+// ==============================
+// ==============================
+// ==============================
 
 /* console.log('i', i);
 console.log('Octave', 4 + Math.sign(i) * Math.floor((steps + (dir ? 9 : 2)) / 12));
