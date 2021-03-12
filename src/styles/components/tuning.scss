@@ -1,0 +1,36 @@
+.tuning {
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  width: 30rem;
+  margin-bottom: 15rem;
+
+  &__string {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.1s all;
+    border: 1px solid transparent;
+  }
+
+  &__string span {
+    font-size: 2.5rem;
+  }
+
+  &__string.active {
+    border: 1px solid #ec3000;
+    box-shadow: 0px 0px 1px 1px #ec3000;
+  }
+
+  &__string.active span {
+    color: #ec3000;
+  }
+
+  &__string:hover {
+    color: #ec3000;
+  }
+}

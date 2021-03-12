@@ -1,56 +1,13 @@
 import React from "react";
 import ml5 from "ml5";
 import { Provider } from "react-redux";
-import store from "./store";
-import Test from "./components/Test";
+import store from "./store/store";
+import Home from "./layout/home";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="container">
-        <div className="circle">
-          <div className="dial">
-            {/* NOTCHES */}
-            {/* FREQUENCIES */}
-            {/* NOTES */}
-          </div>
-          <div className="housing">
-            <div className="housing__bottom"></div>
-          </div>
-          <div className="center"></div>
-          <div className="hand-container">
-            <div className="hand"></div>
-          </div>
-        </div>
-        <div className="tuning">
-          <div className="tuning__string">
-            <span className="tuning__note">E</span>
-          </div>
-          <div className="tuning__string active">
-            <span className="tuning__note">A</span>
-          </div>
-          <div className="tuning__string">
-            <span className="tuning__note">D</span>
-          </div>
-          <div className="tuning__string">
-            <span className="tuning__note">G</span>
-          </div>
-          <div className="tuning__string">
-            <span className="tuning__note">B</span>
-          </div>
-          <div className="tuning__string">
-            <span className="tuning__note">E</span>
-          </div>
-        </div>
-        <div className="pitch-data">
-          <h1>Pitch Detection</h1>
-          <p id="status">Loading Model...</p>
-          <p id="pitch">pitch: 0</p>
-          <p id="octave">octave: 0</p>
-          <p id="closest_note">closest_note: 0</p>
-          <p id="closest_pitch">closest_pitch: 0</p>
-        </div>
-      </div>
+      <Home />
     </Provider>
   );
 }

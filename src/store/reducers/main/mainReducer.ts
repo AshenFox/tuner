@@ -1,4 +1,4 @@
-import {} from "../../types";
+import {} from "../../actions/types";
 import initialState from "./mainInitState";
 
 const MainReducer = (state = initialState, action: any) => {

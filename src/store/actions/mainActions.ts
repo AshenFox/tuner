@@ -1,4 +1,4 @@
-import { TEST } from "../../types";
+import { TEST } from "./types";
 //   import axios from '../../server/supplemental/axios';
 
 // GET_DRAFT

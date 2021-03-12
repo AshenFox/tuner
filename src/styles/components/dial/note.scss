@@ -1,0 +1,20 @@
+.dial {
+  &__note-cont {
+    position: absolute;
+    z-index: 10;
+    width: 10rem;
+    height: 48%;
+    /* background-color: white; */
+    bottom: 50%;
+    left: calc(50% - 5rem);
+    transform-origin: 50% bottom;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  &__note {
+    font-size: 8rem;
+    font-weight: 700;
+  }
+}
