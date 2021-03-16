@@ -1,8 +1,8 @@
 import React from "react";
-import ml5 from "ml5";
+// import ml5 from "ml5";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import Home from "./layout/home";
+import Home from "./layout/home/Home";
 
 function App() {
   return (

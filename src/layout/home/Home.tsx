@@ -2,7 +2,7 @@ import React from "react";
 import Dial from "./components/Dial";
 import Tuning from "./components/Tuning";
 
-const Home = (props) => {
+const Home = (props: any) => {
   return (
     <div className="container">
       <Dial />
