@@ -1,6 +1,6 @@
 import React from "react";
 
-const Fr = ({ number, deg }) => {
+const Fr = ({ number, deg }: { number: number; deg: number }) => {
   let style = { transform: `rotate(${deg * 1.5}deg)` };
 
   /* console.log(deg * 1.5, -5 + number * 5); */

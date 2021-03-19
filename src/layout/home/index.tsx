@@ -1,5 +1,6 @@
 import React from "react";
 import Dial from "./components/Dial";
+import PitchDetector from "./components/PitchDetector";
 import Tuning from "./components/Tuning";
 
 const Home = (props: any) => {
@@ -7,6 +8,7 @@ const Home = (props: any) => {
     <div className="container">
       <Dial />
       <Tuning />
+      <PitchDetector />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Notch = ({ deg }) => {
+const Notch = ({ deg }: { deg: number }) => {
   let style = { transform: `rotate(${deg * 1.5}deg)` };
   let isBig = !((deg * 1.5) % 7.5);
 

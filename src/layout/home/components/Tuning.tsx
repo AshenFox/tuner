@@ -1,6 +1,6 @@
 import React from "react";
 
-const Tuning = (props) => {
+const Tuning = () => {
   return (
     <div className="tuning">
       <div className="tuning__string">
