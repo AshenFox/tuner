@@ -1,15 +1,41 @@
-import React from "react";
+import React from 'react';
+import { connect } from 'react-redux';
+import { AppState } from '../../../../store/store';
 
-const Fr = ({ number, deg }: { number: number; deg: number }) => {
-  let style = { transform: `rotate(${deg * 1.5}deg)` };
+interface OwnProps {
+  deg: number;
+}
 
-  /* console.log(deg * 1.5, -5 + number * 5); */
+interface StateProps {
+  main: { most_freq_fr: number };
+}
+
+interface DispatchProps {}
+
+type Props = OwnProps & StateProps & DispatchProps;
+
+const Fr: React.FC<Props> = ({ main, deg }) => {
+  const { most_freq_fr } = main;
+
+  const style = { transform: `rotate(${deg * 1.5}deg)` };
+
+  const offset = deg - 120;
+  const n = Math.floor((most_freq_fr - offset - 0.01) / 240);
+
+  // console.log('initNum', initNum);
+  // console.log('------------');
+  // console.log('full circles', Math.ceil(detected_FR / 240));
+  // console.log('------------');
 
   return (
-    <div className="dial__fr-cont" style={style}>
-      <span className="dial__fr">{-5 + number * 5}</span>
+    <div className='dial__fr-cont' style={style}>
+      <span className='dial__fr'>{deg + 240 * n}</span>
     </div>
   );
 };
 
-export default Fr;
+const mapStateToProps = (state: AppState) => ({
+  main: state.main,
+});
+
+export default connect(mapStateToProps)(Fr);

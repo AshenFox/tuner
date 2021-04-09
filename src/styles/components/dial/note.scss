@@ -1,16 +1,18 @@
 .dial {
   &__note-cont {
-    position: absolute;
-    z-index: 10;
     width: 10rem;
     height: 48%;
-    /* background-color: white; */
+
+    position: absolute;
     bottom: 50%;
     left: calc(50% - 5rem);
+
     transform-origin: 50% bottom;
 
     display: flex;
     justify-content: center;
+
+    z-index: 10;
   }
 
   &__note {

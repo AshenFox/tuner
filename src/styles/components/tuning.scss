@@ -1,20 +1,27 @@
 .tuning {
-  z-index: 20;
-  display: flex;
-  justify-content: space-between;
-  width: 30rem;
   margin-bottom: 15rem;
 
+  width: 30rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  z-index: 20;
+
   &__string {
+    cursor: pointer;
+
+    border: 1px solid transparent;
+    border-radius: 50%;
+
     width: 4rem;
     height: 4rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
+
     transition: 0.1s all;
-    border: 1px solid transparent;
   }
 
   &__string span {
@@ -23,6 +30,7 @@
 
   &__string.active {
     border: 1px solid #ec3000;
+
     box-shadow: 0px 0px 1px 1px #ec3000;
   }
 

@@ -1,82 +1,79 @@
 .dial {
   &__housing {
-    position: absolute;
-
     width: 150%;
     height: 150%;
+
+    position: absolute;
     top: 50%;
     left: 50%;
+
     transform: translate(-50%, -50%);
-    z-index: 15;
-    /* background-color: red; */
+
     overflow: hidden;
-    /* border-radius: 50%; */
-    /* background-color: red; */ /* #200952 */
-    /* background: linear-gradient(
-          0deg,
-          rgba(32, 9, 82, 1) 0%,
-          rgba(32, 9, 82, 1) 50%,
-          rgba(255, 0, 0, 0) 100%
-        ); */
-    /* clip-path: polygon(
-          0% 0%,
-          5% 0%,
-          50% 50%,
-          95% 0%,
-          100% 0%,
-          100% 100%,
-          0% 100%
-        ); */
+
+    z-index: 15;
+
     /* display: none; */
   }
 
   &__housing::after {
-    position: absolute;
-    content: "";
+    content: '';
+
     width: 150%;
     height: 150%;
+
+    position: absolute;
+    top: 2.5%;
+    left: 10%;
+
+    transform-origin: 0 0;
+    transform: rotate(35deg);
+
     background: linear-gradient(
       0deg,
       rgba(32, 9, 82, 1) 0%,
       rgba(32, 9, 82, 1) 85%,
       rgba(255, 0, 0, 0) 100%
     );
-    top: 2.5%;
-    left: 10%;
-    transform-origin: 0 0;
-    transform: rotate(35deg);
   }
 
   &__housing::before {
-    position: absolute;
-    content: "";
+    content: '';
+
     width: 150%;
     height: 150%;
+
+    position: absolute;
+    top: 2.5%;
+    right: 10%;
+
+    transform-origin: right top;
+    transform: rotate(325deg);
+
     background: linear-gradient(
       0deg,
       rgba(32, 9, 82, 1) 0%,
       rgba(32, 9, 82, 1) 85%,
       rgba(255, 0, 0, 0) 100%
     );
-    top: 2.5%;
-    right: 10%;
-    transform-origin: right top;
-    transform: rotate(325deg);
   }
 
   &__housing-bottom {
-    position: absolute;
     width: 150%;
     height: 150%;
+
+    position: absolute;
+    top: 45%;
+    right: 0;
+
+    transform-origin: right top;
+    z-index: 25;
+
     background: linear-gradient(
       0deg,
       rgba(32, 9, 82, 1) 0%,
       rgba(32, 9, 82, 1) 95%,
       rgba(255, 0, 0, 0) 100%
     );
-    top: 45%;
-    right: 0;
-    transform-origin: right top;
-    z-index: 25;
   }
 }

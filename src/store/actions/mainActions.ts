@@ -1,48 +1,33 @@
-import { TEST } from "./types";
+import { AppState } from './../store';
+import { MainActions } from './../types/actions';
+import { TEST, SET_FR } from '../types/actions';
+import { Dispatch } from 'react';
 //   import axios from '../../server/supplemental/axios';
 
-// GET_DRAFT
-/*   export const get_draft = () => async (dispatch, getState) => {
+type ThunkMainAC = (dispatch: Dispatch<MainActions>, getState: () => AppState) => void;
+
+export const set_fr = (detected_fr: number): MainActions => ({
+  type: SET_FR,
+  payload: { detected_fr },
+});
+
+export const test = (value: any) => <ThunkMainAC>(async (dispatch, getState) => {
     try {
       const {
-        auth: { user },
+        main: { most_freq_fr },
       } = getState();
-      if (!user) return; // loading
-  
+
       dispatch({
-        type: SET_MAIN_LOADING,
-        payload: true,
+        type: TEST,
+        payload: { value: most_freq_fr },
       });
-  
-      const { data } = await axios.get('/api/edit/draft');
-  
-      data.cards = arr_to_obj(data.cards);
-      data.module = { ...data.module, ...module_fields };
-  
-      dispatch({ type: GET_MODULE, payload: data });
+
+      // const { data } = await axios.get('/api/edit/draft');
     } catch (err) {
-      window.location.replace(`/home/modules`);
       console.error(err);
     }
-  
-    dispatch({
-      type: SET_MAIN_LOADING,
-      payload: false,
-    });
-  }; */
+  });
 
 // ==============================
 // ==============================
 // ==============================
-
-/* const arr_to_obj = (arr) => {
-  return Object.fromEntries(
-    arr.map((card) => [
-      card._id,
-      {
-        ...card,
-        ...card_fields,
-      },
-    ])
-  );
-}; */

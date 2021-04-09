@@ -1,16 +1,17 @@
 .dial {
   &__notch-cont {
-    position: absolute;
-    z-index: 10;
+    padding: 12px 0 15px 0;
 
     width: 1px;
     height: 33.5%;
 
+    position: absolute;
     bottom: 50%;
     left: calc(50% - 0.5px);
+
     transform-origin: 50% bottom;
 
-    padding: 12px 0 15px 0;
+    z-index: 10;
 
     /* width: 33.5%;
     height: 2px;
@@ -22,19 +23,19 @@
     padding: 0 7.5px 0 15px; */
 
     &.big {
-      width: 1.5px;
       padding: 7.5px 0 15px 0;
+
+      width: 1.5px;
+
       left: calc(50% - 0.75px);
     }
   }
 
   &__notch {
-    background: linear-gradient(
-      0deg,
-      transparent 0%,
-      #72181a 75%,
-      #72181a 100%
-    );
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(0deg, transparent 0%, #72181a 75%, #72181a 100%);
 
     /* background: linear-gradient(
       90deg,
@@ -42,7 +43,5 @@
       #72181a 75%,
       #72181a 100%
     ); */
-    width: 100%;
-    height: 100%;
   }
 }
