@@ -8,6 +8,7 @@
     left: calc(50% - 5rem);
 
     transform-origin: 50% bottom;
+    transform: rotate(180deg);
 
     display: flex;
     justify-content: center;
@@ -15,8 +16,18 @@
     z-index: 10;
   }
 
+  &__note-holder {
+    height: max-content;
+  }
+
   &__note {
+    line-height: 1;
     font-size: 8rem;
-    font-weight: 700;
+    font-weight: 500;
+  }
+
+  &__note-octave {
+    font-size: 2.5rem;
+    font-weight: 500;
   }
 }

@@ -32,7 +32,7 @@ const Dial = ({ main }: { main: { most_freq_fr: number } }) => {
         {/* FREQUENCIES */}
         {frs}
         {/* NOTES */}
-        {/* <Note /> */}
+        <Note />
       </div>
       <div className='dial__housing'>
         <div className='dial__housing-bottom'></div>
