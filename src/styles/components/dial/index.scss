@@ -1,13 +1,15 @@
-@import './housing';
-@import './notch';
-@import './note';
-@import './fr';
-@import './hand';
+@import "./housing";
+@import "./notch";
+@import "./note";
+@import "./fr";
+@import "./hand";
+@import "./detfr";
 
 .dial {
   border-radius: 100%;
 
   margin-bottom: -15rem;
+  margin-top: 20rem;
 
   width: 60rem;
   height: 60rem;
@@ -28,7 +30,7 @@
   &::after {
     border-radius: 100%;
 
-    content: '';
+    content: "";
 
     width: 100%;
     height: 100%;
@@ -43,7 +45,7 @@
   }
 
   &::before {
-    content: '';
+    content: "";
 
     width: 25%;
     height: 0px;

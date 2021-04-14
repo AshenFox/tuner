@@ -1,0 +1,27 @@
+.dial {
+  &__detfr-cont {
+    padding-top: 3rem;
+
+    height: max-content;
+    width: 10rem;
+
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 5rem);
+
+    z-index: 25;
+
+    /* animation: 10s infinite reverse linear rotate; */
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &__detfr {
+    font-size: 1.8rem;
+
+    /* background-color: #200952;
+    box-shadow: 0px 0px 1px 1px #200952; */
+  }
+}
