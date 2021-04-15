@@ -1,12 +1,22 @@
-import React from "react";
-import Dial from "./components/Dial";
-import PitchDetector from "./components/PitchDetector";
-import Tuning from "./components/Tuning";
+import React from 'react';
+import Dial from './components/Dial';
+import PitchDetector from './components/PitchDetector';
+import Tuning from './components/Tuning';
+import Indicator from './components/Indicator';
 
-const Home = (props: any) => {
+interface OwnProps {}
+
+interface StateProps {}
+
+interface DispatchProps {}
+
+type Props = OwnProps & StateProps & DispatchProps;
+
+const Home = (props: Props) => {
   return (
-    <div className="container">
+    <div className='container'>
       <Dial />
+      <Indicator />
       <Tuning />
       <PitchDetector />
     </div>

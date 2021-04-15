@@ -24,9 +24,25 @@
     transition: 0.1s all;
   }
 
-  &__string span {
+  &__note {
     font-size: 2.5rem;
   }
+
+  &__note-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 0.2rem;
+  }
+
+  &__note-octave,
+  &__note-sharp {
+    font-size: 1.2rem;
+  }
+
+  /* &__string span {
+    font-size: 2.5rem;
+  } */
 
   &__string.active {
     border: 1px solid #ec3000;
