@@ -29,27 +29,31 @@ const Dial = ({ main }: { main: { most_freq_fr: number } }) => {
   };
 
   return (
-    <div className="dial">
-      <div className="dial__inner" style={style}>
-        {/* NOTCHES */}
-        {notches}
-        {/* FREQUENCIES */}
-        {frs}
-        {/* NOTES */}
-        <Note />
-      </div>
-      <div className="dial__housing">
-        <div className="dial__housing-bottom"></div>
-      </div>
-      <div className="dial__center"></div>
-      <div className="dial__hand-cont">
-        <div className="dial__hand"></div>
-      </div>
-      <div className="dial__detfr-cont">
-        <div className="dial__detfr">
-          120<span>Hz</span>
+    <div className="dial__container">
+      <div className="dial">
+        <div className="dial__inner" style={style}>
+          {/* NOTCHES */}
+          {notches}
+          {/* FREQUENCIES */}
+          {frs}
+          {/* NOTES */}
+          <Note />
         </div>
-        <div className="dial__detfr-tip">lower</div>
+        <div className="dial__housing">
+          <div className="dial__housing-bottom"></div>
+        </div>
+        <div className="dial__center"></div>
+        <div className="dial__hand-cont">
+          <div className="dial__hand"></div>
+        </div>
+        <div className="dial__detfr-cont">
+          <div className="dial__detfr">
+            120<span>Hz</span>
+          </div>
+          <div className="dial__detfr-tip">lower</div>
+        </div>
+        <div className="dial__background-top"></div>
+        <div className="dial__background-bottom"></div>
       </div>
     </div>
   );

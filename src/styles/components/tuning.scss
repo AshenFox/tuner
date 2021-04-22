@@ -1,5 +1,5 @@
 .tuning {
-  margin-bottom: 15rem;
+  margin-bottom: 2rem;
 
   width: 30rem;
 
@@ -7,6 +7,8 @@
   justify-content: space-between;
 
   z-index: 20;
+
+  user-select: none;
 
   &__string {
     cursor: pointer;
