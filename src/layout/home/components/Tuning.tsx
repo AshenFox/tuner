@@ -1,6 +1,14 @@
 import React from "react";
 
-const Tuning = () => {
+interface OwnProps {}
+
+interface StateProps {}
+
+interface DispatchProps {}
+
+type Props = OwnProps & StateProps & DispatchProps;
+
+const Tuning: React.FC<Props> = () => {
   return (
     <div className="tuning">
       <div className="tuning__string ">

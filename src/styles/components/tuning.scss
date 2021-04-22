@@ -9,6 +9,7 @@
   z-index: 20;
 
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   &__string {
     cursor: pointer;
@@ -22,6 +23,8 @@
     position: relative;
 
     transition: 0.1s all;
+
+    backface-visibility: hidden;
   }
 
   &__note-holder {

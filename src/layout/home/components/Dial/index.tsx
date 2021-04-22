@@ -4,6 +4,7 @@ import Notch from "./Notch";
 import Note from "./Note";
 import { connect } from "react-redux";
 import { AppState } from "../../../../store/store";
+import DetFr from "./DetFr";
 
 const notchesNum = 240;
 
@@ -20,7 +21,7 @@ interface StateProps {
 
 type Props = StateProps;
 
-const Dial = ({ main }: { main: { most_freq_fr: number } }) => {
+const Dial: React.FC<Props> = ({ main }) => {
   /* console.log(notches.length, frs.length); */
   const { most_freq_fr } = main;
 
@@ -46,12 +47,7 @@ const Dial = ({ main }: { main: { most_freq_fr: number } }) => {
         <div className="dial__hand-cont">
           <div className="dial__hand"></div>
         </div>
-        <div className="dial__detfr-cont">
-          <div className="dial__detfr">
-            120<span>Hz</span>
-          </div>
-          <div className="dial__detfr-tip">lower</div>
-        </div>
+        <DetFr />
         <div className="dial__background-top"></div>
         <div className="dial__background-bottom"></div>
       </div>
