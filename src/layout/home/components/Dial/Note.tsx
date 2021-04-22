@@ -1,6 +1,14 @@
 import React from 'react';
 
-const Note = () => {
+interface OwnProps {}
+
+interface StateProps {}
+
+interface DispatchProps {}
+
+type Props = OwnProps & StateProps & DispatchProps;
+
+const Note: React.FC<Props> = () => {
   return (
     <div className='dial__note-cont'>
       <div className='dial__note-holder'>

@@ -1,5 +1,5 @@
 .tuning {
-  margin-bottom: 15rem;
+  margin-bottom: 2rem;
 
   width: 30rem;
 
@@ -8,24 +8,49 @@
 
   z-index: 20;
 
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
   &__string {
     cursor: pointer;
 
     border: 1px solid transparent;
     border-radius: 50%;
 
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 
     transition: 0.1s all;
+
+    backface-visibility: hidden;
+  }
+
+  &__note-holder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: flex-end;
   }
 
   &__note {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
+    margin-right: 0.25rem;
+  }
+
+  &__note-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__note-octave,
+  &__note-sharp {
+    font-size: 1.4rem;
   }
 
   &__note-info {
