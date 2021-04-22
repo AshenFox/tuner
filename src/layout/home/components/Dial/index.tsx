@@ -49,6 +49,7 @@ const Dial = ({ main }: { main: { most_freq_fr: number } }) => {
         <div className="dial__detfr">
           120<span>Hz</span>
         </div>
+        <div className="dial__detfr-tip">lower</div>
       </div>
     </div>
   );
