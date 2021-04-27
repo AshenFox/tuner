@@ -2,8 +2,6 @@ import React from 'react';
 import Dial from './components/Dial';
 import PitchDetector from './components/PitchDetector';
 import Tuning from './components/Tuning';
-import Indicator from './components/Indicator';
-
 interface OwnProps {}
 
 interface StateProps {}
@@ -16,7 +14,6 @@ const Home = (props: Props) => {
   return (
     <div className='container'>
       <Dial />
-      <Indicator />
       <Tuning />
       <PitchDetector />
     </div>

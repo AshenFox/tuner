@@ -4,7 +4,7 @@ import Notch from './Notch';
 import Note from './Note';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../store/store';
-import DetFr from './DetFr';
+import Indicator from './Indicator';
 
 const notchesNum = 240;
 
@@ -43,9 +43,10 @@ const Dial: React.FC<Props> = ({ main }) => {
         <div className='dial__hand-cont'>
           <div className='dial__hand'></div>
         </div>
-        <DetFr />
+
         <div className='dial__background-top'></div>
         <div className='dial__background-bottom'></div>
+        <Indicator />
       </div>
     </div>
   );
