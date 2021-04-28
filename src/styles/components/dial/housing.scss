@@ -13,11 +13,11 @@
 
     z-index: 15;
 
-    /* display: none; */
+    display: none;
   }
 
   &__housing::after {
-    content: '';
+    content: "";
 
     width: 150%;
     height: 150%;
@@ -38,7 +38,7 @@
   }
 
   &__housing::before {
-    content: '';
+    content: "";
 
     width: 150%;
     height: 150%;

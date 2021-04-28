@@ -21,25 +21,41 @@ const Fr: React.FC<Props> = ({ main, deg }) => {
 
   const offset = deg - 120;
 
+  /* let k = 1;
+
+  if (most_freq_fr - offset < 100) k = 5; */
+
   const n = Math.floor((most_freq_fr - offset - 0.01) / 240);
 
-  /* console.log("------------");
+  const value = deg + 240 * n;
 
-  console.log("deg", deg / 5);
-  console.log("offset", deg / 5 - 24);
-  console.log(
-    "n",
-    Math.floor((most_freq_fr - (deg / 5 - 24) - 0.01) / 48)
-  );
-  console.log(
-    "value",
-    deg / 5 + 48 * Math.floor((most_freq_fr - (deg / 5 - 24) - 0.01) / 48)
-  );
+  /* console.log("------------");
+  console.log("------------");
+
+  console.log("deg", deg);
+  console.log("offset", offset);
+  console.log("n", n);
+  console.log("value", value);
+
+  console.log("------------"); */
+
+  let k = 5;
+  const deg_k = deg / k;
+  const offset_k = deg_k - 120 / 5;
+  const n_k = Math.floor((most_freq_fr - offset_k - 0.01) / (240 / k));
+  const value_k = deg_k + (240 / k) * n_k;
+
+  /* console.log("deg_k", deg_k);
+  console.log("offset_k", offset_k);
+  console.log("n_k", n_k);
+  console.log("value_k", value_k);
+
+  console.log("------------");
   console.log("------------"); */
 
   return (
     <div className="dial__fr-cont" style={style}>
-      <span className="dial__fr">{deg + 240 * n}</span>
+      <span className="dial__fr">{n_k > 4 ? value : value_k}</span>
     </div>
   );
 };
