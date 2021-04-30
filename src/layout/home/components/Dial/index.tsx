@@ -25,6 +25,8 @@ const Dial: React.FC<Props> = ({ main }) => {
   /* console.log(notches.length, frs.length); */
   const { most_freq_fr } = main;
 
+  console.log(most_freq_fr);
+
   let k5_value = 0;
   let k_value = 0;
 
@@ -34,7 +36,7 @@ const Dial: React.FC<Props> = ({ main }) => {
     let k = most_freq_fr - 240;
     k_value = k > 0 ? k : 0;
 
-    console.log(k5_value, k_value);
+    /* console.log(k5_value, k_value); */
   }
 
   const style = {
@@ -42,6 +44,10 @@ const Dial: React.FC<Props> = ({ main }) => {
       -k5_value * 1.5 * 5 - k_value * 1.5
     }deg)`,
   };
+
+  /* const style = {
+    transform: `translate(-50%, -50%) rotate(${-most_freq_fr * 1.5}deg)`,
+  }; */
 
   return (
     <div className="dial__container">
