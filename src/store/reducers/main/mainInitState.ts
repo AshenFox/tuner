@@ -1,8 +1,23 @@
-import { mainStateInterface } from "../../types/state";
+import { mainStateInterface } from '../../types/state';
 
 const mainInitState: mainStateInterface = {
   test: true,
   fr_arr: [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
     120,
     120,
     120,
