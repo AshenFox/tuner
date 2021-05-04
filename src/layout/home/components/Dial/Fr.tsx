@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { AppState } from "../../../../store/store";
+import React from 'react';
+import { connect } from 'react-redux';
+import { AppState } from '../../../../store/store';
 
 interface OwnProps {
   deg: number;
@@ -19,36 +19,23 @@ const Fr: React.FC<Props> = ({ main, deg }) => {
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
 
-  /* let k = 1;
-  if (most_freq_fr + deg - 120 <= 240) k = 5;
-  */
+  let k = 10;
 
-  const offset = deg - 120;
-  const n_crude = (most_freq_fr - offset - 0.01) / 240;
+  const { n_crude } = calcValues(deg, k, most_freq_fr);
 
-  let k = 5;
-  if (n_crude >= 1) k = 1;
+  if (n_crude >= 2) k = 5;
+  if (n_crude >= 8) k = 1;
+  if (n_crude >= 40) k = 0.5;
 
-  const value = deg / k + Math.round((240 / k) * n_crude);
+  const { value, n: n_k } = calcValues(deg, k, most_freq_fr);
 
-  console.log(deg, k, Math.round((240 / k) * n_crude));
-
-  /* console.log(
-    "most_freq_fr + deg - 120",
-    most_freq_fr + deg - 120,
-    "value",
-    value
-  ); */
-
-  /* let k = 1;
-
-  if (most_freq_fr - offset < 100) k = 5; */
+  /* console.log(`deg: ${deg}`, `n_crude: ${n_crude}`, `n_k: ${n_k}`, value); */
 
   return (
-    <div className="dial__fr-cont" style={style}>
+    <div className='dial__fr-cont' style={style}>
       {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
-      <span className="dial__fr">{value}</span>
-      {/* <span>{deg}</span> */}
+      <span className='dial__fr'>{value}</span>
+      {/* <span className='dial__deg-test'>{deg}</span> */}
     </div>
   );
 };
@@ -59,14 +46,50 @@ const mapStateToProps = (state: AppState) => ({
 
 export default connect(mapStateToProps)(Fr);
 
-const getValues = (fr: number, deg: number, k: number) => {
-  const deg_k = deg / k;
-  const offset = deg_k - 120 / 5;
-  const n = Math.floor((fr - offset - 0.01) / (240 / k));
-  const value = deg + (240 / k) * n;
+const calcValues = (deg: number, k: number, fr: number) => {
+  // let modif = 0;
 
-  return [deg_k, offset, n, value];
+  // if (k <= 1) modif = -48;
+
+  // const deg_k = (deg + modif) / k;
+  const deg_k = deg / k;
+  const offset = deg_k - 120 / k;
+  const n_crude = (fr - offset - 0.01) / (240 / k);
+  const n = Math.floor(n_crude);
+  const value = deg_k + (240 / k) * n;
+
+  return {
+    deg_k,
+    offset,
+    n_crude,
+    n,
+    value,
+  };
 };
+
+/* let k = 1;
+  if (most_freq_fr + deg - 120 <= 240) k = 5;
+  */
+
+/* const offset = deg - 120;
+  const n_crude = (most_freq_fr - offset - 0.01) / 240;
+
+  let k = 5;
+  if (n_crude >= 1) k = 1;
+
+  const value = deg / k + Math.round((240 / k) * n_crude);
+ */
+
+/* console.log(
+    "most_freq_fr + deg - 120",
+    most_freq_fr + deg - 120,
+    "value",
+    value
+  ); */
+
+/* let k = 1;
+
+  if (most_freq_fr - offset < 100) k = 5; */
 
 /* 
 

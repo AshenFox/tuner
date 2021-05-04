@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import { set_fr } from "../../../store/actions/mainActions";
-import ml5 from "ml5";
-import { AppState } from "../../../store/store";
+import { connect } from 'react-redux';
+import { set_fr } from '../../../store/actions/mainActions';
+import ml5 from 'ml5';
+import { AppState } from '../../../store/store';
 
 interface OwnProps {}
 
@@ -16,7 +16,7 @@ type Props = DispatchProps & OwnProps;
 const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   useEffect(() => {
     // Initiate pitch detection
-    /* setup(); */
+    setup();
   }, []);
 
   // Declare functions
@@ -36,33 +36,25 @@ const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   };
 
   const startPitch = (stream: any, audioContext: any) => {
-    pitchDetection = ml5.pitchDetection(
-      "./model",
-      audioContext,
-      stream,
-      modelLoaded
-    );
+    pitchDetection = ml5.pitchDetection('./model', audioContext, stream, modelLoaded);
   };
 
   const modelLoaded = () => {
-    console.log("Model Loaded");
+    console.log('Model Loaded');
     getPitch();
   };
 
   const getPitch = () => {
     pitchDetection.getPitch(function (err: Error, fr: number) {
       if (fr) {
-        const i = Math.round(
-          Math.log2(Math.round(fr) / concertPitch) * 12
-        );
+        const i = Math.round(Math.log2(Math.round(fr) / concertPitch) * 12);
         let steps = Math.abs(i);
         let dir = Math.sign(i) >= 0;
 
         const closest_note = allNotes[(dir ? i : (i % 12) + 12) % 12];
         const closest_pitch = Math.round(concertPitch * 2 ** (i / 12));
 
-        const octave =
-          4 + Math.sign(i) * Math.floor((steps + (dir ? 9 : 2)) / 12);
+        const octave = 4 + Math.sign(i) * Math.floor((steps + (dir ? 9 : 2)) / 12);
 
         /* set_pitch_arr((pitch_arr) => [...pitch_arr.filter((el, i) => i !== 0), fr]); */
         set_fr(fr);
@@ -91,7 +83,7 @@ export default connect(mapStateToProps, {
 // =====================================
 
 const getMostFrequent = (arr: number[]) => {
-  let compare = "";
+  let compare = '';
   let mostFreq = 0;
 
   arr.reduce((acc: any, val) => {
@@ -122,20 +114,7 @@ let pitchDetection: any;
 let stream: MediaStream;
 
 const concertPitch = 440;
-const allNotes = [
-  "A",
-  "A#",
-  "B",
-  "C",
-  "C#",
-  "D",
-  "D#",
-  "E",
-  "F",
-  "F#",
-  "G",
-  "G#",
-];
+const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 
 let i = Math.round(Math.log2(Math.round(523.25) / concertPitch) * 12);
 let steps = Math.abs(i);
