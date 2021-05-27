@@ -1,7 +1,7 @@
-import React from 'react';
-import Note from './Note';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store/store';
+import React from "react";
+import Note from "./Note";
+import { connect } from "react-redux";
+import { AppState } from "../../../../store/store";
 
 interface OwnProps {}
 
@@ -22,24 +22,55 @@ const Notes: React.FC<Props> = ({ main }) => {
 
   const steps = 12 * Math.log2(most_freq_fr / baseFR);
 
-  let up = Math.ceil(steps);
-  let down = Math.floor(steps);
-  const equal = up === down;
+  // 24
+  // 120
+  // 240
+
+  const closest = Math.floor(steps);
 
   const notesArr = [];
+
+  let offsetUp = 3;
+  let offestDown = 3;
+
+  if (most_freq_fr > 150) {
+    offestDown = 2;
+    offsetUp = 2;
+  }
+
+  if (most_freq_fr > 220) offsetUp = 4;
+
+  for (let z = closest - offestDown; z < closest + offsetUp; z++) {
+    /* const i = (z + 1) % 12;
+    const { name, sign } = notesValuesArr[i];
+    const octave = Math.floor(35 / 12);
+    const fr = baseFR * 2 ** ((z + 1) / 12);
+
+    const angle = calcAngle(fr);
+
+    notesArr.push({ name, sign, octave, fr, angle }); */
+  }
+
+  /* console.log(notesArr); */
 
   /* ===========
   
   const i = (steps + 1) % 12;
-  const {name, sign} = notesValuesArr[i];
-  const octave = Math.floor(35/12);
-  const fr = baseFR*(2 ** (steps/12)) 
+    const {name, sign} = notesValuesArr[i];
+    const octave = Math.floor(35/12);
+    const fr = baseFR*(2 ** (steps/12)) 
   
   =========== */
 
   //   console.log(steps);
 
-  return <Note />;
+  return (
+    <>
+      {/* {notesArr.map((data) => (
+        <Note data={data} />
+      ))} */}
+    </>
+  );
 };
 
 const mapStateToProps = (state: AppState) => ({
@@ -52,53 +83,73 @@ const baseFR = 16.351597831287414;
 
 const notesValuesArr = [
   {
-    name: 'C',
+    name: "C",
     sign: false,
   },
   {
-    name: 'C',
+    name: "C",
     sign: true,
   },
   {
-    name: 'D',
+    name: "D",
     sign: false,
   },
   {
-    name: 'D',
+    name: "D",
     sign: true,
   },
   {
-    name: 'E',
+    name: "E",
     sign: false,
   },
   {
-    name: 'F',
+    name: "F",
     sign: false,
   },
   {
-    name: 'F',
+    name: "F",
     sign: true,
   },
   {
-    name: 'G',
+    name: "G",
     sign: false,
   },
   {
-    name: 'G',
+    name: "G",
     sign: true,
   },
   {
-    name: 'A',
+    name: "A",
     sign: false,
   },
   {
-    name: 'A',
+    name: "A",
     sign: true,
   },
   {
-    name: 'B',
+    name: "B",
     sign: false,
   },
+];
+
+const calcAngle = (fr: number) =>
+  degs.reduce((result, deg, i) => {
+    if (fr <= 0) return result;
+
+    const { max, k } = deg;
+
+    fr > max ? (result += max * k) : (result += fr * k);
+
+    fr -= max;
+
+    if (i + 1 === degs.length && fr > 0) result += fr * 0.5;
+    return result;
+  }, 0);
+
+const degs: { max: number; k: number }[] = [
+  { max: 48, k: 10 },
+  { max: 192, k: 5 },
+  { max: 720, k: 1 },
 ];
 
 /* (() => {

@@ -20,8 +20,9 @@ const Fr: React.FC<Props> = memo(({ main, deg }) => {
   const style = { transform: `rotate(${deg * 1.5}deg)` };
 
   let k = 10;
+  console.log("============");
 
-  const { n_crude } = calcValues(deg, k, most_freq_fr);
+  const { n_crude, offset } = calcValues(deg, k, most_freq_fr);
 
   if (n_crude >= 2) k = 5;
   if (n_crude >= 10) k = 1;
@@ -29,13 +30,15 @@ const Fr: React.FC<Props> = memo(({ main, deg }) => {
 
   const { value, n: n_k } = calcValues(deg, k, most_freq_fr);
 
+  console.log("============");
+
   // console.log(`deg: ${deg}`, `n_crude: ${n_crude}`, `n_k: ${n_k}`, value);
 
   return (
     <div className="dial__fr-cont" style={style}>
       {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
       <span className="dial__fr">{value}</span>
-      {/* <span className="dial__deg-test">{deg}</span> */}
+      <span className="dial__deg-test">{offset}</span>
     </div>
   );
 });
@@ -57,6 +60,17 @@ const calcValues = (deg: number, k: number, fr: number) => {
   const n_crude = (fr - offset - 0.01) / (240 / k);
   const n = Math.floor(n_crude);
   const value = deg_k + (240 / k) * n;
+
+  console.log(
+    `deg: ${deg}`,
+    `k: ${k}`,
+    `fr: ${fr}`,
+    `deg_k: ${deg_k}`,
+    `offset: ${offset}`,
+    `n_crude: ${n_crude}`,
+    `n: ${n}`,
+    `value: ${value}`
+  );
 
   return {
     deg_k,
