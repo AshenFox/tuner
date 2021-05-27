@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store/store';
+import React from "react";
+import { connect } from "react-redux";
+import { AppState } from "../../../../store/store";
 
 interface OwnProps {
   deg: number;
@@ -32,10 +32,10 @@ const Fr: React.FC<Props> = ({ main, deg }) => {
   /* console.log(`deg: ${deg}`, `n_crude: ${n_crude}`, `n_k: ${n_k}`, value); */
 
   return (
-    <div className='dial__fr-cont' style={style}>
+    <div className="dial__fr-cont" style={style}>
       {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
-      <span className='dial__fr'>{value}</span>
-      {/* <span className='dial__deg-test'>{deg}</span> */}
+      <span className="dial__fr">{value}</span>
+      {/* <span className="dial__deg-test">{deg}</span> */}
     </div>
   );
 };

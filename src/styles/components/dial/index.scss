@@ -1,9 +1,9 @@
-@import './housing';
-@import './notch';
-@import './note';
-@import './fr';
-@import './hand';
-@import './indicator';
+@import "./housing";
+@import "./notch";
+@import "./note";
+@import "./fr";
+@import "./hand";
+@import "./indicator";
 
 .dial {
   width: 90rem;
@@ -70,7 +70,7 @@
   }
 
   &::after {
-    content: '';
+    content: "";
 
     width: 25%;
     height: 0px;
