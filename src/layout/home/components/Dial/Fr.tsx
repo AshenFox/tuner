@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../store/store';
 
@@ -14,7 +14,7 @@ interface DispatchProps {}
 
 type Props = OwnProps & StateProps & DispatchProps;
 
-const Fr: React.FC<Props> = ({ main, deg }) => {
+const Fr: React.FC<Props> = memo(({ main, deg }) => {
   const { most_freq_fr } = main;
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
@@ -24,12 +24,12 @@ const Fr: React.FC<Props> = ({ main, deg }) => {
   const { n_crude } = calcValues(deg, k, most_freq_fr);
 
   if (n_crude >= 2) k = 5;
-  if (n_crude >= 8) k = 1;
+  if (n_crude >= 10) k = 1;
   if (n_crude >= 40) k = 0.5;
 
   const { value, n: n_k } = calcValues(deg, k, most_freq_fr);
 
-  /* console.log(`deg: ${deg}`, `n_crude: ${n_crude}`, `n_k: ${n_k}`, value); */
+  // console.log(`deg: ${deg}`, `n_crude: ${n_crude}`, `n_k: ${n_k}`, value);
 
   return (
     <div className='dial__fr-cont' style={style}>
@@ -38,7 +38,7 @@ const Fr: React.FC<Props> = ({ main, deg }) => {
       {/* <span className='dial__deg-test'>{deg}</span> */}
     </div>
   );
-};
+});
 
 const mapStateToProps = (state: AppState) => ({
   main: state.main,
