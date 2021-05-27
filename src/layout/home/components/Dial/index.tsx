@@ -1,7 +1,7 @@
 import React from 'react';
 import Fr from './Fr';
 import Notch from './Notch';
-import Note from './Note';
+import Notes from './Notes';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../store/store';
 import Indicator from './Indicator';
@@ -36,7 +36,7 @@ const Dial: React.FC<Props> = ({ main }) => {
           {/* FREQUENCIES */}
           {frs}
           {/* NOTES */}
-          {/* <Note /> */}
+          <Notes />
         </div>
         <div className='dial__housing'>
           <div className='dial__housing-bottom'></div>
@@ -56,6 +56,8 @@ const Dial: React.FC<Props> = ({ main }) => {
 
 const calcAngle = (fr: number) =>
   degs.reduce((result, deg, i) => {
+    console.log(fr);
+
     if (fr <= 0) return result;
 
     const { max, k } = deg;
