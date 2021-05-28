@@ -1,19 +1,15 @@
-import React from "react";
-import Fr from "./Fr";
-import Notch from "./Notch";
-import Notes from "./Notes";
-import { connect } from "react-redux";
-import { AppState } from "../../../../store/store";
-import Indicator from "./Indicator";
+import React from 'react';
+import Fr from './Fr';
+import Notch from './Notch';
+import Notes from './Notes';
+import { connect } from 'react-redux';
+import { AppState } from '../../../../store/store';
+import Indicator from './Indicator';
 
 const notchesNum = 240;
 
-const notches = [...new Array(notchesNum)].map((_, i) => (
-  <Notch key={i} deg={i} />
-));
-const frs = [...new Array(notchesNum / 5)].map((_, i) => (
-  <Fr key={i * 5} deg={i * 5} />
-));
+const notches = [...new Array(notchesNum)].map((_, i) => <Notch key={i} deg={i} />);
+const frs = [...new Array(notchesNum / 5)].map((_, i) => <Fr key={i * 5} deg={i * 5} />);
 
 interface StateProps {
   main: { most_freq_fr: number };
@@ -32,9 +28,9 @@ const Dial: React.FC<Props> = ({ main }) => {
   };
 
   return (
-    <div className="dial__container">
-      <div className="dial">
-        <div className="dial__inner" style={style}>
+    <div className='dial__container'>
+      <div className='dial'>
+        <div className='dial__inner' style={style}>
           {/* NOTCHES */}
           {notches}
           {/* FREQUENCIES */}
@@ -42,16 +38,16 @@ const Dial: React.FC<Props> = ({ main }) => {
           {/* NOTES */}
           <Notes />
         </div>
-        <div className="dial__housing">
-          <div className="dial__housing-bottom"></div>
+        <div className='dial__housing'>
+          <div className='dial__housing-bottom'></div>
         </div>
-        <div className="dial__center"></div>
-        <div className="dial__hand-cont">
-          <div className="dial__hand"></div>
+        <div className='dial__center'></div>
+        <div className='dial__hand-cont'>
+          <div className='dial__hand'></div>
         </div>
 
-        <div className="dial__background-top"></div>
-        <div className="dial__background-bottom"></div>
+        <div className='dial__background-top'></div>
+        <div className='dial__background-bottom'></div>
         <Indicator />
       </div>
     </div>
@@ -74,10 +70,16 @@ const calcAngle = (fr: number) =>
     return result;
   }, 0);
 
-const degs: { max: number; k: number }[] = [
+/* const degs: { max: number; k: number }[] = [
   { max: 48, k: 10 },
   { max: 192, k: 5 },
   { max: 720, k: 1 },
+]; */
+
+const degs: { max: number; k: number }[] = [
+  { max: 54, k: 10 },
+  { max: 86, k: 5 },
+  { max: 580, k: 1 },
 ];
 
 const mapStateToProps = (state: AppState) => ({

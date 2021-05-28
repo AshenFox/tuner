@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import { set_fr } from "../../../store/actions/mainActions";
-import ml5 from "ml5";
-import { AppState } from "../../../store/store";
+import { connect } from 'react-redux';
+import { set_fr } from '../../../store/actions/mainActions';
+import ml5 from 'ml5';
+import { AppState } from '../../../store/store';
 
 let audioContext: AudioContext;
 let pitchDetection: any;
@@ -20,7 +20,7 @@ type Props = DispatchProps & OwnProps;
 const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   useEffect(() => {
     // Initiate pitch detection
-    /* setup(); */
+    setup();
   }, []);
 
   // Declare functions
@@ -40,16 +40,11 @@ const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   };
 
   const startPitch = (stream: any, audioContext: any) => {
-    pitchDetection = ml5.pitchDetection(
-      "./model",
-      audioContext,
-      stream,
-      modelLoaded
-    );
+    pitchDetection = ml5.pitchDetection('./model', audioContext, stream, modelLoaded);
   };
 
   const modelLoaded = () => {
-    console.log("Model Loaded");
+    console.log('Model Loaded');
     getPitch();
   };
 

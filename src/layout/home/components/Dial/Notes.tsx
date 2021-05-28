@@ -1,7 +1,7 @@
-import React from "react";
-import Note from "./Note";
-import { connect } from "react-redux";
-import { AppState } from "../../../../store/store";
+import React from 'react';
+import Note from './Note';
+import { connect } from 'react-redux';
+import { AppState } from '../../../../store/store';
 
 interface OwnProps {}
 
@@ -41,14 +41,14 @@ const Notes: React.FC<Props> = ({ main }) => {
   if (most_freq_fr > 220) offsetUp = 4;
 
   for (let z = closest - offestDown; z < closest + offsetUp; z++) {
-    /* const i = (z + 1) % 12;
+    const i = (z + 1) % 12;
     const { name, sign } = notesValuesArr[i];
     const octave = Math.floor(35 / 12);
     const fr = baseFR * 2 ** ((z + 1) / 12);
 
     const angle = calcAngle(fr);
 
-    notesArr.push({ name, sign, octave, fr, angle }); */
+    notesArr.push({ name, sign, octave, fr, angle });
   }
 
   /* console.log(notesArr); */
@@ -66,9 +66,9 @@ const Notes: React.FC<Props> = ({ main }) => {
 
   return (
     <>
-      {/* {notesArr.map((data) => (
+      {notesArr.map((data) => (
         <Note data={data} />
-      ))} */}
+      ))}
     </>
   );
 };
@@ -83,51 +83,51 @@ const baseFR = 16.351597831287414;
 
 const notesValuesArr = [
   {
-    name: "C",
+    name: 'C',
     sign: false,
   },
   {
-    name: "C",
+    name: 'C',
     sign: true,
   },
   {
-    name: "D",
+    name: 'D',
     sign: false,
   },
   {
-    name: "D",
+    name: 'D',
     sign: true,
   },
   {
-    name: "E",
+    name: 'E',
     sign: false,
   },
   {
-    name: "F",
+    name: 'F',
     sign: false,
   },
   {
-    name: "F",
+    name: 'F',
     sign: true,
   },
   {
-    name: "G",
+    name: 'G',
     sign: false,
   },
   {
-    name: "G",
+    name: 'G',
     sign: true,
   },
   {
-    name: "A",
+    name: 'A',
     sign: false,
   },
   {
-    name: "A",
+    name: 'A',
     sign: true,
   },
   {
-    name: "B",
+    name: 'B',
     sign: false,
   },
 ];
@@ -147,10 +147,16 @@ const calcAngle = (fr: number) =>
   }, 0);
 
 const degs: { max: number; k: number }[] = [
+  { max: 54, k: 10 },
+  { max: 86, k: 5 },
+  { max: 580, k: 1 },
+];
+
+/* const degs: { max: number; k: number }[] = [
   { max: 48, k: 10 },
   { max: 192, k: 5 },
   { max: 720, k: 1 },
-];
+]; */
 
 /* (() => {
   const table = document.querySelector('center center table');
