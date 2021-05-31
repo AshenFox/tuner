@@ -1,12 +1,13 @@
-import { mainStateInterface } from '../../types/state';
+import { mainStateInterface } from "../../types/state";
 
 const mainInitState: mainStateInterface = {
   test: true,
   fr_arr: [
-    120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
-    120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+    120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+    120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
+    120, 120,
   ],
-  most_freq_fr: 141,
+  most_freq_fr: 120,
 };
 
 export default mainInitState;

@@ -1,7 +1,7 @@
-import React from 'react';
-import Note from './Note';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store/store';
+import React from "react";
+import Note from "./Note";
+import { connect } from "react-redux";
+import { AppState } from "../../../../store/store";
 
 interface OwnProps {}
 
@@ -30,21 +30,29 @@ const Notes: React.FC<Props> = ({ main }) => {
 
   const notesArr = [];
 
-  let offsetUp = 3;
-  let offestDown = 3;
+  let offsetUp = 6;
+  let offestDown = 6;
 
-  if (most_freq_fr > 150) {
-    offestDown = 2;
-    offsetUp = 2;
+  if (most_freq_fr >= 300) {
+    offsetUp = 4;
+    offestDown = 4;
   }
 
-  if (most_freq_fr > 220) offsetUp = 4;
+  if (most_freq_fr >= 1000) {
+    offsetUp = 3;
+    offestDown = 3;
+  }
 
-  for (let z = closest - offestDown; z < closest + offsetUp; z++) {
-    const i = (z + 1) % 12;
+  if (most_freq_fr >= 1500) {
+    offsetUp = 2;
+    offestDown = 2;
+  }
+
+  for (let z = closest - offestDown + 1; z < closest + offsetUp; z++) {
+    const i = z % 12;
     const { name, sign } = notesValuesArr[i];
-    const octave = Math.floor(35 / 12);
-    const fr = baseFR * 2 ** ((z + 1) / 12);
+    const octave = Math.floor(z / 12);
+    const fr = baseFR * 2 ** (z / 12);
 
     const angle = calcAngle(fr);
 
@@ -83,51 +91,51 @@ const baseFR = 16.351597831287414;
 
 const notesValuesArr = [
   {
-    name: 'C',
+    name: "C",
     sign: false,
   },
   {
-    name: 'C',
+    name: "C",
     sign: true,
   },
   {
-    name: 'D',
+    name: "D",
     sign: false,
   },
   {
-    name: 'D',
+    name: "D",
     sign: true,
   },
   {
-    name: 'E',
+    name: "E",
     sign: false,
   },
   {
-    name: 'F',
+    name: "F",
     sign: false,
   },
   {
-    name: 'F',
+    name: "F",
     sign: true,
   },
   {
-    name: 'G',
+    name: "G",
     sign: false,
   },
   {
-    name: 'G',
+    name: "G",
     sign: true,
   },
   {
-    name: 'A',
+    name: "A",
     sign: false,
   },
   {
-    name: 'A',
+    name: "A",
     sign: true,
   },
   {
-    name: 'B',
+    name: "B",
     sign: false,
   },
 ];
@@ -147,9 +155,10 @@ const calcAngle = (fr: number) =>
   }, 0);
 
 const degs: { max: number; k: number }[] = [
-  { max: 54, k: 10 },
-  { max: 86, k: 5 },
-  { max: 580, k: 1 },
+  { max: 48, k: 10 },
+  { max: 12, k: 5 },
+  { max: 140, k: 2.5 },
+  { max: 520, k: 1 },
 ];
 
 /* const degs: { max: number; k: number }[] = [

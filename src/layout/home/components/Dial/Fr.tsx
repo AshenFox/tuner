@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store/store';
+import React, { memo } from "react";
+import { connect } from "react-redux";
+import { AppState } from "../../../../store/store";
 
 interface OwnProps {
   deg: number;
@@ -23,18 +23,26 @@ const Fr: React.FC<Props> = memo(({ main, deg }) => {
 
   let k = 10;
 
+  // console.log("==========");
+
   let value = calcValues(deg, position, k, most_freq_fr, 0);
 
-  if (value > 54) {
-    position = ((value - 54) % (240 / k)) * 10;
+  if (value > 48) {
+    position = ((value - 48) % (240 / k)) * 10;
     k = 5;
-    value = calcValues(deg, position, k, most_freq_fr, 54);
+    value = calcValues(deg, position, k, most_freq_fr, 48);
   }
 
-  if (value > 140) {
-    position = ((value - 140) % (240 / k)) * 5;
+  if (value > 60) {
+    position = ((value - 60) % (240 / k)) * 5;
+    k = 2.5;
+    value = calcValues(deg, position, k, most_freq_fr, 60);
+  }
+
+  if (value > 200) {
+    position = ((value - 200) % (240 / k)) * 2.5;
     k = 1;
-    value = calcValues(deg, position, k, most_freq_fr, 140);
+    value = calcValues(deg, position, k, most_freq_fr, 200);
   }
 
   if (value > 720) {
@@ -43,11 +51,13 @@ const Fr: React.FC<Props> = memo(({ main, deg }) => {
     value = calcValues(deg, position, k, most_freq_fr, 720);
   }
 
+  // console.log("==========");
+
   return (
-    <div className='dial__fr-cont' style={style}>
+    <div className="dial__fr-cont" style={style}>
       {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
-      <span className='dial__fr'>{value}</span>
-      {/* <span className='dial__deg-test'>{deg}</span> */}
+      <span className="dial__fr">{value}</span>
+      {/* <span className="dial__deg-test">{deg}</span> */}
     </div>
   );
 });
@@ -69,33 +79,34 @@ const calcValues = (
   const offset = position / k - 120 / k;
   let n = Math.floor((fr - fr_offset - offset - 0.01) / (240 / k));
 
-  if (k === 10 && fr > 54 && fr < 66 && deg >= 0 && deg <= 60) {
-    n = 2;
+  // console.log({ deg, n, k });
+
+  if (k === 10 && fr > 48 && fr < 60 && deg >= 180) {
+    n = 1;
     k = 10;
   }
 
-  if (
-    k === 5 &&
-    fr > 140 &&
-    fr < 200 &&
-    ((deg >= 0 && deg <= 10) || (deg >= 190 && deg <= 240))
-  ) {
-    n = 1;
+  if (k === 5 && fr > 60 && fr < 84 && deg <= 60) {
+    n = 0;
     k = 5;
   }
 
-  if (k === 1 && fr > 720 && fr < 840 && deg >= 50 && deg <= 110) {
+  if (k === 2.5 && fr > 200 && fr < 260 && deg >= 110 && deg <= 170) {
+    n = 1;
+    k = 2.5;
+
+    //(deg <= 20 || deg >= 200)
+  }
+
+  if (k === 1 && fr > 720 && fr < 840 && deg >= 60 && deg <= 120) {
     n = 2;
     k = 1;
   }
 
   const value = position / k + (240 / k) * n + fr_offset;
 
-  /* if (show) {
-    console.log('============');
-    console.log(fr_offset);
-    console.log({ deg, position, k, fr_offset, value, n });
-    console.log('============');
+  /* if ((deg >= 0 && deg <= 20) || (deg >= 200 && deg <= 240)) {
+    // console.log({ deg, value, n, k, position });
   } */
 
   return value;
