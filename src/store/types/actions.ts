@@ -1,6 +1,8 @@
 // main
-export const TEST = 'TEST';
-export const SET_FR = 'SET_FR';
+export const TEST = "TEST";
+export const SET_FR = "SET_FR";
+// new types
+export const SET_NOTE = "SET_NOTE";
 
 export interface SetFrAction {
   type: typeof SET_FR;

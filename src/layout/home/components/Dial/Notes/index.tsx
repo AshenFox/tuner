@@ -1,7 +1,7 @@
 import React from "react";
 import Note from "./Note";
 import { connect } from "react-redux";
-import { AppState } from "../../../../store/store";
+import { AppState } from "../../../../../store/store";
 
 interface OwnProps {}
 
@@ -21,10 +21,6 @@ const Notes: React.FC<Props> = ({ main }) => {
   //16.351597831287414*(2 ** (71/12))
 
   const steps = 12 * Math.log2(most_freq_fr / baseFR);
-
-  // 24
-  // 120
-  // 240
 
   const closest = Math.floor(steps);
 
@@ -50,27 +46,14 @@ const Notes: React.FC<Props> = ({ main }) => {
 
   for (let z = closest - offestDown + 1; z < closest + offsetUp; z++) {
     const i = z % 12;
-    const { name, sign } = notesValuesArr[i];
+
     const octave = Math.floor(z / 12);
     const fr = baseFR * 2 ** (z / 12);
 
     const angle = calcAngle(fr);
 
-    notesArr.push({ name, sign, octave, fr, angle });
+    notesArr.push({ ...notesValuesArr[i], octave, fr, angle });
   }
-
-  /* console.log(notesArr); */
-
-  /* ===========
-  
-  const i = (steps + 1) % 12;
-    const {name, sign} = notesValuesArr[i];
-    const octave = Math.floor(35/12);
-    const fr = baseFR*(2 ** (steps/12)) 
-  
-  =========== */
-
-  //   console.log(steps);
 
   return (
     <>
@@ -161,30 +144,6 @@ const degs: { max: number; k: number }[] = [
   { max: 80, k: 2 },
   { max: 520, k: 1 },
 ];
-
-/* const degs: { max: number; k: number }[] = [
-  { max: 48, k: 10 },
-  { max: 192, k: 5 },
-  { max: 720, k: 1 },
-]; */
-
-/* (() => {
-  const table = document.querySelector('center center table');
-
-  let values = [...table.querySelectorAll('tr')].map((el) => {
-    let children = [...el.querySelectorAll('td')];
-    if(!children.length) return;
-
-    let note = children[0].firstChild.textContent.trim()
-    // let note = el.firstChild;
-    let sign = children[0].querySelector('sup') ? children[0].querySelector('sup').textContent.trim() : false;
-    let octave = parseFloat(children[0].querySelector('sub').textContent.trim());
-    let ft = parseFloat(children[1].textContent.trim());
-    return { note,sign, octave,ft };
-  });
-
-  return values;
-})(); */
 
 /* const allNotes = [
   {

@@ -1,6 +1,7 @@
 import { mainStateInterface } from "../../types/state";
 
 const mainInitState: mainStateInterface = {
+  tunnings: [],
   test: true,
   fr_arr: [
     120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120,
