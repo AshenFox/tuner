@@ -83,7 +83,8 @@ const calcAngle = (fr: number) =>
 const degs: { max: number; k: number }[] = [
   { max: 48, k: 10 },
   { max: 12, k: 5 },
-  { max: 140, k: 2.5 },
+  { max: 60, k: 2.5 },
+  { max: 80, k: 2 },
   { max: 520, k: 1 },
 ];
 

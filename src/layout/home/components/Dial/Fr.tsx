@@ -39,8 +39,14 @@ const Fr: React.FC<Props> = memo(({ main, deg }) => {
     value = calcValues(deg, position, k, most_freq_fr, 60);
   }
 
+  if (value > 120) {
+    position = ((value - 120) % (240 / k)) * 2.5; // 2.5 ???
+    k = 2;
+    value = calcValues(deg, position, k, most_freq_fr, 120);
+  }
+
   if (value > 200) {
-    position = ((value - 200) % (240 / k)) * 2.5;
+    position = ((value - 200) % (240 / k)) * 2;
     k = 1;
     value = calcValues(deg, position, k, most_freq_fr, 200);
   }
@@ -221,9 +227,3 @@ const calcValues = (deg: number, k: number, fr: number) => {
 
 
 */
-
-let v = 190;
-
-if ((v > 0 && v < 60) || (v > 180 && v < 240)) {
-  console.log(true);
-}

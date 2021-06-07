@@ -1,13 +1,20 @@
-import { mainStateInterface } from './../../types/state';
-import { MainActions, TEST, SET_FR } from './../../types/actions';
-import initialState from './mainInitState';
+import { mainStateInterface } from "./../../types/state";
+import { MainActions, TEST, SET_FR } from "./../../types/actions";
+import initialState from "./mainInitState";
 
-const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
+const MainReducer = (
+  state = initialState,
+  action: MainActions
+): mainStateInterface => {
   switch (action.type) {
     case SET_FR:
       return {
         ...state,
-        ...calc_fr(state.fr_arr, action.payload.detected_fr),
+        ...calc_fr(
+          state.fr_arr,
+          action.payload.detected_fr,
+          state.most_freq_fr
+        ),
       };
 
     default:
@@ -17,21 +24,23 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
 
 export default MainReducer;
 
-const calc_fr = (arr: number[], fr: number) => {
+const calc_fr = (arr: number[], fr: number, most_freq_fr_old: number) => {
+  // Filter our harmonics fr
+
   const fr_arr = [...arr.filter((el, i) => i !== 0), fr];
-  const most_freq_fr = get_most_frequent(fr_arr);
+  const most_freq_fr_new = get_most_frequent(fr_arr);
 
   return {
     fr_arr,
-    most_freq_fr,
+    most_freq_fr: most_freq_fr_new,
   };
 };
 
 const get_most_frequent = (arr: number[]) => {
-  let compare = '';
+  let compare = "";
   let most_freq = 0;
 
-  arr.reduce((acc: any, val) => {
+  let acc = arr.reduce((acc: any, val) => {
     const floored = Math.floor(val);
 
     if (floored in acc) {
@@ -49,6 +58,8 @@ const get_most_frequent = (arr: number[]) => {
 
     return acc;
   }, {});
+
+  // console.log(acc);
 
   return most_freq;
 };
