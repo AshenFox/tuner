@@ -1,19 +1,12 @@
 import React from "react";
-import Fr from "./Fr";
-import Notch from "./Notch";
-import Notes from "./Notes";
 import { connect } from "react-redux";
 import { AppState } from "../../../../store/store";
 import Indicator from "./Indicator";
+import Notes from "./Notes";
+import Frs from "./Frs";
+import Notches from "./Notches";
 
 const notchesNum = 240;
-
-const notches = [...new Array(notchesNum)].map((_, i) => (
-  <Notch key={i} deg={i} />
-));
-const frs = [...new Array(notchesNum / 5)].map((_, i) => (
-  <Fr key={i * 5} deg={i * 5} />
-));
 
 interface StateProps {
   main: { most_freq_fr: number };
@@ -35,11 +28,8 @@ const Dial: React.FC<Props> = ({ main }) => {
     <div className="dial__container">
       <div className="dial">
         <div className="dial__inner" style={style}>
-          {/* NOTCHES */}
-          {notches}
-          {/* FREQUENCIES */}
-          {frs}
-          {/* NOTES */}
+          <Notches num={notchesNum} />
+          <Frs num={notchesNum} />
           <Notes />
         </div>
         <div className="dial__housing">
@@ -60,8 +50,6 @@ const Dial: React.FC<Props> = ({ main }) => {
 
 const calcAngle = (fr: number) =>
   degs.reduce((result, deg, i) => {
-    // console.log(fr);
-
     if (fr <= 0) return result;
 
     const { max, k } = deg;
@@ -74,16 +62,11 @@ const calcAngle = (fr: number) =>
     return result;
   }, 0);
 
-/* const degs: { max: number; k: number }[] = [
-  { max: 48, k: 10 },
-  { max: 192, k: 5 },
-  { max: 720, k: 1 },
-]; */
-
 const degs: { max: number; k: number }[] = [
   { max: 48, k: 10 },
   { max: 12, k: 5 },
-  { max: 140, k: 2.5 },
+  { max: 60, k: 2.5 },
+  { max: 80, k: 2 },
   { max: 520, k: 1 },
 ];
 
