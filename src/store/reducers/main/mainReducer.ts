@@ -1,20 +1,13 @@
-import { mainStateInterface } from "./../../types/state";
-import { MainActions, TEST, SET_FR } from "./../../types/actions";
-import initialState from "./mainInitState";
+import { mainStateInterface } from './../../types/state';
+import { MainActions, TEST, SET_FR } from './../../types/actions';
+import initialState from './mainInitState';
 
-const MainReducer = (
-  state = initialState,
-  action: MainActions
-): mainStateInterface => {
+const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
   switch (action.type) {
     case SET_FR:
       return {
         ...state,
-        ...calc_fr(
-          state.fr_arr,
-          action.payload.detected_fr,
-          state.most_freq_fr
-        ),
+        ...calc_fr(state.fr_arr, action.payload.detected_fr, state.most_freq_fr),
       };
 
     default:
@@ -24,20 +17,37 @@ const MainReducer = (
 
 export default MainReducer;
 
-const calc_fr = (arr: number[], fr: number, most_freq_fr_old: number) => {
-  // Filter our harmonics fr
+const calc_fr = (
+  fr_arr_prev: number[],
+  detected_fr: number,
+  most_freq_fr_prev: number
+) => {
+  let sensitivity = 5;
+  if (most_freq_fr_prev < 100) sensitivity = 15;
 
-  const fr_arr = [...arr.filter((el, i) => i !== 0), fr];
-  const most_freq_fr_new = get_most_frequent(fr_arr);
+  // Filter our harmonics fr
+  let harmonic_offset = Math.min(
+    Math.abs(detected_fr - most_freq_fr_prev * 2),
+    Math.abs(detected_fr - most_freq_fr_prev * 3),
+    Math.abs(detected_fr - most_freq_fr_prev * 4)
+  );
+  const is_harmonic = harmonic_offset <= sensitivity;
+
+  const fr_arr = is_harmonic
+    ? fr_arr_prev
+    : [...fr_arr_prev.filter((el, i) => i !== 0), detected_fr];
+  const most_freq_fr = is_harmonic
+    ? most_freq_fr_prev + (Math.random() < 0.5 ? -0.05 : 0.05)
+    : get_most_frequent(fr_arr);
 
   return {
     fr_arr,
-    most_freq_fr: most_freq_fr_new,
+    most_freq_fr: most_freq_fr,
   };
 };
 
 const get_most_frequent = (arr: number[]) => {
-  let compare = "";
+  let compare = '';
   let most_freq = 0;
 
   let acc = arr.reduce((acc: any, val) => {
