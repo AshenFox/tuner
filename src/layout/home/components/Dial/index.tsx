@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { AppState } from "../../../../store/store";
-import Indicator from "./Indicator";
-import Notes from "./Notes";
-import Frs from "./Frs";
-import Notches from "./Notches";
+import React from 'react';
+import { connect } from 'react-redux';
+import { AppState } from '../../../../store/store';
+import Indicator from './Indicator';
+import Notes from './Notes';
+import Frs from './Frs';
+import Notches from './Notches';
 
 const notchesNum = 240;
 
@@ -25,23 +25,23 @@ const Dial: React.FC<Props> = ({ main }) => {
   };
 
   return (
-    <div className="dial__container">
-      <div className="dial">
-        <div className="dial__inner" style={style}>
+    <div className='dial__container'>
+      <div className='dial'>
+        <div className='dial__inner' style={style}>
           <Notches num={notchesNum} />
           <Frs num={notchesNum} />
-          <Notes />
+          <Notes fr={most_freq_fr} />
         </div>
-        <div className="dial__housing">
-          <div className="dial__housing-bottom"></div>
+        <div className='dial__housing'>
+          <div className='dial__housing-bottom'></div>
         </div>
-        <div className="dial__center"></div>
-        <div className="dial__hand-cont">
-          <div className="dial__hand"></div>
+        <div className='dial__center'></div>
+        <div className='dial__hand-cont'>
+          <div className='dial__hand'></div>
         </div>
 
-        <div className="dial__background-top"></div>
-        <div className="dial__background-bottom"></div>
+        <div className='dial__background-top'></div>
+        <div className='dial__background-bottom'></div>
         <Indicator />
       </div>
     </div>

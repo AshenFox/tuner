@@ -1,26 +1,28 @@
-import React from "react";
-import Note from "./Note";
-import { connect } from "react-redux";
-import { AppState } from "../../../../../store/store";
+import React, { memo } from 'react';
+import Note from './Note';
+// import { connect } from 'react-redux';
+// import { AppState } from '../../../../../store/store';
 
-interface OwnProps {}
+interface OwnProps {
+  fr: number;
+}
 
 interface StateProps {
-  main: { most_freq_fr: number };
+  /* main: { most_freq_fr: number }; */
 }
 
 interface DispatchProps {}
 
 type Props = OwnProps & StateProps & DispatchProps;
 
-const Notes: React.FC<Props> = ({ main }) => {
-  const { most_freq_fr } = main;
+const Notes: React.FC<Props> = ({ fr }) => {
+  // const { most_freq_fr } = main;
 
   //   12*Math.log2(440/16.351597831287414)
 
   //16.351597831287414*(2 ** (71/12))
 
-  const steps = 12 * Math.log2(most_freq_fr / baseFR);
+  const steps = 12 * Math.log2(fr / baseFR);
 
   const closest = Math.floor(steps);
 
@@ -29,17 +31,17 @@ const Notes: React.FC<Props> = ({ main }) => {
   let offsetUp = 6;
   let offestDown = 6;
 
-  if (most_freq_fr >= 300) {
+  if (fr >= 300) {
     offsetUp = 4;
     offestDown = 4;
   }
 
-  if (most_freq_fr >= 1000) {
+  if (fr >= 1000) {
     offsetUp = 3;
     offestDown = 3;
   }
 
-  if (most_freq_fr >= 1500) {
+  if (fr >= 1500) {
     offsetUp = 2;
     offestDown = 2;
   }
@@ -57,68 +59,73 @@ const Notes: React.FC<Props> = ({ main }) => {
 
   return (
     <>
-      {notesArr.map((data) => (
-        <Note data={data} />
+      {notesArr.map((data, i) => (
+        <Note data={data} key={i} />
       ))}
     </>
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
+/* const mapStateToProps = (state: AppState) => ({
   main: state.main,
-});
+}); */
 
-export default connect(mapStateToProps)(Notes);
+const areEqual = (prev: any, curent: any) =>
+  Math.floor(prev.fr) === Math.floor(curent.fr);
+
+// export default memo(connect(mapStateToProps)(Notes));
+
+export default memo(Notes, areEqual);
 
 const baseFR = 16.351597831287414;
 
 const notesValuesArr = [
   {
-    name: "C",
+    name: 'C',
     sign: false,
   },
   {
-    name: "C",
+    name: 'C',
     sign: true,
   },
   {
-    name: "D",
+    name: 'D',
     sign: false,
   },
   {
-    name: "D",
+    name: 'D',
     sign: true,
   },
   {
-    name: "E",
+    name: 'E',
     sign: false,
   },
   {
-    name: "F",
+    name: 'F',
     sign: false,
   },
   {
-    name: "F",
+    name: 'F',
     sign: true,
   },
   {
-    name: "G",
+    name: 'G',
     sign: false,
   },
   {
-    name: "G",
+    name: 'G',
     sign: true,
   },
   {
-    name: "A",
+    name: 'A',
     sign: false,
   },
   {
-    name: "A",
+    name: 'A',
     sign: true,
   },
   {
-    name: "B",
+    name: 'B',
     sign: false,
   },
 ];

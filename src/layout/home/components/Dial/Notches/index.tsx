@@ -1,5 +1,5 @@
-import React from "react";
-import Notch from "./Notch";
+import React, { memo } from 'react';
+import Notch from './Notch';
 
 interface OwnProps {
   num: number;
@@ -21,4 +21,4 @@ const Notches: React.FC<Props> = ({ num }) => {
   );
 };
 
-export default Notches;
+export default memo(Notches);

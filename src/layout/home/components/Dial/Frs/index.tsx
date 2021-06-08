@@ -1,5 +1,5 @@
-import React from "react";
-import Fr from "./Fr";
+import React, { memo } from 'react';
+import Fr from './Fr';
 
 interface OwnProps {
   num: number;
@@ -21,4 +21,4 @@ const Frs: React.FC<Props> = ({ num }) => {
   );
 };
 
-export default Frs;
+export default memo(Frs);

@@ -26,6 +26,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "react-scripts start",
+    "devs": "set HTTPS=true&&set SSL_CRT_FILE=./.cert/cert.pem&&set SSL_KEY_FILE=./.cert/key.pem&npm run dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
