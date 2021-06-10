@@ -17,7 +17,7 @@
   }
 
   &__housing::after {
-    content: "";
+    content: '';
 
     width: 150%;
     height: 150%;
@@ -29,16 +29,11 @@
     transform-origin: 0 0;
     transform: rotate(35deg);
 
-    background: linear-gradient(
-      0deg,
-      rgba(32, 9, 82, 1) 0%,
-      rgba(32, 9, 82, 1) 85%,
-      rgba(255, 0, 0, 0) 100%
-    );
+    background: linear-gradient(0deg, $primary 0%, $primary 85%, rgba($primary, 0) 100%);
   }
 
   &__housing::before {
-    content: "";
+    content: '';
 
     width: 150%;
     height: 150%;
@@ -50,12 +45,7 @@
     transform-origin: right top;
     transform: rotate(325deg);
 
-    background: linear-gradient(
-      0deg,
-      rgba(32, 9, 82, 1) 0%,
-      rgba(32, 9, 82, 1) 85%,
-      rgba(255, 0, 0, 0) 100%
-    );
+    background: linear-gradient(0deg, $primary 0%, $primary 85%, rgba($primary, 0) 100%);
   }
 
   &__housing-bottom {
@@ -69,11 +59,6 @@
     transform-origin: right top;
     z-index: 25;
 
-    background: linear-gradient(
-      0deg,
-      rgba(32, 9, 82, 1) 0%,
-      rgba(32, 9, 82, 1) 95%,
-      rgba(255, 0, 0, 0) 100%
-    );
+    background: linear-gradient(0deg, $primary 0%, $primary 95%, rgba($primary, 0) 100%);
   }
 }

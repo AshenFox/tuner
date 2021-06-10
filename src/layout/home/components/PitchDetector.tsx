@@ -4,7 +4,8 @@ import { set_fr } from '../../../store/actions/mainActions';
 import ml5 from 'ml5';
 import { AppState } from '../../../store/store';
 
-let audioContext: AudioContext;
+let audioContext = window.AudioContext || window.webkitAudioContext;
+let audioContextInstance: AudioContext;
 let pitchDetection: any;
 let stream: MediaStream;
 
@@ -34,8 +35,8 @@ const PitchDetector: React.FC<Props> = ({ set_fr }) => {
       video: false,
     });
 
-    audioContext = new AudioContext();
-    startPitch(stream, audioContext);
+    audioContextInstance = new audioContext();
+    startPitch(stream, audioContextInstance);
   };
 
   const startPitch = (stream: any, audioContext: any) => {

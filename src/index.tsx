@@ -17,3 +17,9 @@ ReactDOM.render(
 
 // mkcert -cert-file ./.cert/cert.pem -key-file ./.cert/key.pem localhost
 // HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem npm run dev
+
+declare global {
+  interface Window {
+    webkitAudioContext: typeof AudioContext;
+  }
+}
