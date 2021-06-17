@@ -17,14 +17,25 @@ const Indicator: React.FC<Props> = ({ main }) => {
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
+  const activeStringFr = 98;
+
+  const isTuned = Math.abs(most_freq_fr - activeStringFr) <= 0.5;
+
+  // tip text calculation
+  let tipText = 'lower';
+
+  if (most_freq_fr < activeStringFr) tipText = 'higher';
+  if (isTuned) tipText = 'in tune';
+  // ==========
+
   return (
-    <div className='dial__indicator-cont'>
+    <div className={`dial__indicator-cont ${isTuned && 'active'}`}>
       <div className='dial__indicator'>
         {value}
         {value % 1 ? '' : '.0'}
         <span>Hz</span>
       </div>
-      <div className='dial__indicator-tip'>lower</div>
+      <div className='dial__indicator-tip'>{tipText}</div>
     </div>
   );
 };

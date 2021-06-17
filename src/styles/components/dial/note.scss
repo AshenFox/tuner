@@ -28,7 +28,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
 
       height: 65.25%;
 
@@ -36,16 +36,11 @@
 
       z-index: 10;
 
-      background: linear-gradient(
-        0deg,
-        transparent 0%,
-        white 75%,
-        white 100%
-      );
+      background: linear-gradient(0deg, transparent 0%, white 75%, white 100%);
     }
 
     &::before {
-      content: "";
+      content: '';
 
       height: 5%;
 
@@ -78,5 +73,11 @@
   &__note-sharp {
     font-size: 2.5rem;
     font-weight: 500;
+  }
+
+  &__note-fr {
+    span {
+      margin-left: 0.15rem;
+    }
   }
 }

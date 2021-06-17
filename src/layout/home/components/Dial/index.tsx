@@ -24,6 +24,8 @@ const Dial: React.FC<Props> = ({ main }) => {
     transform: `translate(-50%, -50%) rotate(${-angle * 1.5}deg)`,
   };
 
+  const isTuned = Math.abs(most_freq_fr - 98) <= 0.5;
+
   return (
     <div className='dial__container'>
       <div className='dial'>
@@ -35,9 +37,10 @@ const Dial: React.FC<Props> = ({ main }) => {
         <div className='dial__housing'>
           <div className='dial__housing-bottom'></div>
         </div>
-        <div className='dial__center'></div>
-        <div className='dial__hand-cont'>
-          <div className='dial__hand'></div>
+        <div className={`dial__center ${isTuned && 'active'}`}></div>
+        <div className={`dial__hand-cont ${isTuned && 'active'}`}>
+          <div className='dial__hand1'></div>
+          <div className='dial__hand2'></div>
         </div>
 
         <div className='dial__background-top'></div>
