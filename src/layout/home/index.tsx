@@ -1,7 +1,7 @@
-import React from "react";
-import Dial from "./components/Dial";
-import PitchDetector from "./components/PitchDetector";
-import Tuning from "./components/Tuning";
+import React from 'react';
+import Dial from './components/Dial';
+import PitchDetector from './components/PitchDetector';
+import Tuning from './components/Tuning';
 interface OwnProps {}
 
 interface StateProps {}
@@ -12,7 +12,7 @@ type Props = OwnProps & StateProps & DispatchProps;
 
 const Home = (props: Props) => {
   return (
-    <div className="container">
+    <div className='container'>
       <Dial />
       <Tuning />
       <PitchDetector />

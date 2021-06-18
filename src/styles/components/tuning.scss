@@ -4,12 +4,30 @@
   width: 30rem;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
+  flex-wrap: wrap;
 
   z-index: 20;
 
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+
+  &__string-cont {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 5rem;
+  }
+
+  &__string-number {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    color: rgba(#fff, 0.6);
+    font-size: 1.4rem;
+  }
 
   &__string {
     cursor: pointer;
@@ -34,7 +52,7 @@
     transform: translate(-50%, -50%);
 
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
   }
 
   &__note {
@@ -42,11 +60,11 @@
     margin-right: 0.25rem;
   }
 
-  &__note-info {
+  /* &__note-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
+  } */
 
   &__note-octave,
   &__note-sharp {
@@ -55,8 +73,9 @@
 
   &__note-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: space-between;
+
     margin-left: 0.2rem;
   }
 

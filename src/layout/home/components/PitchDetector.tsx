@@ -20,7 +20,7 @@ type Props = DispatchProps & OwnProps;
 const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   useEffect(() => {
     // Initiate pitch detection
-    // setup();
+    setup();
   }, []);
 
   // Declare functions

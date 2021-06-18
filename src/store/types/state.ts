@@ -1,22 +1,22 @@
-type Note = {
-  key: string;
+export type Note = {
   name: string;
   sign: boolean;
   octave: number;
   fr: number;
-  active: number;
+  active: boolean;
 };
 
-type Tunning = {
-  key: string;
+export type Tuning = {
   name: string;
   data: Note[];
   active: boolean;
 };
 
+export type Tunings = Tuning[];
+
 export interface mainStateInterface {
   test: boolean;
   fr_arr: number[];
   most_freq_fr: number;
-  tunnings: Tunning[];
+  tunings: Tunings;
 }

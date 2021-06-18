@@ -17,8 +17,6 @@ interface DispatchProps {}
 type Props = OwnProps & StateProps & DispatchProps;
 
 const Note: React.FC<Props> = ({ data }) => {
-  /* console.log(data); */
-
   const { name, sign, octave, fr, angle } = data;
 
   const style = {

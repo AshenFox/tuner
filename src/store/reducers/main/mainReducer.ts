@@ -1,5 +1,5 @@
 import { mainStateInterface } from './../../types/state';
-import { MainActions, TEST, SET_FR } from './../../types/actions';
+import { MainActions, TEST, SET_FR, SET_ACTIVE_NOTE } from './../../types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
@@ -8,6 +8,22 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
       return {
         ...state,
         ...calc_fr(state.fr_arr, action.payload.detected_fr, state.most_freq_fr),
+      };
+
+    case SET_ACTIVE_NOTE:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          tuning.active
+            ? {
+                ...tuning,
+                data: tuning.data.map((string, i) => ({
+                  ...string,
+                  active: i === action.payload.key,
+                })),
+              }
+            : tuning
+        ),
       };
 
     default:

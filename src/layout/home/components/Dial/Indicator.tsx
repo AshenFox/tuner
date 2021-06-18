@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../store/store';
+import { Tunings } from '../../../../store/types/state';
 
 interface OwnProps {}
 
 interface StateProps {
-  main: { most_freq_fr: number };
+  main: { most_freq_fr: number; tunings: Tunings };
 }
 
 interface DispatchProps {}
@@ -13,18 +14,23 @@ interface DispatchProps {}
 type Props = OwnProps & StateProps & DispatchProps;
 
 const Indicator: React.FC<Props> = ({ main }) => {
-  const { most_freq_fr } = main;
+  const { most_freq_fr, tunings } = main;
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
-  const activeStringFr = 98;
+  const activeTuning = tunings.find((tuning) => tuning.active);
+  const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
 
-  const isTuned = Math.abs(most_freq_fr - activeStringFr) <= 0.5;
+  const isTuned =
+    typeof activeStringFr === 'number'
+      ? Math.abs(most_freq_fr - activeStringFr) <= 0.5
+      : false;
 
   // tip text calculation
   let tipText = 'lower';
 
-  if (most_freq_fr < activeStringFr) tipText = 'higher';
+  if (typeof activeStringFr === 'number' && most_freq_fr < activeStringFr)
+    tipText = 'higher';
   if (isTuned) tipText = 'in tune';
   // ==========
 

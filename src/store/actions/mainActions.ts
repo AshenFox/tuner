@@ -1,6 +1,6 @@
 import { AppState } from './../store';
 import { MainActions } from './../types/actions';
-import { TEST, SET_FR } from '../types/actions';
+import { TEST, SET_FR, SET_ACTIVE_NOTE } from '../types/actions';
 import { Dispatch } from 'react';
 //   import axios from '../../server/supplemental/axios';
 
@@ -9,6 +9,11 @@ type ThunkMainAC = (dispatch: Dispatch<MainActions>, getState: () => AppState) =
 export const set_fr = (detected_fr: number): MainActions => ({
   type: SET_FR,
   payload: { detected_fr },
+});
+
+export const set_active_note = (key: number): MainActions => ({
+  type: SET_ACTIVE_NOTE,
+  payload: { key },
 });
 
 export const test = (value: any) => <ThunkMainAC>(async (dispatch, getState) => {

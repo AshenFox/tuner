@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../store/store';
+import { Tunings } from '../../../../store/types/state';
 import Indicator from './Indicator';
 import Notes from './Notes';
 import Frs from './Frs';
@@ -9,14 +10,17 @@ import Notches from './Notches';
 const notchesNum = 240;
 
 interface StateProps {
-  main: { most_freq_fr: number };
+  main: { most_freq_fr: number; tunings: Tunings };
 }
 
 type Props = StateProps;
 
 const Dial: React.FC<Props> = ({ main }) => {
   /* console.log(notches.length, frs.length); */
-  const { most_freq_fr } = main;
+  const { most_freq_fr, tunings } = main;
+
+  const activeTuning = tunings.find((tuning) => tuning.active);
+  const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
 
   const angle = calcAngle(most_freq_fr);
 
@@ -24,7 +28,10 @@ const Dial: React.FC<Props> = ({ main }) => {
     transform: `translate(-50%, -50%) rotate(${-angle * 1.5}deg)`,
   };
 
-  const isTuned = Math.abs(most_freq_fr - 98) <= 0.5;
+  const isTuned =
+    typeof activeStringFr === 'number'
+      ? Math.abs(most_freq_fr - activeStringFr) <= 0.5
+      : false;
 
   return (
     <div className='dial__container'>
