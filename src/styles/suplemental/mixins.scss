@@ -1,0 +1,76 @@
+@mixin toggle-switch {
+  position: relative;
+  display: inline-block;
+  height: 2.8rem;
+  width: 5rem;
+
+  .toggle-checkbox {
+    display: none;
+
+    &:checked {
+      & ~ .toggle-switch {
+        left: 28px;
+        background-color: $green;
+      }
+
+      & ~ .toggle-frame {
+        border-color: $green;
+      }
+
+      & ~ .toggle-switch.sm {
+        left: 18px;
+      }
+    }
+  }
+
+  & .toggle-switch {
+    // content: '';
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 4px;
+    height: 1.8rem;
+    width: 1.8rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: all 0.2s;
+    z-index: 1000;
+  }
+
+  & .toggle-frame {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 1.4rem;
+    border: 2px solid white;
+    transition: all 0.2s;
+  }
+
+  &.sm {
+    height: 20px;
+    width: 3.5rem;
+
+    .toggle-checkbox {
+      &:checked {
+        & ~ .toggle-switch {
+          left: 18px;
+        }
+      }
+    }
+
+    & .toggle-switch {
+      left: 3px;
+      height: 14px;
+      width: 14px;
+    }
+
+    & .toggle-frame {
+      border-radius: 1rem;
+      border: 1.5px solid white;
+    }
+  }
+}

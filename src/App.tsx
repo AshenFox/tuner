@@ -3,6 +3,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import Home from './layout/home';
+import NavBar from './layout/navbar';
+import Settings from './layout/settings';
 
 interface OwnProps {}
 
@@ -15,7 +17,9 @@ type Props = OwnProps & StateProps & DispatchProps;
 const App: React.FC<Props> = () => {
   return (
     <Provider store={store}>
-      <Home />
+      {/* <Home /> */}
+      <Settings />
+      <NavBar />
     </Provider>
   );
 };

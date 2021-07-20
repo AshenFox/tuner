@@ -1,0 +1,98 @@
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid rgba(white, $alpha: 0.5);
+  box-shadow: 0px -5px 5px 0px rgba(white, $alpha: 0.1);
+  background-color: $primary;
+  z-index: 1000;
+
+  & .container {
+    max-width: 600px;
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    width: 100%;
+  }
+
+  &__item {
+    cursor: pointer;
+    width: 6.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 0.5rem;
+
+    &:hover {
+      .navbar__icon {
+        fill: $tertiary;
+      }
+
+      .navbar__title {
+        color: $tertiary;
+      }
+    }
+  }
+
+  &__icon {
+    fill: white;
+    /* height: 4rem;
+    width: 4rem; */
+    margin-bottom: 1.2rem;
+    transition: all 0.1s;
+  }
+
+  &__icon-tuner {
+    height: 4rem;
+    width: 4rem;
+
+    @media (max-width: 800px) {
+      height: 3.5rem;
+      width: 3.5rem;
+    }
+  }
+
+  &__icon-settings {
+    height: 3.5rem;
+    width: 3.5rem;
+
+    @media (max-width: 800px) {
+      height: 3rem;
+      width: 3rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.7rem;
+    font-weight: 300;
+    transition: all 0.1s;
+
+    @media (max-width: 800px) {
+      font-size: 1.6rem;
+    }
+  }
+}
+.home {
+  & + .navbar {
+    @media (max-height: 710px) and (max-width: 900px) {
+      position: relative;
+    }
+
+    @media (max-height: 790px) and (min-width: 900px) {
+      position: relative;
+    }
+  }
+}
+.settings {
+  & + .navbar {
+    position: fixed;
+  }
+}
+
+// 611 686 main body
+// 96 102 nav bar

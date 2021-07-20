@@ -1,0 +1,49 @@
+.settings {
+  & .container {
+    max-width: 600px;
+  }
+  &__header {
+    font-size: 3.5rem;
+    margin-top: 5rem;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+
+    @media (max-width: 800px) {
+      margin-top: 3rem;
+    }
+  }
+
+  &__menu {
+    margin-bottom: 5rem;
+
+    @media (max-width: 800px) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3rem;
+    font-size: 2rem;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(white, $alpha: 0.5);
+    }
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        color: $tertiary;
+      }
+    }
+  }
+
+  &__toggle {
+    margin-left: 5rem;
+
+    @include toggle-switch;
+  }
+}

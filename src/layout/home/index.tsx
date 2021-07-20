@@ -12,10 +12,12 @@ type Props = OwnProps & StateProps & DispatchProps;
 
 const Home = (props: Props) => {
   return (
-    <div className='container'>
-      <Dial />
-      <Tuning />
-      <PitchDetector />
+    <div className='home'>
+      <div className='container'>
+        <Dial />
+        <Tuning />
+        <PitchDetector />
+      </div>
     </div>
   );
 };
