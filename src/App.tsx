@@ -5,6 +5,9 @@ import store from './store/store';
 import Home from './layout/home';
 import NavBar from './layout/navbar';
 import Settings from './layout/settings';
+import TuningsList from './layout/tunings-list';
+import TuningsPage from './layout/tuning-page';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 interface OwnProps {}
 
@@ -17,9 +20,15 @@ type Props = OwnProps & StateProps & DispatchProps;
 const App: React.FC<Props> = () => {
   return (
     <Provider store={store}>
-      {/* <Home /> */}
-      <Settings />
-      <NavBar />
+      <Router>
+        <Switch>
+          <Route path='/settings' component={Settings} />
+          <Route path='/tunings-list' component={TuningsList} />
+          <Route path='/tuning-page' component={TuningsPage} />
+          <Route path='/' component={Home} />
+        </Switch>
+        <NavBar />
+      </Router>
     </Provider>
   );
 };

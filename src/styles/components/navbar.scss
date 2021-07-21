@@ -17,6 +17,20 @@
     justify-content: space-around;
     align-items: baseline;
     width: 100%;
+    text-decoration: none !important;
+
+    a {
+      text-decoration: none !important;
+      color: white;
+    }
+
+    a.selected {
+      color: $tertiary;
+
+      .navbar__icon {
+        fill: $tertiary;
+      }
+    }
   }
 
   &__item {
