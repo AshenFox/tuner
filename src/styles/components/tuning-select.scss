@@ -1,0 +1,21 @@
+.tuning-select {
+  width: 17.5rem;
+  color: white;
+  z-index: 2000;
+  margin-bottom: 2.5rem;
+
+  & [class*='-menu'] {
+    * {
+      &::-webkit-scrollbar {
+        margin: 1rem 0;
+        background-color: $primary-light;
+        width: 0.3rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(white, 0.7);
+        border-radius: 0.1rem;
+      }
+    }
+  }
+}
