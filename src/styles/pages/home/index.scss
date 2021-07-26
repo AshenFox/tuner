@@ -1,0 +1,13 @@
+@import './components/dial';
+@import './components/tuning';
+@import './components/pitch-data';
+@import './components/home';
+@import './components/tuning-select';
+
+.home {
+  margin-bottom: 15rem;
+
+  @media (max-width: 900px) {
+    margin-bottom: 0;
+  }
+}

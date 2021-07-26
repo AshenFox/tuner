@@ -13,14 +13,6 @@ interface DispatchProps {}
 const optionsTuningSelect = [
   { value: 'Guitar standart', label: 'Guitar standart' },
   { value: 'Drop D', label: 'Drop D' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Guitar standart', label: 'Guitar standart' },
 ];
 
 const createCustomTheme = (theme: any) => ({

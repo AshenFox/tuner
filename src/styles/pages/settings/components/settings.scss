@@ -2,15 +2,16 @@
   & .container {
     max-width: 600px;
   }
+
   &__header {
     font-size: 4rem;
-    margin-top: 5rem;
+    margin-top: 7rem;
     margin-bottom: 2.5rem;
     font-weight: 400;
 
-    @media (max-width: 800px) {
-      margin-top: 3rem;
-    }
+    /* @media (max-width: 800px) {
+      margin-top: 5rem;
+    } */
   }
 
   &__menu {
@@ -26,7 +27,7 @@
     }
   }
 
-  &__item {
+  &__menu-item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,9 +49,37 @@
     }
   }
 
-  &__toggle {
+  &__menu-toggle {
     margin-left: 5rem;
 
     @include toggle-switch;
+  }
+
+  &__add {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 3rem;
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 12rem;
+    transition: all 0.1s;
+
+    &:hover {
+      color: $tertiary;
+
+      & svg {
+        fill: $tertiary;
+      }
+    }
+  }
+
+  &__add-icon {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+    margin-left: 1rem;
+    transition: all 0.1s;
   }
 }

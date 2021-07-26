@@ -1,18 +1,4 @@
-@keyframes animate {
-  0% {
-    transform: perspective(1000px) rotateX(0deg);
-  }
-
-  100% {
-    transform: perspective(1000px) rotateX(360deg);
-  }
-}
-
 .tuning-page {
-  & .container {
-    max-width: 600px;
-  }
-
   &__header {
     background-color: $primary;
     color: white;
@@ -20,14 +6,14 @@
     text-align: center;
     font-size: 4rem;
     padding: 0 1rem 1rem;
-    margin: 5rem 0 2.5rem;
+    margin: 7rem 0 2.5rem;
     font-weight: 400;
     border-bottom: 1px solid white;
-    width: min-content;
+    // width: min-content;
 
-    @media (max-width: 800px) {
+    /*  @media (max-width: 800px) {
       margin-top: 3rem;
-    }
+    } */
   }
 
   &__list {
@@ -43,12 +29,12 @@
     display: flex;
     // justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem;
+    padding: 1rem;
     font-size: 2rem;
 
-    @media (max-width: 600px) {
+    /* @media (max-width: 600px) {
       padding: 1rem 1.5rem;
-    }
+    } */
   }
 
   &__info {
@@ -88,38 +74,6 @@
       top: 50%;
     }
   }
-
-  // =======
-
-  &__add {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 3rem;
-    font-size: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 20rem;
-    transition: all 0.1s;
-
-    &:hover {
-      color: $tertiary;
-
-      & svg {
-        fill: $tertiary;
-      }
-    }
-  }
-
-  &__add-icon {
-    width: 2rem;
-    height: 2rem;
-    fill: white;
-    margin-left: 1rem;
-    transition: all 0.1s;
-  }
-
-  // =======
 
   &__note-select {
     width: 7rem;

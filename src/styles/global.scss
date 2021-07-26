@@ -8,7 +8,7 @@
 
 html {
   font-size: 10px;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 body {
@@ -45,4 +45,18 @@ input {
 
 input:focus {
   outline: none;
+}
+
+.btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.1s linear;
+
+  &:focus {
+    outline: none;
+  }
 }

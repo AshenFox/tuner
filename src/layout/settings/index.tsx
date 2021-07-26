@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import TuningsPage from './components/TuningPage';
+import TuningsList from './components/TuningList';
+import Main from './components/Main';
 
 interface OwnProps {}
 
@@ -12,35 +16,16 @@ type Props = OwnProps & StateProps & DispatchProps;
 const Settings = (props: Props) => {
   return (
     <div className='settings'>
-      <div className='container'>
-        <h1 className='settings__header'>Settings</h1>
-        <div className='settings__menu'>
-          <Link to='/tunings-list'>
-            <div className='settings__item settings__item--clickable'>
-              <span>Tunings list</span>
-            </div>
-          </Link>
+      {/* <Main /> */}
+      <Switch>
+        {/* <Route path='/settings' component={Main} /> */}
+        {/* <Route path='/tunings-list' component={TuningsList} />
+          <Route path='/tuning-page' component={TuningsPage} /> */}
 
-          <div className='settings__item'>
-            <span>Auto tuning</span>
-            <div className='settings__toggle'>
-              <input
-                className='toggle-checkbox'
-                type='checkbox'
-                id='toggle'
-                /* checked={active} */
-                /* readOnly */
-              />
-              <label
-                className='toggle-frame'
-                htmlFor='toggle'
-                /* onClick={clickAllSave} */
-              ></label>
-              <div className='toggle-switch'></div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <Route path='/settings/tuning-page' exact component={TuningsPage} />
+        <Route path='/settings/tunings-list' exact component={TuningsList} />
+        <Route path='/' component={Main} />
+      </Switch>
     </div>
   );
 };
