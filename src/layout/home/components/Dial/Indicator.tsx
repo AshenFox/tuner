@@ -1,20 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store/store';
-import { Tunings } from '../../../../store/types/state';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
 
 interface OwnProps {}
 
-interface StateProps {
-  main: { most_freq_fr: number; tunings: Tunings };
-}
+type Props = OwnProps;
 
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
-
-const Indicator: React.FC<Props> = ({ main }) => {
-  const { most_freq_fr, tunings } = main;
+const Indicator: React.FC<Props> = (props) => {
+  const { most_freq_fr, tunings } = useAppSelector((state) => state.main);
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
@@ -46,8 +38,4 @@ const Indicator: React.FC<Props> = ({ main }) => {
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  main: state.main,
-});
-
-export default connect(mapStateToProps)(Indicator);
+export default Indicator;

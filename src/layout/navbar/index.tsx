@@ -1,50 +1,40 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import Hamburger from './components/Hamburger';
+import NavBarItem from './components/NavbarItem';
 
 interface OwnProps {}
 
-interface StateProps {}
+type Props = OwnProps;
 
-interface DispatchProps {}
+const NavBar: React.FC<Props> = (props) => {
+  const [isActive, setIsActive] = useState(false);
 
-type Props = OwnProps & StateProps & DispatchProps;
+  const hamburgerClick = (e: React.MouseEvent) => setIsActive(!isActive);
+  const closeNavbar = useRef(() => setIsActive(false));
 
-const NavBar = (props: Props) => {
+  useEffect(() => {
+    isActive
+      ? document.addEventListener('click', closeNavbar.current)
+      : document.removeEventListener('click', closeNavbar.current);
+  }, [isActive]);
+
   return (
     <>
-      <div className='navbar'>
+      <div className={`navbar ${isActive ? 'active' : ''}`}>
         <div className='container'>
           <div className='navbar__menu'>
-            <NavLink to='/' exact activeClassName='selected'>
-              <div className='navbar__item'>
-                <svg className='navbar__icon navbar__icon-tuner'>
-                  <use href='../svg/sprite.svg#icon__tuning-fork'></use>
-                </svg>
-                <span className='navbar__title'>Tuner</span>
-              </div>
-            </NavLink>
-            <NavLink to='/settings' exact activeClassName='selected'>
-              <div className='navbar__item'>
-                <svg className='navbar__icon navbar__icon-settings'>
-                  <use href='../svg/sprite.svg#icon__settings-2'></use>
-                </svg>
-                <span className='navbar__title'>Settings</span>
-              </div>
-            </NavLink>
+            <NavBarItem to={'/'} icon={'tuning-fork'}>
+              Tuner
+            </NavBarItem>
+            <NavBarItem to={'/settings'} icon={'settings-2'}>
+              Settings
+            </NavBarItem>
           </div>
         </div>
       </div>
-      <Hamburger />
+      <Hamburger clickHandler={hamburgerClick} />
     </>
   );
 };
 
 export default NavBar;
-
-/* 
-<svg>
-        <use href='../svg/sprite.svg#icon__settings'></use>
-      </svg>
-
-*/

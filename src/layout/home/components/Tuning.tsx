@@ -1,29 +1,21 @@
-import React, { EventHandler } from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../../../store/store';
-import { Tunings } from '../../../store/types/state';
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { set_active_note } from '../../../store/actions/mainActions';
 
 interface OwnProps {}
 
-interface StateProps {
-  main: { most_freq_fr: number; tunings: Tunings };
-}
+type Props = OwnProps;
 
-interface DispatchProps {
-  set_active_note: typeof set_active_note;
-}
+const Tuning: React.FC<Props> = (props) => {
+  const { tunings } = useAppSelector((state) => state.main);
 
-type Props = OwnProps & StateProps & DispatchProps;
-
-const Tuning: React.FC<Props> = ({ main, set_active_note }) => {
-  const { tunings } = main;
+  const dispatch = useAppDispatch();
 
   const activeTuning = tunings.find((tuning) => tuning.active);
-  const activeNote = activeTuning?.data.find(({ active }) => active);
+  const activeNote = activeTuning?.data.find(({ active }) => active); // ?????
 
   const onClickHandler = (key: number, active: boolean) => (e: React.MouseEvent) => {
-    if (!active) set_active_note(key);
+    if (!active) dispatch(set_active_note(key));
   };
 
   return (
@@ -49,10 +41,4 @@ const Tuning: React.FC<Props> = ({ main, set_active_note }) => {
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  main: state.main,
-});
-
-export default connect(mapStateToProps, {
-  set_active_note,
-})(Tuning);
+export default Tuning;

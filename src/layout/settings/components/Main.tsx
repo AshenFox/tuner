@@ -3,13 +3,9 @@ import { Link } from 'react-router-dom';
 
 interface OwnProps {}
 
-interface StateProps {}
+type Props = OwnProps;
 
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
-
-const Main = (props: Props) => {
+const Main: React.FC<Props> = (props) => {
   return (
     <div className='container'>
       <h1 className='settings__header'>Settings</h1>

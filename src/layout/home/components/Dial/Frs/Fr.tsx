@@ -1,21 +1,14 @@
-import React, { memo } from "react";
-import { connect } from "react-redux";
-import { AppState } from "../../../../../store/store";
+import React, { memo } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../../store/store';
 
 interface OwnProps {
   deg: number;
 }
 
-interface StateProps {
-  main: { most_freq_fr: number };
-}
+type Props = OwnProps;
 
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
-
-const Fr: React.FC<Props> = memo(({ main, deg }) => {
-  const { most_freq_fr } = main;
+const Fr: React.FC<Props> = memo(({ deg }) => {
+  const { most_freq_fr } = useAppSelector((state) => state.main);
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
 
@@ -60,19 +53,15 @@ const Fr: React.FC<Props> = memo(({ main, deg }) => {
   // console.log("==========");
 
   return (
-    <div className="dial__fr-cont" style={style}>
+    <div className='dial__fr-cont' style={style}>
       {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
-      <span className="dial__fr">{value}</span>
+      <span className='dial__fr'>{value}</span>
       {/* <span className="dial__deg-test">{deg}</span> */}
     </div>
   );
 });
 
-const mapStateToProps = (state: AppState) => ({
-  main: state.main,
-});
-
-export default connect(mapStateToProps)(Fr);
+export default Fr;
 
 const calcValues = (
   deg: number,

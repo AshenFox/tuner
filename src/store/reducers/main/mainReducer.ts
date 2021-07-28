@@ -1,9 +1,28 @@
 import { mainStateInterface } from './../../types/state';
-import { MainActions, TEST, SET_FR, SET_ACTIVE_NOTE } from './../../types/actions';
+import {
+  MainActions,
+  TEST,
+  SET_FR,
+  SET_ACTIVE_NOTE,
+  DELETE_TUNING,
+  ADD_TUNING,
+} from './../../types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
   switch (action.type) {
+    case ADD_TUNING:
+      return {
+        ...state,
+        tunings: [...state.tunings, action.payload.new_tuning],
+      };
+
+    case DELETE_TUNING:
+      return {
+        ...state,
+        tunings: [...state.tunings.filter((tuning) => tuning.id !== action.payload.id)],
+      };
+
     case SET_FR:
       return {
         ...state,

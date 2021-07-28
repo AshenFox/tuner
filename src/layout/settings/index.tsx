@@ -1,19 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import TuningsPage from './components/TuningPage';
 import TuningsList from './components/TuningList';
 import Main from './components/Main';
 
 interface OwnProps {}
 
-interface StateProps {}
+type Props = OwnProps;
 
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
-
-const Settings = (props: Props) => {
+const Settings: React.FC<Props> = (props) => {
   return (
     <div className='settings'>
       {/* <Main /> */}

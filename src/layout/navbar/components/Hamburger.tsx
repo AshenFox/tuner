@@ -1,17 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-interface OwnProps {}
+interface OwnProps {
+  clickHandler: (e: React.MouseEvent) => void;
+}
 
-interface StateProps {}
+type Props = OwnProps;
 
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
-
-const Hamburger = (props: Props) => {
+const Hamburger: React.FC<Props> = ({ clickHandler }) => {
   return (
-    <button className={`btn hamburger hamburger--spring`} type='button'>
+    <button
+      onClick={clickHandler}
+      className={`btn hamburger hamburger--spring`}
+      type='button'
+    >
       <span className='hamburger__box'>
         <span className='hamburger__inner'></span>
       </span>

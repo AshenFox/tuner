@@ -5,11 +5,7 @@ interface OwnProps {
   num: number;
 }
 
-interface StateProps {}
-
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = OwnProps;
 
 const Frs: React.FC<Props> = ({ num }) => {
   return (

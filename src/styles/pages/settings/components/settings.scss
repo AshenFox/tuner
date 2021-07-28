@@ -82,4 +82,11 @@
     margin-left: 1rem;
     transition: all 0.1s;
   }
+
+  &__empty {
+    font-size: 1.8rem;
+    text-align: center;
+    opacity: 0.8;
+    margin: 1rem 0;
+  }
 }

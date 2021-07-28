@@ -10,11 +10,7 @@ interface OwnProps {
   };
 }
 
-interface StateProps {}
-
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = OwnProps;
 
 const Note: React.FC<Props> = ({ data }) => {
   const { name, sign, octave, fr, angle } = data;

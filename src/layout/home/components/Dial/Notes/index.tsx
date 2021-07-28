@@ -1,19 +1,10 @@
 import React, { memo } from 'react';
 import Note from './Note';
-// import { connect } from 'react-redux';
-// import { AppState } from '../../../../../store/store';
-
 interface OwnProps {
   fr: number;
 }
 
-interface StateProps {
-  /* main: { most_freq_fr: number }; */
-}
-
-interface DispatchProps {}
-
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = OwnProps;
 
 const Notes: React.FC<Props> = ({ fr }) => {
   // const { most_freq_fr } = main;
@@ -66,14 +57,8 @@ const Notes: React.FC<Props> = ({ fr }) => {
   );
 };
 
-/* const mapStateToProps = (state: AppState) => ({
-  main: state.main,
-}); */
-
 const areEqual = (prev: any, curent: any) =>
   Math.floor(prev.fr) === Math.floor(curent.fr);
-
-// export default memo(connect(mapStateToProps)(Notes));
 
 export default memo(Notes, areEqual);
 

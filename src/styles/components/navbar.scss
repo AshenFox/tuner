@@ -26,6 +26,10 @@
 
     border-left: 1px solid rgba(white, $alpha: 0.5);
     box-shadow: -5px 0px 5px 0px rgba(white, $alpha: 0.1);
+
+    &.active {
+      right: 0;
+    }
   }
 
   & .container {

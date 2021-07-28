@@ -8,6 +8,7 @@ export type Note = {
 
 export type Tuning = {
   name: string;
+  id: string;
   data: Note[];
   active: boolean;
 };

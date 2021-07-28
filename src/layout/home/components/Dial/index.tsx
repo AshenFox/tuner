@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store/store';
-import { Tunings } from '../../../../store/types/state';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
 import Indicator from './Indicator';
 import Notes from './Notes';
 import Frs from './Frs';
@@ -9,15 +7,12 @@ import Notches from './Notches';
 
 const notchesNum = 240;
 
-interface StateProps {
-  main: { most_freq_fr: number; tunings: Tunings };
-}
+interface OwnProps {}
 
-type Props = StateProps;
+type Props = OwnProps;
 
-const Dial: React.FC<Props> = ({ main }) => {
-  /* console.log(notches.length, frs.length); */
-  const { most_freq_fr, tunings } = main;
+const Dial: React.FC<Props> = (props) => {
+  const { most_freq_fr, tunings } = useAppSelector((state) => state.main);
 
   const activeTuning = tunings.find((tuning) => tuning.active);
   const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
@@ -80,8 +75,4 @@ const degs: { max: number; k: number }[] = [
   { max: 520, k: 1 },
 ];
 
-const mapStateToProps = (state: AppState) => ({
-  main: state.main,
-});
-
-export default connect(mapStateToProps)(Dial);
+export default Dial;

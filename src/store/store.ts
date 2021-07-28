@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk, { ThunkMiddleware } from 'redux-thunk';
+import thunk, { ThunkDispatch, ThunkMiddleware } from 'redux-thunk';
 import rootReducer from './reducers';
 import { AppActions } from './types/actions';
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 
 const initialState = {};
 
@@ -24,3 +25,11 @@ const store = createStore(
 export default store;
 
 export type AppState = ReturnType<typeof rootReducer>;
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch &
+  ThunkDispatch<RootState, null, AppActions>;
+// Customized dispatch and selector hooks for the Tuner App
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

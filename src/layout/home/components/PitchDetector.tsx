@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { set_fr } from '../../../store/actions/mainActions';
 import ml5 from 'ml5';
-import { AppState } from '../../../store/store';
 
 let audioContext = window.AudioContext || window.webkitAudioContext;
 let audioContextInstance: AudioContext;
@@ -11,13 +10,11 @@ let stream: MediaStream;
 
 interface OwnProps {}
 
-interface DispatchProps {
-  set_fr: typeof set_fr;
-}
+type Props = OwnProps;
 
-type Props = DispatchProps & OwnProps;
+const PitchDetector: React.FC<Props> = (props) => {
+  const dispatch = useAppDispatch();
 
-const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   useEffect(() => {
     // Initiate pitch detection
     // setup();
@@ -50,9 +47,8 @@ const PitchDetector: React.FC<Props> = ({ set_fr }) => {
 
   const getPitch = () => {
     pitchDetection.getPitch(function (err: Error, fr: number) {
-      if (fr) {
-        set_fr(fr);
-      }
+      if (fr) dispatch(set_fr(fr));
+
       getPitch();
     });
   };
@@ -64,10 +60,4 @@ const PitchDetector: React.FC<Props> = ({ set_fr }) => {
   return <></>;
 };
 
-const mapStateToProps = (state: AppState) => ({
-  main: state.main,
-});
-
-export default connect(mapStateToProps, {
-  set_fr,
-})(PitchDetector);
+export default PitchDetector;
