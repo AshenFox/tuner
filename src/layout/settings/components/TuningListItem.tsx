@@ -5,13 +5,13 @@ import { delete_tuning } from '../../../store/actions/mainActions';
 
 interface OwnProps {
   number: number;
-  children: React.ReactNode;
+  name: string;
   id: string;
 }
 
 type Props = OwnProps;
 
-const TuningsListItem: React.FC<Props> = ({ number, children, id }) => {
+const TuningsListItem: React.FC<Props> = ({ number, name, id }) => {
   const dispatch = useAppDispatch();
 
   const deleteTuningClickHandler = (e: React.MouseEvent) => dispatch(delete_tuning(id));
@@ -20,7 +20,7 @@ const TuningsListItem: React.FC<Props> = ({ number, children, id }) => {
     <div className='tunings-list__item'>
       <div className='tunings-list__info'>
         <span className='tunings-list__number'>{number}.</span>
-        <span className='tunings-list__name'>{children}</span>
+        <span className='tunings-list__name'>{name ? name : 'No title'}</span>
       </div>
       <div className='tunings-list__line'></div>
       <div className='tunings-list__controls'>

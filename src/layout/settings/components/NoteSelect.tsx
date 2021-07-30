@@ -1,11 +1,10 @@
 import React from 'react';
 import { useAppDispatch } from '../../../store/store';
-import { add_tuning, set_note } from '../../../store/actions/mainActions';
+import { set_note } from '../../../store/actions/mainActions';
 import Select from 'react-select';
 import { Note } from '../../../store/types/state';
 import { useParams } from 'react-router-dom';
 import { createTheme, Styles } from '../../../utilities/SelectComponentStyles';
-import { store } from 'react-notifications-component';
 
 interface NoteSelectOption {
   value: number;

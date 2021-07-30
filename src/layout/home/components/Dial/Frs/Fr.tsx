@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../../store/store';
+import { useAppSelector } from '../../../../../store/store';
 
 interface OwnProps {
   deg: number;

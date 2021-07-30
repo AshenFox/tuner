@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import React, { useEffect } from 'react';
+import { useAppDispatch } from '../../../store/store';
 import { set_fr } from '../../../store/actions/mainActions';
 import ml5 from 'ml5';
 
@@ -17,7 +17,7 @@ const PitchDetector: React.FC<Props> = (props) => {
 
   useEffect(() => {
     // Initiate pitch detection
-    // setup();
+    setup();
   }, []);
 
   // Declare functions

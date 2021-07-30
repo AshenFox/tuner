@@ -1,11 +1,11 @@
 import { Note, Tuning } from './state';
 // main
-export const TEST = 'TEST';
 export const SET_FR = 'SET_FR';
 
 export const ERROR = 'ERROR';
 
 export const SET_ACTIVE_NOTE = 'SET_ACTIVE_NOTE';
+export const AUTO_SET_ACTIVE_NOTE = 'AUTO_SET_ACTIVE_NOTE';
 
 export const DELETE_TUNING = 'DELETE_TUNING';
 export const ADD_TUNING = 'ADD_TUNING';
@@ -15,6 +15,31 @@ export const SET_ACTIVE_TUNING = 'SET_ACTIVE_TUNING';
 export const EDIT_STRING = 'EDIT_STRING';
 
 export const EDIT_TUNING_NAME = 'EDIT_TUNING_NAME';
+
+export const ADD_STRING = 'ADD_STRING';
+export const DELETE_STRING = 'DELETE_STRING';
+
+export const TOGGLE_AUTO_TUNING = 'TOGGLE_AUTO_TUNING';
+
+export interface ToggleAutoTuningAction {
+  type: typeof TOGGLE_AUTO_TUNING;
+}
+
+export interface DeleteStringAction {
+  type: typeof DELETE_STRING;
+  payload: {
+    tuning_id: string;
+    string_id: string;
+  };
+}
+
+export interface AddStringAction {
+  type: typeof ADD_STRING;
+  payload: {
+    id: string;
+    new_string: Note;
+  };
+}
 
 export interface ErrorAction {
   type: typeof ERROR;
@@ -64,26 +89,29 @@ export interface SetFrAction {
   };
 }
 
+export interface AutoSetActiveNoteAction {
+  type: typeof AUTO_SET_ACTIVE_NOTE;
+}
+
 export interface SetActiveNoteAction {
   type: typeof SET_ACTIVE_NOTE;
   payload: {
-    key: number;
+    id: string;
   };
-}
-
-export interface Test {
-  type: typeof TEST;
 }
 
 export type MainActions =
   | SetFrAction
+  | AutoSetActiveNoteAction
   | SetActiveNoteAction
-  | Test
   | DeleteTuningAction
   | AddTuningAction
   | SetActiveTuningAction
   | EditStringAction
   | EditTuniingNameAction
-  | ErrorAction; // & ...
+  | ErrorAction
+  | AddStringAction
+  | DeleteStringAction
+  | ToggleAutoTuningAction; // & ...
 
 export type AppActions = MainActions; // & ...

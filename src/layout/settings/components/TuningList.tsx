@@ -13,16 +13,18 @@ const TuningsList: React.FC<Props> = (props) => {
 
   const dispatch = useAppDispatch();
 
-  const addTuningClickHandler = (e: React.MouseEvent) => dispatch(add_tuning());
+  const addTuningClickHandler = (e: React.MouseEvent) => {
+    dispatch(add_tuning());
+
+    setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0);
+  };
 
   return (
     <div className='container'>
       <h1 className='settings__header'>Tunings list</h1>
       <div className='tunings-list'>
         {tunings.map(({ name, id }, i) => (
-          <TuningsListItem key={id} number={i + 1} id={id}>
-            {name}
-          </TuningsListItem>
+          <TuningsListItem key={id} number={i + 1} id={id} name={name} />
         ))}
         {!tunings.length && (
           <div className='settings__empty'>You don't have any tunings yet.</div>

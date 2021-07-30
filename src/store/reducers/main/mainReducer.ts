@@ -1,7 +1,6 @@
-import { mainStateInterface } from './../../types/state';
+import { mainStateInterface, Note } from './../../types/state';
 import {
   MainActions,
-  TEST,
   SET_FR,
   SET_ACTIVE_NOTE,
   DELETE_TUNING,
@@ -9,11 +8,49 @@ import {
   SET_ACTIVE_TUNING,
   EDIT_STRING,
   EDIT_TUNING_NAME,
+  ADD_STRING,
+  DELETE_STRING,
+  TOGGLE_AUTO_TUNING,
+  AUTO_SET_ACTIVE_NOTE,
 } from './../../types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
   switch (action.type) {
+    case TOGGLE_AUTO_TUNING:
+      return {
+        ...state,
+        auto_tuning: !state.auto_tuning,
+      };
+
+    case DELETE_STRING:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          action.payload.tuning_id === tuning.id
+            ? {
+                ...tuning,
+                data: tuning.data.filter(
+                  (string) => action.payload.string_id !== string.id
+                ),
+              }
+            : tuning
+        ),
+      };
+
+    case ADD_STRING:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          action.payload.id === tuning.id
+            ? {
+                ...tuning,
+                data: [...tuning.data, action.payload.new_string],
+              }
+            : tuning
+        ),
+      };
+
     case EDIT_TUNING_NAME:
       return {
         ...state,
@@ -69,6 +106,19 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
         ...calc_fr(state.fr_arr, action.payload.detected_fr, state.most_freq_fr),
       };
 
+    case AUTO_SET_ACTIVE_NOTE:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          tuning.active
+            ? {
+                ...tuning,
+                data: activate_closest_note(tuning.data, state.most_freq_fr),
+              }
+            : tuning
+        ),
+      };
+
     case SET_ACTIVE_NOTE:
       return {
         ...state,
@@ -76,9 +126,9 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
           tuning.active
             ? {
                 ...tuning,
-                data: tuning.data.map((string, i) => ({
+                data: tuning.data.map((string) => ({
                   ...string,
-                  active: i === action.payload.key,
+                  active: string.id === action.payload.id,
                 })),
               }
             : tuning
@@ -121,11 +171,27 @@ const calc_fr = (
   };
 };
 
+const activate_closest_note = (notes: Note[], most_freq_fr: number) => {
+  const result = notes.reduce(
+    (result, note) => {
+      const new_diff = Math.abs(most_freq_fr - note.fr);
+
+      return new_diff < result.diff ? { id: note.id, diff: new_diff } : result;
+    },
+    { id: '', diff: 10000 }
+  );
+
+  return notes.map((string) => ({
+    ...string,
+    active: string.id === result.id,
+  }));
+};
+
 const get_most_frequent = (arr: number[]) => {
   let compare = '';
   let most_freq = 0;
 
-  let acc = arr.reduce((acc: any, val) => {
+  arr.reduce((acc: any, val) => {
     const floored = Math.floor(val);
 
     if (floored in acc) {

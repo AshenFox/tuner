@@ -2,8 +2,8 @@ import { Note } from './../types/state';
 import { RootState } from './../store';
 import { MainActions } from './../types/actions';
 import {
-  TEST,
   SET_FR,
+  AUTO_SET_ACTIVE_NOTE,
   SET_ACTIVE_NOTE,
   DELETE_TUNING,
   ADD_TUNING,
@@ -11,38 +11,70 @@ import {
   EDIT_STRING,
   EDIT_TUNING_NAME,
   ERROR,
+  ADD_STRING,
+  DELETE_STRING,
+  TOGGLE_AUTO_TUNING,
 } from '../types/actions';
 import { ThunkAction } from 'redux-thunk';
-import { store } from 'react-notifications-component';
+import { ReactNotificationOptions, store } from 'react-notifications-component';
 
 //   import axios from '../../server/supplemental/axios';
 
-let test_id = '';
-
 type ThunkActionMain = ThunkAction<void, RootState, unknown, MainActions>;
+
+export const toggle_auto_tuning = (): MainActions => ({
+  type: TOGGLE_AUTO_TUNING,
+});
+
+export const delete_string = (tuning_id: string, string_id: string): MainActions => ({
+  type: DELETE_STRING,
+  payload: {
+    tuning_id,
+    string_id,
+  },
+});
+
+export const add_string = (id: string): MainActions => ({
+  type: ADD_STRING,
+  payload: {
+    id,
+    new_string: {
+      id: create_id(),
+      name: 'E',
+      value: 5,
+      sign: false,
+      octave: 2,
+      fr: 82.4068892282175,
+      active: false,
+    },
+  },
+});
 
 export const edit_tuning_name = (id: string, value: string): MainActions => {
   if (value.length > 20) {
     store.removeAllNotifications();
 
-    console.log(
-      store.addNotification({
-        title: 'Error',
-        message: 'Title can be no longer than 20 characters',
-        type: 'danger',
-        insert: 'top',
-        container: 'top-left',
-        animationIn: ['animate__animated', 'animate__fadeIn'],
-        animationOut: ['animate__animated', 'animate__fadeOut'],
-        /* dismiss: {
-          duration: 4000,
-        }, */
-      })
-    );
+    add_custom_notification({
+      title: 'Error',
+      message: 'Title can be no longer than 20 characters.',
+      type: 'danger',
+      container: 'top-left',
+    });
 
     return {
       type: ERROR,
     };
+  }
+
+  if (value.length === 0) {
+    store.removeAllNotifications();
+
+    add_custom_notification({
+      title: 'Warning',
+      message: 'Do not leave the title field empty.',
+      type: 'warning',
+      container: 'top-left',
+    });
   }
 
   return {
@@ -168,12 +200,16 @@ export const set_fr = (detected_fr: number): MainActions => ({
   payload: { detected_fr },
 });
 
-export const set_active_note = (key: number): MainActions => ({
-  type: SET_ACTIVE_NOTE,
-  payload: { key },
+export const auto_set_active_note = (): MainActions => ({
+  type: AUTO_SET_ACTIVE_NOTE,
 });
 
-export const test = (value: any) => <ThunkActionMain>(async (dispatch, getState) => {
+export const set_active_note = (id: string): MainActions => ({
+  type: SET_ACTIVE_NOTE,
+  payload: { id },
+});
+
+/* export const test = (value: any) => <ThunkActionMain>(async (dispatch, getState) => {
     try {
       const {
         main: { most_freq_fr },
@@ -184,11 +220,11 @@ export const test = (value: any) => <ThunkActionMain>(async (dispatch, getState)
         payload: { value: most_freq_fr },
       });
 
-      // const { data } = await axios.get('/api/edit/draft');
+      const { data } = await axios.get('/api/edit/draft');
     } catch (err) {
       console.error(err);
     }
-  });
+  }); */
 
 // ==============================
 // ==============================
@@ -232,6 +268,18 @@ const all_notes = [
   { sign: true, name: 'A' },
   { sign: false, name: 'B' },
 ];
+
+const add_custom_notification = (custom_options: ReactNotificationOptions) => {
+  store.addNotification({
+    ...custom_options,
+    insert: 'top',
+    animationIn: ['animate__animated', 'animate__fadeIn'],
+    animationOut: ['animate__animated', 'animate__fadeOut'],
+    dismiss: {
+      duration: 4000,
+    },
+  });
+};
 
 // ==============================
 // ==============================

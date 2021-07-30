@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { useAppSelector } from '../../../../store/store';
 import Indicator from './Indicator';
 import Notes from './Notes';
 import Frs from './Frs';

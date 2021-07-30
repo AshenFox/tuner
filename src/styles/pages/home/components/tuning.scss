@@ -30,8 +30,6 @@
   }
 
   &__string {
-    cursor: pointer;
-
     border: 1px solid transparent;
     border-radius: 50%;
 
@@ -98,7 +96,13 @@
     color: #ec3000;
   }
 
-  &__string:hover {
-    color: #ec3000;
+  &.active {
+    & .tuning__string {
+      cursor: pointer;
+
+      &:hover {
+        color: #ec3000;
+      }
+    }
   }
 }

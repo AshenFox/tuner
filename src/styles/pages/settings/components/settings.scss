@@ -56,7 +56,6 @@
   }
 
   &__add {
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,12 +64,18 @@
     margin-top: 2rem;
     margin-bottom: 12rem;
     transition: all 0.1s;
+    opacity: 0.5;
 
-    &:hover {
-      color: $tertiary;
+    &.active {
+      opacity: 1;
+      cursor: pointer;
 
-      & svg {
-        fill: $tertiary;
+      &:hover {
+        color: $tertiary;
+
+        & svg {
+          fill: $tertiary;
+        }
       }
     }
   }

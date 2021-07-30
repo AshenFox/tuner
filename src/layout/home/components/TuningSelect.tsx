@@ -22,7 +22,7 @@ const TuningSelect: React.FC<Props> = (props) => {
   const optionsTuningSelect: TuningSelectOption[] = tunings.map(
     ({ id, name, active }) => ({
       value: id,
-      label: name,
+      label: name ? name : 'No title',
       active,
     })
   );

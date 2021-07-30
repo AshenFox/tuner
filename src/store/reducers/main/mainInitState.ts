@@ -1,6 +1,7 @@
 import { mainStateInterface } from '../../types/state';
 
 const mainInitState: mainStateInterface = {
+  auto_tuning: false,
   tunings: [
     {
       name: 'Standart guitar',
@@ -125,9 +126,8 @@ const mainInitState: mainStateInterface = {
       active: false,
     },
   ],
-  test: true,
   fr_arr: [120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120],
-  most_freq_fr: 116.5,
+  most_freq_fr: 120,
 };
 
 export default mainInitState;

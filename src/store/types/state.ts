@@ -18,8 +18,8 @@ export type Tuning = {
 export type Tunings = Tuning[];
 
 export interface mainStateInterface {
-  test: boolean;
   fr_arr: number[];
   most_freq_fr: number;
   tunings: Tunings;
+  auto_tuning: boolean;
 }
