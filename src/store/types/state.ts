@@ -1,5 +1,7 @@
 export type Note = {
+  id: string;
   name: string;
+  value: number;
   sign: boolean;
   octave: number;
   fr: number;
@@ -7,8 +9,8 @@ export type Note = {
 };
 
 export type Tuning = {
-  name: string;
   id: string;
+  name: string;
   data: Note[];
   active: boolean;
 };

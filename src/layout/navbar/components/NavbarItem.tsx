@@ -14,7 +14,7 @@ const NavBarItem: React.FC<Props> = ({ to, icon, children }) => {
     <NavLink to={to} exact activeClassName='selected'>
       <div className='navbar__item'>
         <svg className='navbar__icon navbar__icon-tuner'>
-          <use href={`../svg/sprite.svg#icon__${icon}`}></use>
+          <use href={`${window.location.origin}/svg/sprite.svg#icon__${icon}`}></use>
         </svg>
         <span className='navbar__title'>{children}</span>
       </div>

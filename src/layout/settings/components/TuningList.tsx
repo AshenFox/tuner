@@ -20,7 +20,7 @@ const TuningsList: React.FC<Props> = (props) => {
       <h1 className='settings__header'>Tunings list</h1>
       <div className='tunings-list'>
         {tunings.map(({ name, id }, i) => (
-          <TuningsListItem number={i + 1} id={id}>
+          <TuningsListItem key={id} number={i + 1} id={id}>
             {name}
           </TuningsListItem>
         ))}

@@ -1,49 +1,50 @@
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { set_active_tuning } from '../../../store/actions/mainActions';
 import Select from 'react-select';
+import { createTheme, StylesSmall } from '../../../utilities/SelectComponentStyles';
+
+interface TuningSelectOption {
+  value: string;
+  label: string;
+  active: boolean;
+}
 
 interface OwnProps {}
-
-const optionsTuningSelect = [
-  { value: 'Guitar standart', label: 'Guitar standart' },
-  { value: 'Drop D', label: 'Drop D' },
-];
-
-const createCustomTheme = (theme: any) => ({
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary25: '#ec3000',
-    primary: '#ec3000',
-    neutral0: '#533592',
-    neutral80: '#fff',
-  },
-});
-
-const customStyles = {
-  dropdownIndicator: (provided: any) => ({
-    ...provided,
-    paddingLeft: 3,
-    paddingRight: 3,
-  }),
-  menuList: (provided: any) => ({
-    ...provided,
-    maxHeight: 100,
-  }),
-};
 
 type Props = OwnProps;
 
 const TuningSelect: React.FC<Props> = (props) => {
+  const { tunings } = useAppSelector((state) => state.main);
+
+  const dispatch = useAppDispatch();
+
+  const optionsTuningSelect: TuningSelectOption[] = tunings.map(
+    ({ id, name, active }) => ({
+      value: id,
+      label: name,
+      active,
+    })
+  );
+
+  const activeOption = optionsTuningSelect.find((option) => option.active);
+
+  const onSelectChange = (tuning: TuningSelectOption | null) => {
+    if (!tuning) return;
+
+    dispatch(set_active_tuning(tuning.value));
+  };
+
   return (
     <Select
       className={'tuning-select'}
-      theme={createCustomTheme}
+      theme={createTheme}
       options={optionsTuningSelect}
       isSearchable={false}
-      /* onChange={changeSelectCreated} */
-      /* value={optionsTuningSelect[0]} */
+      onChange={onSelectChange}
+      value={activeOption}
       instanceId='react-select-created'
-      styles={customStyles}
+      styles={StylesSmall}
     />
   );
 };

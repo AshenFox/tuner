@@ -1,59 +1,65 @@
 import React from 'react';
+import { useAppDispatch } from '../../../store/store';
+import { add_tuning, set_note } from '../../../store/actions/mainActions';
 import Select from 'react-select';
+import { Note } from '../../../store/types/state';
+import { useParams } from 'react-router-dom';
+import { createTheme, Styles } from '../../../utilities/SelectComponentStyles';
+import { store } from 'react-notifications-component';
 
-interface OwnProps {}
+interface NoteSelectOption {
+  value: number;
+  label: string;
+}
+
+type urlParams = {
+  id: string;
+};
+
+const optionsNoteSelect: NoteSelectOption[] = [
+  { value: 1, label: 'C' },
+  { value: 2, label: 'C#' },
+  { value: 3, label: 'D' },
+  { value: 4, label: 'D#' },
+  { value: 5, label: 'E' },
+  { value: 6, label: 'F' },
+  { value: 7, label: 'F#' },
+  { value: 8, label: 'G' },
+  { value: 9, label: 'G#' },
+  { value: 10, label: 'A' },
+  { value: 11, label: 'A#' },
+  { value: 12, label: 'B' },
+];
+
+interface OwnProps {
+  data: Note;
+}
 
 type Props = OwnProps;
 
-const optionsNoteSelect = [
-  { value: 'C', label: 'C' },
-  { value: 'C#', label: 'C#' },
-  { value: 'D', label: 'D' },
-  { value: 'D#', label: 'D#' },
-  { value: 'E', label: 'E' },
-  { value: 'F', label: 'F' },
-  { value: 'F#', label: 'F#' },
-  { value: 'G', label: 'G' },
-  { value: 'G#', label: 'G#' },
-  { value: 'A', label: 'A' },
-  { value: 'A#', label: 'A#' },
-  { value: 'B', label: 'B' },
-];
+const NoteSelect: React.FC<Props> = ({ data }) => {
+  const dispatch = useAppDispatch();
 
-const createCustomTheme = (theme: any) => ({
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary25: '#ec3000',
-    primary: '#ec3000',
-    neutral0: '#533592',
-    neutral80: '#fff',
-  },
-});
+  const { id: tuningID } = useParams<urlParams>();
 
-const customStyles = {
-  dropdownIndicator: (provided: any) => ({
-    ...provided,
-    paddingLeft: 3,
-    paddingRight: 3,
-  }),
-  menuList: (provided: any) => ({
-    ...provided,
-    height: 150,
-  }),
-};
+  const { value } = data;
 
-const NoteSelect: React.FC<Props> = (props) => {
+  const onSelectChange = (value: NoteSelectOption | null) => {
+    if (!value) return;
+
+    dispatch(set_note(tuningID, data, value.value));
+  };
+
   return (
     <Select
       className={'tuning-page__note-select'}
-      theme={createCustomTheme}
+      theme={createTheme}
       options={optionsNoteSelect}
       isSearchable={false}
-      /* onChange={changeSelectCreated} */
-      /* value={optionsNoteSelect[0]} */
+      onChange={onSelectChange}
+      value={optionsNoteSelect[value - 1]}
       instanceId='react-select-created'
-      styles={customStyles}
+      styles={Styles}
     />
   );
 };

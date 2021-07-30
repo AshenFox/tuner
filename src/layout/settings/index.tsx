@@ -17,7 +17,7 @@ const Settings: React.FC<Props> = (props) => {
         {/* <Route path='/tunings-list' component={TuningsList} />
           <Route path='/tuning-page' component={TuningsPage} /> */}
 
-        <Route path='/settings/tuning-page' exact component={TuningsPage} />
+        <Route path='/settings/tuning-page/:id' exact component={TuningsPage} />
         <Route path='/settings/tunings-list' exact component={TuningsList} />
         <Route path='/' component={Main} />
       </Switch>

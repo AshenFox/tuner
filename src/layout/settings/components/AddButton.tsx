@@ -12,7 +12,7 @@ const AddButton: React.FC<Props> = ({ children, clickHandler }) => {
     <div className='settings__add' onClick={clickHandler}>
       <span>{children}</span>
       <svg className='settings__add-icon'>
-        <use href='../svg/sprite.svg#icon__add'></use>
+        <use href={`${window.location.origin}/svg/sprite.svg#icon__add`}></use>
       </svg>
     </div>
   );

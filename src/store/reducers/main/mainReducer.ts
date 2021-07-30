@@ -6,11 +6,51 @@ import {
   SET_ACTIVE_NOTE,
   DELETE_TUNING,
   ADD_TUNING,
+  SET_ACTIVE_TUNING,
+  EDIT_STRING,
+  EDIT_TUNING_NAME,
 } from './../../types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
   switch (action.type) {
+    case EDIT_TUNING_NAME:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          tuning.id === action.payload.id
+            ? { ...tuning, name: action.payload.value }
+            : tuning
+        ),
+      };
+
+    case EDIT_STRING:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          action.payload.tuning_id === tuning.id
+            ? {
+                ...tuning,
+                data: tuning.data.map((string) =>
+                  action.payload.new_note.id === string.id
+                    ? action.payload.new_note
+                    : string
+                ),
+              }
+            : tuning
+        ),
+      };
+
+    case SET_ACTIVE_TUNING:
+      return {
+        ...state,
+        tunings: state.tunings.map((tuning) =>
+          action.payload.id === tuning.id
+            ? { ...tuning, active: true }
+            : { ...tuning, active: false }
+        ),
+      };
+
     case ADD_TUNING:
       return {
         ...state,
@@ -20,7 +60,7 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case DELETE_TUNING:
       return {
         ...state,
-        tunings: [...state.tunings.filter((tuning) => tuning.id !== action.payload.id)],
+        tunings: state.tunings.filter((tuning) => tuning.id !== action.payload.id),
       };
 
     case SET_FR:

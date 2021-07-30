@@ -24,13 +24,13 @@ const TuningsListItem: React.FC<Props> = ({ number, children, id }) => {
       </div>
       <div className='tunings-list__line'></div>
       <div className='tunings-list__controls'>
-        <Link to='/settings/tuning-page'>
+        <Link to={`/settings/tuning-page/${id}`}>
           <svg className='tunings-list__edit-icon'>
-            <use href='../svg/sprite.svg#icon__edit'></use>
+            <use href={`${window.location.origin}/svg/sprite.svg#icon__edit`}></use>
           </svg>
         </Link>
         <svg className='tunings-list__delete-icon' onClick={deleteTuningClickHandler}>
-          <use href='../svg/sprite.svg#icon__delete'></use>
+          <use href={`${window.location.origin}/svg/sprite.svg#icon__delete`}></use>
         </svg>
       </div>
     </div>

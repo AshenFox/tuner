@@ -6,6 +6,7 @@ import Home from './layout/home';
 import NavBar from './layout/navbar';
 import Settings from './layout/settings';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import ReactNotifications from 'react-notifications-component';
 
 interface OwnProps {}
 
@@ -13,15 +14,18 @@ type Props = OwnProps;
 
 const App: React.FC<Props> = () => {
   return (
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path='/settings' component={Settings} />
-          <Route path='/' component={Home} />
-        </Switch>
-        <NavBar />
-      </Router>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <ReactNotifications isMobile={true} />
+        <Router>
+          <Switch>
+            <Route path='/settings' component={Settings} />
+            <Route path='/' component={Home} />
+          </Switch>
+          <NavBar />
+        </Router>
+      </Provider>
+    </>
   );
 };
 
