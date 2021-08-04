@@ -94,18 +94,23 @@ export const add_string = (id: string) => <ThunkActionMain>(async (dispatch) => 
     }
   });
 
+let notif_id: string = '';
+
 export const edit_tuning_name = (id: string, value: string) => <ThunkActionMain>(async (
     dispatch
   ) => {
     try {
       if (value.length > 20) {
-        store.removeAllNotifications();
+        store.removeNotification(notif_id);
+
+        notif_id = uuidv4();
 
         add_custom_notification({
           title: 'Error',
           message: 'Title can be no longer than 20 characters.',
           type: 'danger',
           container: 'top-left',
+          id: notif_id,
         });
 
         dispatch({
@@ -116,13 +121,16 @@ export const edit_tuning_name = (id: string, value: string) => <ThunkActionMain>
       }
 
       if (value.length === 0) {
-        store.removeAllNotifications();
+        store.removeNotification(notif_id);
+
+        notif_id = uuidv4();
 
         add_custom_notification({
           title: 'Warning',
           message: 'Do not leave the title field empty.',
           type: 'warning',
           container: 'top-left',
+          id: notif_id,
         });
       }
 
