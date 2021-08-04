@@ -18,15 +18,6 @@ let inputFloat32Array: Float32Array;
 const PitchDetectorComponent: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    // Initiate pitch detection
-    setup();
-
-    return () => {
-      stream.getTracks()[0].enabled = false;
-    };
-  }, []);
-
   // Declare functions
 
   // ==============================
@@ -77,6 +68,15 @@ const PitchDetectorComponent: React.FC<Props> = (props) => {
   // ==============================
   // ==============================
   // ==============================
+
+  useEffect(() => {
+    // Initiate pitch detection
+    setup();
+
+    return () => {
+      stream.getTracks()[0].enabled = false;
+    };
+  }, []);
 
   return <></>;
 };

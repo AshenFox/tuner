@@ -6,7 +6,8 @@ import NavBar from './layout/navbar';
 import Settings from './layout/settings';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReactNotifications from 'react-notifications-component';
-import DBSync from './utilities/DBSync';
+import DBSyncronizer from './utilities/DBSyncronizer';
+import SWRegistrator from './utilities/SWRegistrator';
 
 interface OwnProps {}
 
@@ -17,7 +18,8 @@ const App: React.FC<Props> = () => {
     <>
       <Provider store={store}>
         <ReactNotifications isMobile={true} />
-        <DBSync />
+        <DBSyncronizer />
+        <SWRegistrator />
         <Router>
           <Switch>
             <Route path='/settings' component={Settings} />
