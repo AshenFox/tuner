@@ -1,8 +1,14 @@
 .tunings-list {
   width: 100%;
 
+  &__info {
+    display: flex;
+  }
+
   &__number {
-    margin-right: 2rem;
+    display: block;
+    width: 2rem;
+    margin-right: 1rem;
   }
 
   &__item {
@@ -10,7 +16,6 @@
     // justify-content: space-between;
     padding: 1rem 1rem;
     font-size: 2rem;
-
     /* @media (max-width: 600px) {
       padding: 1rem 1.5rem;
     } */
@@ -34,14 +39,19 @@
 
   &__delete-icon,
   &__edit-icon {
-    cursor: pointer;
+    opacity: 0.5;
     fill: white;
     width: 2.5rem;
     height: 2.5rem;
     transition: all 0.1s;
 
-    &:hover {
-      fill: red;
+    &.active {
+      opacity: 1;
+      cursor: pointer;
+
+      &:hover {
+        fill: red;
+      }
     }
   }
 

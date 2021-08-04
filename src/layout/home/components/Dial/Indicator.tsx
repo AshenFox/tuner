@@ -13,9 +13,12 @@ const Indicator: React.FC<Props> = (props) => {
   const activeTuning = tunings.find((tuning) => tuning.active);
   const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
 
+  let sensitivity = 0.5;
+  if (most_freq_fr > 200) sensitivity = 1;
+
   const isTuned =
     typeof activeStringFr === 'number'
-      ? Math.abs(most_freq_fr - activeStringFr) <= 0.5
+      ? Math.abs(most_freq_fr - activeStringFr) <= sensitivity
       : false;
 
   // tip text calculation

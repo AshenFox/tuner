@@ -1,6 +1,6 @@
 import React from 'react';
 import Dial from './components/Dial';
-import PitchDetector from './components/PitchDetector';
+import PitchDetector from '../../utilities/PitchDetectorComponent';
 import Tuning from './components/Tuning';
 import TuningSelect from './components/TuningSelect';
 

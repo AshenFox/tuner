@@ -12,15 +12,26 @@ import {
   DELETE_STRING,
   TOGGLE_AUTO_TUNING,
   AUTO_SET_ACTIVE_NOTE,
+  SYNC_WITH_DB,
 } from './../../types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
   switch (action.type) {
+    case SYNC_WITH_DB:
+      return {
+        ...state,
+        tunings: action.payload.tunings,
+        settings: action.payload.settings,
+      };
+
     case TOGGLE_AUTO_TUNING:
       return {
         ...state,
-        auto_tuning: !state.auto_tuning,
+        settings: {
+          ...state.settings,
+          auto_tuning: !state.settings.auto_tuning,
+        },
       };
 
     case DELETE_STRING:

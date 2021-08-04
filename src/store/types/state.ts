@@ -13,6 +13,13 @@ export type Tuning = {
   name: string;
   data: Note[];
   active: boolean;
+  created: number;
+  is_default: boolean;
+};
+
+export type Settings = {
+  id: string;
+  auto_tuning: boolean;
 };
 
 export type Tunings = Tuning[];
@@ -21,5 +28,5 @@ export interface mainStateInterface {
   fr_arr: number[];
   most_freq_fr: number;
   tunings: Tunings;
-  auto_tuning: boolean;
+  settings: Settings;
 }

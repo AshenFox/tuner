@@ -8,7 +8,9 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const Main: React.FC<Props> = (props) => {
-  const { auto_tuning } = useAppSelector((state) => state.main);
+  const {
+    settings: { auto_tuning },
+  } = useAppSelector((state) => state.main);
 
   const dispatch = useAppDispatch();
 

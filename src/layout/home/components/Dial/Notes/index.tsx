@@ -57,7 +57,7 @@ const Notes: React.FC<Props> = ({ fr }) => {
   );
 };
 
-const areEqual = (prev: any, curent: any) =>
+const areEqual = (prev: Props, curent: Props) =>
   Math.floor(prev.fr) === Math.floor(curent.fr);
 
 export default memo(Notes, areEqual);

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { edit_tuning_name, add_string } from '../../../store/actions/mainActions';
-import AddButton from './AddButton';
-import TuningPageString from './TuningPageString';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { edit_tuning_name, add_string } from '../../../../store/actions/mainActions';
+import AddButton from '../AddButton';
+import TuningPageString from './String';
 import { useParams } from 'react-router-dom';
 
 type urlParams = {

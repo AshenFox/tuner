@@ -23,9 +23,12 @@ const Dial: React.FC<Props> = (props) => {
     transform: `translate(-50%, -50%) rotate(${-angle * 1.5}deg)`,
   };
 
+  let sensitivity = 0.5;
+  if (most_freq_fr > 200) sensitivity = 1;
+
   const isTuned =
     typeof activeStringFr === 'number'
-      ? Math.abs(most_freq_fr - activeStringFr) <= 0.5
+      ? Math.abs(most_freq_fr - activeStringFr) <= sensitivity
       : false;
 
   return (

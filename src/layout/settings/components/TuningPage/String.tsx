@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAppDispatch } from '../../../store/store';
-import { delete_string } from '../../../store/actions/mainActions';
+import { useAppDispatch } from '../../../../store/store';
+import { delete_string } from '../../../../store/actions/mainActions';
 import NoteSelect from './NoteSelect';
 import OctaveSelect from './OctaveSelect';
-import { Note } from '../../../store/types/state';
+import { Note } from '../../../../store/types/state';
 import { useParams } from 'react-router-dom';
 
 type urlParams = {

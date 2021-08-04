@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppDispatch } from '../../../store/store';
-import { set_note } from '../../../store/actions/mainActions';
+import { useAppDispatch } from '../../../../store/store';
+import { set_note } from '../../../../store/actions/mainActions';
 import Select from 'react-select';
-import { Note } from '../../../store/types/state';
+import { Note } from '../../../../store/types/state';
 import { useParams } from 'react-router-dom';
-import { createTheme, Styles } from '../../../utilities/SelectComponentStyles';
+import { createTheme, Styles } from '../../../../utilities/SelectComponentStyles';
 
 interface NoteSelectOption {
   value: number;
@@ -41,7 +41,7 @@ const NoteSelect: React.FC<Props> = ({ data }) => {
 
   const { id: tuningID } = useParams<urlParams>();
 
-  const { value } = data;
+  const { value, id: noteID } = data;
 
   const onSelectChange = (value: NoteSelectOption | null) => {
     if (!value) return;
@@ -51,6 +51,7 @@ const NoteSelect: React.FC<Props> = ({ data }) => {
 
   return (
     <Select
+      id={`note-select-${noteID}`}
       className={'tuning-page__note-select'}
       theme={createTheme}
       options={optionsNoteSelect}

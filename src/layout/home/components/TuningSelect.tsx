@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { set_active_tuning } from '../../../store/actions/mainActions';
 import Select from 'react-select';
@@ -49,4 +49,4 @@ const TuningSelect: React.FC<Props> = (props) => {
   );
 };
 
-export default TuningSelect;
+export default memo(TuningSelect);

@@ -1,4 +1,4 @@
-import { Note, Tuning } from './state';
+import { Note, Tuning, Tunings, Settings } from './state';
 // main
 export const SET_FR = 'SET_FR';
 
@@ -20,6 +20,16 @@ export const ADD_STRING = 'ADD_STRING';
 export const DELETE_STRING = 'DELETE_STRING';
 
 export const TOGGLE_AUTO_TUNING = 'TOGGLE_AUTO_TUNING';
+
+export const SYNC_WITH_DB = 'SYNC_WITH_DB';
+
+export interface SyncWithDBAction {
+  type: typeof SYNC_WITH_DB;
+  payload: {
+    tunings: Tunings;
+    settings: Settings;
+  };
+}
 
 export interface ToggleAutoTuningAction {
   type: typeof TOGGLE_AUTO_TUNING;
@@ -112,6 +122,7 @@ export type MainActions =
   | ErrorAction
   | AddStringAction
   | DeleteStringAction
-  | ToggleAutoTuningAction; // & ...
+  | ToggleAutoTuningAction
+  | SyncWithDBAction; // & ...
 
 export type AppActions = MainActions; // & ...

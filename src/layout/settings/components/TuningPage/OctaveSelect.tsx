@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppDispatch } from '../../../store/store';
-import { set_octave } from '../../../store/actions/mainActions';
+import { useAppDispatch } from '../../../../store/store';
+import { set_octave } from '../../../../store/actions/mainActions';
 import Select from 'react-select';
-import { Note } from '../../../store/types/state';
+import { Note } from '../../../../store/types/state';
 import { useParams } from 'react-router-dom';
-import { createTheme, Styles } from '../../../utilities/SelectComponentStyles';
+import { createTheme, Styles } from '../../../../utilities/SelectComponentStyles';
 
 interface OctaveSelectOption {
   value: number;
@@ -37,7 +37,7 @@ const OctaveSelect: React.FC<Props> = ({ data }) => {
 
   const { id: tuningID } = useParams<urlParams>();
 
-  const { octave } = data;
+  const { octave, id: noteID } = data;
 
   const onSelectChange = (value: OctaveSelectOption | null) => {
     if (!value) return;
@@ -49,6 +49,7 @@ const OctaveSelect: React.FC<Props> = ({ data }) => {
 
   return (
     <Select
+      id={`note-select-${noteID}`}
       className={'tuning-page__octave-select'}
       theme={createTheme}
       options={optionsOctaveSelect}

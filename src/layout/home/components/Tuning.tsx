@@ -10,7 +10,11 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const Tuning: React.FC<Props> = (props) => {
-  const { tunings, most_freq_fr, auto_tuning } = useAppSelector((state) => state.main);
+  const {
+    tunings,
+    most_freq_fr,
+    settings: { auto_tuning },
+  } = useAppSelector((state) => state.main);
 
   useEffect(() => {
     if (auto_tuning) dispatch(auto_set_active_note()); // a

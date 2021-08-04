@@ -2,7 +2,7 @@ export const createTheme = (theme: any) => ({
   ...theme,
   colors: {
     ...theme.colors,
-    primary25: '#ec3000',
+    primary25: '#533592',
     primary: '#ec3000',
     neutral0: '#533592',
     neutral80: '#fff',

@@ -1,8 +1,8 @@
 import React from 'react';
-import AddButton from './AddButton';
-import TuningsListItem from './TuningListItem';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { add_tuning } from '../../../store/actions/mainActions';
+import AddButton from '../AddButton';
+import ListItem from './ListItem';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { add_tuning } from '../../../../store/actions/mainActions';
 
 interface OwnProps {}
 
@@ -23,8 +23,8 @@ const TuningsList: React.FC<Props> = (props) => {
     <div className='container'>
       <h1 className='settings__header'>Tunings list</h1>
       <div className='tunings-list'>
-        {tunings.map(({ name, id }, i) => (
-          <TuningsListItem key={id} number={i + 1} id={id} name={name} />
+        {tunings.map((tuning, i) => (
+          <ListItem key={tuning.id} number={i + 1} data={tuning} />
         ))}
         {!tunings.length && (
           <div className='settings__empty'>You don't have any tunings yet.</div>
