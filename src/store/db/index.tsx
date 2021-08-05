@@ -16,24 +16,27 @@ interface MyDB extends DBSchema {
 
 const set_up_db = async () => {
   // Setting up the db
-  const db = await openDB<MyDB>('db', 1, {
-    upgrade(db) {
-      db.createObjectStore('tunings', { keyPath: 'id' });
-      db.createObjectStore('settings', { keyPath: 'id' });
+  const db = await openDB<MyDB>('db', 3, {
+    upgrade(db, oldVersion, newVersion, tx) {
+      console.log('fire', oldVersion, newVersion);
+
+      if (oldVersion === 0) {
+        db.createObjectStore('tunings', { keyPath: 'id' });
+        db.createObjectStore('settings', { keyPath: 'id' });
+      }
+
+      const tunings_store = tx.objectStore('tunings');
+      const settings_store = tx.objectStore('settings');
+
+      default_tunings.map((tuning) => tunings_store.put(tuning));
+
+      settings_store.put({
+        id: 'main-settings',
+        auto_tuning: true,
+        language: languages['ENG'],
+      });
     },
   });
-
-  const { length } = await db.getAllKeys('tunings');
-
-  if (!length) {
-    await Promise.all(default_tunings.map((tuning) => db.put('tunings', tuning)));
-
-    await db.put('settings', {
-      id: 'main-settings',
-      auto_tuning: true,
-      language: languages['ENG'],
-    });
-  }
 
   // ==========
   // The db edit Methods
