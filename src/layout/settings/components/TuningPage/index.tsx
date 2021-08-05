@@ -16,7 +16,10 @@ type Props = OwnProps;
 const TuningsPage: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
-  const { tunings } = useAppSelector((state) => state.main);
+  const {
+    tunings,
+    settings: { language },
+  } = useAppSelector((state) => state.main);
 
   const { id } = useParams<urlParams>();
 
@@ -54,7 +57,7 @@ const TuningsPage: React.FC<Props> = (props) => {
         ))}
       </div>
       <AddButton clickHandler={addStringClickHandler} isActive={isAddActive}>
-        Add a new string
+        {language.settigns.tuning_page.add_button}
       </AddButton>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Note, Tuning, Tunings, Settings } from './state';
+import { Note, Tuning, Tunings, Settings, Language } from './state';
 // main
 export const SET_FR = 'SET_FR';
 
@@ -22,6 +22,15 @@ export const DELETE_STRING = 'DELETE_STRING';
 export const TOGGLE_AUTO_TUNING = 'TOGGLE_AUTO_TUNING';
 
 export const SYNC_WITH_DB = 'SYNC_WITH_DB';
+
+export const SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
+
+export interface SwitchLanguagegAction {
+  type: typeof SWITCH_LANGUAGE;
+  payload: {
+    language: Language;
+  };
+}
 
 export interface SyncWithDBAction {
   type: typeof SYNC_WITH_DB;
@@ -123,6 +132,7 @@ export type MainActions =
   | AddStringAction
   | DeleteStringAction
   | ToggleAutoTuningAction
-  | SyncWithDBAction; // & ...
+  | SyncWithDBAction
+  | SwitchLanguagegAction; // & ...
 
 export type AppActions = MainActions; // & ...

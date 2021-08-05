@@ -94,4 +94,11 @@
     opacity: 0.8;
     margin: 1rem 0;
   }
+
+  &__language-select {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    width: 6.9rem;
+  }
 }

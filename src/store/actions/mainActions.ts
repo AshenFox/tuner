@@ -15,13 +15,37 @@ import {
   DELETE_STRING,
   TOGGLE_AUTO_TUNING,
   SYNC_WITH_DB,
+  SWITCH_LANGUAGE,
 } from '../types/actions';
 import { ThunkAction } from 'redux-thunk';
-import { ReactNotificationOptions, store } from 'react-notifications-component';
+import { store } from 'react-notifications-component';
 import db_methods from '../db';
 import { v4 as uuidv4 } from 'uuid';
+import languages from '../../utilities/lang.json';
+import {
+  create_note,
+  create_tuning,
+  add_custom_notification,
+} from '../utilities/helperFunctions';
 
 type ThunkActionMain = ThunkAction<void, RootState, unknown, MainActions>;
+
+export const switch_language = (value: 'RU' | 'ENG') => <ThunkActionMain>(async (
+    dispatch
+  ) => {
+    try {
+      (await db_methods).switch_language(value);
+
+      dispatch({
+        type: SWITCH_LANGUAGE,
+        payload: {
+          language: languages[value],
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 
 export const sync_with_db = () => <ThunkActionMain>(async (dispatch) => {
     try {
@@ -97,17 +121,24 @@ export const add_string = (id: string) => <ThunkActionMain>(async (dispatch) => 
 let notif_id: string = '';
 
 export const edit_tuning_name = (id: string, value: string) => <ThunkActionMain>(async (
-    dispatch
+    dispatch,
+    getState
   ) => {
     try {
+      const {
+        main: {
+          settings: { language },
+        },
+      } = getState();
+
       if (value.length > 20) {
         store.removeNotification(notif_id);
 
         notif_id = uuidv4();
 
         add_custom_notification({
-          title: 'Error',
-          message: 'Title can be no longer than 20 characters.',
+          title: language.notifications.error.name,
+          message: language.notifications.error.message,
           type: 'danger',
           container: 'top-left',
           id: notif_id,
@@ -126,8 +157,8 @@ export const edit_tuning_name = (id: string, value: string) => <ThunkActionMain>
         notif_id = uuidv4();
 
         add_custom_notification({
-          title: 'Warning',
-          message: 'Do not leave the title field empty.',
+          title: language.notifications.warning.name,
+          message: language.notifications.warning.message,
           type: 'warning',
           container: 'top-left',
           id: notif_id,
@@ -194,13 +225,18 @@ export const set_active_tuning = (id: string): MainActions => ({
 export const add_tuning = () => <ThunkActionMain>(async (dispatch, getState) => {
     try {
       const {
-        main: { tunings },
+        main: {
+          tunings,
+          settings: { language },
+        },
       } = getState();
 
       const number =
-        tunings.filter((tuning) => /^New tuning/.test(tuning.name)).length + 1;
+        tunings.filter((tuning) =>
+          new RegExp(`^${language.tunings.new}`).test(tuning.name)
+        ).length + 1;
 
-      const new_tuning = create_tuning(number);
+      const new_tuning = create_tuning(number, language.tunings.new);
 
       (await db_methods).add_tuning(new_tuning);
 
@@ -247,7 +283,7 @@ export const set_active_note = (id: string): MainActions => ({
 // ==============================
 // ==============================
 
-const create_note = (
+/* const create_note = (
   new_value: number | null = null,
   new_octave: number | null = null,
   data: Note = {
@@ -277,8 +313,8 @@ const create_note = (
   };
 };
 
-const create_tuning = (nubmer: number) => {
-  const name = `New tuning ${nubmer}`;
+const create_tuning = (nubmer: number, title: string): Tuning => {
+  const name = `${title} ${nubmer}`;
 
   const id = uuidv4();
 
@@ -295,6 +331,7 @@ const create_tuning = (nubmer: number) => {
     ],
     active: false,
     is_default: false,
+    default_key: 'new_tuning',
     created: Date.now(),
   };
 };
@@ -326,7 +363,7 @@ const add_custom_notification = (custom_options: ReactNotificationOptions) => {
       duration: 4000,
     },
   });
-};
+}; */
 
 // ==============================
 // ==============================

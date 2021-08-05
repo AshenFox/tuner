@@ -6,7 +6,11 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const Indicator: React.FC<Props> = (props) => {
-  const { most_freq_fr, tunings } = useAppSelector((state) => state.main);
+  const {
+    most_freq_fr,
+    tunings,
+    settings: { language },
+  } = useAppSelector((state) => state.main);
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
@@ -22,11 +26,11 @@ const Indicator: React.FC<Props> = (props) => {
       : false;
 
   // tip text calculation
-  let tipText = 'lower';
+  let tipText = language.main.tips.lower;
 
   if (typeof activeStringFr === 'number' && most_freq_fr < activeStringFr)
-    tipText = 'higher';
-  if (isTuned) tipText = 'in tune';
+    tipText = language.main.tips.higher;
+  if (isTuned) tipText = language.main.tips.in_tune;
   // ==========
 
   return (

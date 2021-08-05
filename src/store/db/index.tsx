@@ -1,5 +1,7 @@
 import { openDB, DBSchema } from 'idb';
-import { Tuning, Settings, Note } from '../types/state';
+import { Tuning, Settings, Note, Tunings } from '../types/state';
+import languages from '../../utilities/lang.json';
+import { create_note } from '../utilities/helperFunctions';
 
 interface MyDB extends DBSchema {
   tunings: {
@@ -24,10 +26,13 @@ const set_up_db = async () => {
   const { length } = await db.getAllKeys('tunings');
 
   if (!length) {
-    await db.put('tunings', dafault_tunings[0]);
-    await db.put('tunings', dafault_tunings[1]);
+    await Promise.all(default_tunings.map((tuning) => db.put('tunings', tuning)));
 
-    await db.put('settings', { id: 'main-settings', auto_tuning: true });
+    await db.put('settings', {
+      id: 'main-settings',
+      auto_tuning: true,
+      language: languages['ENG'],
+    });
   }
 
   // ==========
@@ -125,6 +130,18 @@ const set_up_db = async () => {
     }
   };
 
+  const switch_language = async (value: 'RU' | 'ENG') => {
+    try {
+      const settings = await db.get('settings', 'main-settings');
+
+      if (settings) {
+        return db.put('settings', { ...settings, language: languages[value] });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // ==========
 
   return {
@@ -136,138 +153,85 @@ const set_up_db = async () => {
     delete_string,
     toggle_auto_tuning,
     get_all_data,
+    switch_language,
   };
 };
 
 // DB_methods
 
-const dafault_tunings = [
+const default_tunings: Tunings = [
   {
-    name: 'Standart guitar',
+    name: 'guitar_standart',
     id: '76d9ccac-d184-413d-a3ba-12f183e4e9f0',
     data: [
-      {
-        id: '1a15fdcb-e911-45f5-b80e-7a923c15e64b',
-        name: 'E',
-        value: 5,
-        sign: false,
-        octave: 2,
-        fr: 82.4068892282175,
-        active: true,
-      },
-      {
-        id: 'f9c17aec-10b5-467f-a321-f7ed045ff7d6',
-        name: 'A',
-        value: 10,
-        sign: false,
-        octave: 2,
-        fr: 110,
-        active: false,
-      },
-      {
-        id: '6a0244bf-6c2a-4d32-b0cf-85aa0fbf11d2',
-        name: 'D',
-        value: 3,
-        sign: false,
-        octave: 3,
-        fr: 146.83238395870376,
-        active: false,
-      },
-      {
-        id: '0c6d2a99-1128-4fae-975f-7654220cc27c',
-        name: 'G',
-        value: 8,
-        sign: false,
-        octave: 3,
-        fr: 195.99771799087463,
-        active: false,
-      },
-      {
-        id: 'c51cf435-f6c6-4fe5-af51-e113994b1eb2',
-        name: 'B',
-        value: 12,
-        sign: false,
-        octave: 3,
-        fr: 246.94165062806204,
-        active: false,
-      },
-      {
-        id: '4e1cc747-16f6-4db9-bc50-a18765d0c9c2',
-        name: 'E',
-        value: 5,
-        sign: false,
-        octave: 4,
-        fr: 329.62755691286986,
-        active: false,
-      },
+      create_note(5, 2),
+      create_note(10, 2),
+      create_note(3, 3),
+      create_note(8, 3),
+      create_note(12, 3),
+      create_note(5, 4),
     ],
     active: true,
-
     is_default: true,
     created: 1628083499901,
+    default_key: 'guitar_standart',
   },
   {
-    name: 'Drop D',
+    name: 'guitar_drop_d',
     id: '4546131b-da0b-4ce2-9d9c-816064c357e1',
     data: [
-      {
-        id: '5b26c4e9-fa77-40c1-b597-3e8bdce730ad',
-        name: 'D',
-        value: 3,
-        sign: false,
-        octave: 2,
-        fr: 73.41619,
-        active: true,
-      },
-      {
-        id: '71d6c4f8-5eb0-4005-a296-e70186d3ac1e',
-        name: 'A',
-        value: 10,
-        sign: false,
-        octave: 2,
-        fr: 110,
-        active: false,
-      },
-      {
-        id: '6088df93-10e3-4776-8432-e90c74ad00c1',
-        name: 'D',
-        value: 3,
-        sign: false,
-        octave: 3,
-        fr: 146.83238395870376,
-        active: false,
-      },
-      {
-        id: '26ea5756-4274-44de-98fd-2850418f611e',
-        name: 'G',
-        value: 8,
-        sign: false,
-        octave: 3,
-        fr: 195.99771799087463,
-        active: false,
-      },
-      {
-        id: 'd4a041e1-e9a2-4ceb-b668-e9363e0881e2',
-        name: 'B',
-        value: 12,
-        sign: false,
-        octave: 3,
-        fr: 246.94165062806204,
-        active: false,
-      },
-      {
-        id: 'ed015cb-af1f-414e-9f6b-96d849b6e54c',
-        name: 'E',
-        value: 5,
-        sign: false,
-        octave: 4,
-        fr: 329.62755691286986,
-        active: false,
-      },
+      create_note(3, 2),
+      create_note(10, 2),
+      create_note(3, 3),
+      create_note(8, 3),
+      create_note(12, 3),
+      create_note(5, 4),
     ],
     active: false,
     is_default: true,
     created: 1628083569741,
+    default_key: 'guitar_drop_d',
+  },
+  {
+    name: 'guitar_b1',
+    id: '1ee86f62-68fe-49ff-a968-2c9ea1c0a2fa',
+    data: [
+      create_note(4, 2),
+      create_note(9, 2),
+      create_note(2, 3),
+      create_note(7, 3),
+      create_note(9, 3),
+      create_note(4, 4),
+    ],
+    active: false,
+    is_default: true,
+    created: 1628083569742,
+    default_key: 'guitar_b1',
+  },
+  {
+    name: 'guitar_b2',
+    id: 'f05c6e47-ea9b-404b-af7c-6b4e26daf5f7',
+    data: [
+      create_note(3, 2),
+      create_note(8, 2),
+      create_note(1, 3),
+      create_note(6, 3),
+      create_note(10, 3),
+      create_note(3, 4),
+    ],
+    active: false,
+    is_default: true,
+    created: 1628083569743,
+    default_key: 'guitar_b2',
+  },
+  {
+    name: 'ukulele',
+    id: 'aa5520af-cdc9-4977-8bdb-478be826fe2d',
+    data: [create_note(8, 4), create_note(1, 4), create_note(5, 4), create_note(10, 4)],
+    active: false,
+    is_default: true,
+    created: 1628083569744,
+    default_key: 'ukulele',
   },
 ];
 

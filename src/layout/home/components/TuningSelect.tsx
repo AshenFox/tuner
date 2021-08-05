@@ -15,14 +15,21 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const TuningSelect: React.FC<Props> = (props) => {
-  const { tunings } = useAppSelector((state) => state.main);
+  const {
+    tunings,
+    settings: { language },
+  } = useAppSelector((state) => state.main);
 
   const dispatch = useAppDispatch();
 
   const optionsTuningSelect: TuningSelectOption[] = tunings.map(
-    ({ id, name, active }) => ({
+    ({ id, name, active, is_default, default_key }) => ({
       value: id,
-      label: name ? name : 'No title',
+      label: name
+        ? is_default
+          ? language.tunings.default[default_key]
+          : name
+        : language.tunings.title_placeholder,
       active,
     })
   );

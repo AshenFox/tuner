@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useAppSelector } from '../../store/store';
 import Hamburger from './components/Hamburger';
 import NavBarItem from './components/NavbarItem';
 
@@ -7,6 +8,10 @@ interface OwnProps {}
 type Props = OwnProps;
 
 const NavBar: React.FC<Props> = (props) => {
+  const {
+    settings: { language },
+  } = useAppSelector((state) => state.main);
+
   const [isActive, setIsActive] = useState(false);
 
   const hamburgerClick = (e: React.MouseEvent) => setIsActive(!isActive);
@@ -24,10 +29,10 @@ const NavBar: React.FC<Props> = (props) => {
         <div className='container'>
           <div className='navbar__menu'>
             <NavBarItem to={'/'} icon={'tuning-fork'}>
-              Tuner
+              {language.navbar.options.tuner}
             </NavBarItem>
             <NavBarItem to={'/settings'} icon={'settings-2'}>
-              Settings
+              {language.navbar.options.settings}
             </NavBarItem>
           </div>
         </div>

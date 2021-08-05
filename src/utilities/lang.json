@@ -1,0 +1,110 @@
+{
+  "ENG": {
+    "language": "ENG",
+    "main": {
+      "tips": {
+        "higher": "higher",
+        "lower": "lower",
+        "in_tune": "in_tune"
+      }
+    },
+    "navbar": {
+      "options": {
+        "tuner": "Tuner",
+        "settings": "Settings"
+      }
+    },
+    "settigns": {
+      "main": {
+        "header": "Settings",
+        "options": {
+          "tunings_list": "Tunings list",
+          "auto_tuning": "Auto tuning"
+        }
+      },
+      "tunings_list": {
+        "header": "Tunings list",
+        "add_button": "Add a new tuning"
+      },
+      "tuning_page": {
+        "add_button": "Add a new string"
+      }
+    },
+    "notifications": {
+      "error": {
+        "name": "Error",
+        "message": "Max length is 20 characters."
+      },
+      "warning": {
+        "name": "Warning",
+        "message": "Do not leave the title field empty."
+      }
+    },
+    "tunings": {
+      "default": {
+        "guitar_standart": "Guitar",
+        "guitar_drop_d": "Guitar drop D",
+        "guitar_b1": "Guitar -1t.",
+        "guitar_b2": "Guitar -2t.",
+        "ukulele": "Ukulele",
+        "new_tuning": ""
+      },
+      "new": "New tuning",
+      "title_placeholder": "No title"
+    }
+  },
+  "RU": {
+    "language": "RU",
+    "main": {
+      "tips": {
+        "higher": "выше",
+        "lower": "ниже",
+        "in_tune": "настроено"
+      }
+    },
+    "navbar": {
+      "options": {
+        "tuner": "Тюнер",
+        "settings": "Настройки"
+      }
+    },
+    "settigns": {
+      "main": {
+        "header": "Настройки",
+        "options": {
+          "tunings_list": "Список строев",
+          "auto_tuning": "Автонастройка"
+        }
+      },
+      "tunings_list": {
+        "header": "Список строев",
+        "add_button": "Добавить новый строй"
+      },
+      "tuning_page": {
+        "add_button": "Добавить новую струну"
+      }
+    },
+    "notifications": {
+      "error": {
+        "name": "Ошибка",
+        "message": "Максимальная длинна 20 символов."
+      },
+      "warning": {
+        "name": "Предупреждение",
+        "message": "Не оставляйте поле названия пустым."
+      }
+    },
+    "tunings": {
+      "default": {
+        "guitar_standart": "Гитара",
+        "guitar_drop_d": "Гитара drop D",
+        "guitar_b1": "Гитара -1т.",
+        "guitar_b2": "Гитара -2т.",
+        "ukulele": "Укулеле",
+        "new_tuning": ""
+      },
+      "new": "Новый строй",
+      "title_placeholder": "Без названия"
+    }
+  }
+}

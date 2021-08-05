@@ -42,8 +42,6 @@ const OctaveSelect: React.FC<Props> = ({ data }) => {
   const onSelectChange = (value: OctaveSelectOption | null) => {
     if (!value) return;
 
-    console.log(value.value);
-
     dispatch(set_octave(tuningID, data, value.value));
   };
 

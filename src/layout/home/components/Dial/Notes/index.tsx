@@ -43,6 +43,8 @@ const Notes: React.FC<Props> = ({ fr }) => {
     const octave = Math.floor(z / 12);
     const fr = baseFR * 2 ** (z / 12);
 
+    if (fr < 16.3 || fr > 3000) continue;
+
     const angle = calcAngle(fr);
 
     notesArr.push({ ...notesValuesArr[i], octave, fr, angle });

@@ -13,16 +13,29 @@ import {
   TOGGLE_AUTO_TUNING,
   AUTO_SET_ACTIVE_NOTE,
   SYNC_WITH_DB,
+  SWITCH_LANGUAGE,
 } from './../../types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
   switch (action.type) {
+    case SWITCH_LANGUAGE:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          language: action.payload.language,
+        },
+      };
+
     case SYNC_WITH_DB:
       return {
         ...state,
         tunings: action.payload.tunings,
-        settings: action.payload.settings,
+        settings: {
+          ...state.settings,
+          ...action.payload.settings,
+        },
       };
 
     case TOGGLE_AUTO_TUNING:
@@ -172,6 +185,7 @@ const calc_fr = (
   const fr_arr = is_harmonic
     ? fr_arr_prev
     : [...fr_arr_prev.filter((el, i) => i !== 0), detected_fr];
+
   const most_freq_fr = is_harmonic
     ? most_freq_fr_prev + (Math.random() < 0.5 ? -0.05 : 0.05)
     : get_most_frequent(fr_arr);
