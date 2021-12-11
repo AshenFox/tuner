@@ -16,7 +16,7 @@ interface MyDB extends DBSchema {
 
 const set_up_db = async () => {
   // Setting up the db
-  const db = await openDB<MyDB>('db', 3, {
+  const db = await openDB<MyDB>('db', 4, {
     upgrade(db, oldVersion, newVersion, tx) {
       console.log('fire', oldVersion, newVersion);
 
@@ -203,7 +203,7 @@ const default_tunings: Tunings = [
       create_note(9, 2),
       create_note(2, 3),
       create_note(7, 3),
-      create_note(9, 3),
+      create_note(11, 3),
       create_note(4, 4),
     ],
     active: false,
