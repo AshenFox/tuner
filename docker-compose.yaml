@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.front.dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./src:/frontend/src
+      - ./public:/frontend/public
+      - /frontend/node_modules
+    ports:
+      - 3000:3000
