@@ -1,0 +1,5 @@
+{
+  "execMap": {
+    "ts": "npx ts-node --project ./server/tsconfig.server.json"
+  }
+}
