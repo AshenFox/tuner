@@ -1,4 +1,4 @@
-const cacheName = 'v2';
+const cacheName = 'v4';
 
 // Call Install Event
 self.addEventListener('install', (e) => {
@@ -35,7 +35,7 @@ self.addEventListener('fetch', (e) => {
         // Open cache
         caches.open(cacheName).then((cache) => {
           // Add response to cache
-          // console.log('Service Worker: Caching Files');
+          console.log('Service Worker: Caching Files');
           cache.put(e.request, resClone);
         });
 

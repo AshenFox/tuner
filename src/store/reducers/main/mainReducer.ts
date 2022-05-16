@@ -171,6 +171,7 @@ const calc_fr = (
   detected_fr: number,
   most_freq_fr_prev: number
 ) => {
+  const isTooLow = detected_fr <= 5;
   let sensitivity = 5;
   if (most_freq_fr_prev < 100) sensitivity = 15;
 
@@ -182,13 +183,15 @@ const calc_fr = (
   );
   const is_harmonic = harmonic_offset <= sensitivity;
 
-  const fr_arr = is_harmonic
-    ? fr_arr_prev
-    : [...fr_arr_prev.filter((el, i) => i !== 0), detected_fr];
+  const fr_arr =
+    is_harmonic || isTooLow
+      ? fr_arr_prev
+      : [...fr_arr_prev.filter((el, i) => i !== 0), detected_fr];
 
-  const most_freq_fr = is_harmonic
-    ? most_freq_fr_prev + (Math.random() < 0.5 ? -0.05 : 0.05)
-    : get_most_frequent(fr_arr);
+  const most_freq_fr =
+    is_harmonic || isTooLow
+      ? most_freq_fr_prev + (Math.random() < 0.5 ? -0.05 : 0.05)
+      : get_most_frequent(fr_arr);
 
   return {
     fr_arr,
