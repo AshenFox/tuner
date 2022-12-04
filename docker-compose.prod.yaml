@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: tuner-container
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 5000:5000

@@ -41,7 +41,9 @@
     "heroku-postbuild": "npm run build",
     "start:server": "node build_server/index.js",
     "dev:server": "nodemon server/index.ts",
-    "build:server": "tsc --p ./server/tsconfig.server.json"
+    "build:server": "tsc --p ./server/tsconfig.server.json",
+    "prod": "docker-compose -f docker-compose.prod.yaml up -d",
+    "prod-rebuild": "docker-compose -f docker-compose.prod.yaml up -d --no-deps --build app"
   },
   "eslintConfig": {
     "extends": [
