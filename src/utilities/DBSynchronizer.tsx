@@ -6,7 +6,7 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const DBSync: React.FC<Props> = () => {
+const DBSynchronizer: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const DBSync: React.FC<Props> = () => {
   return <></>;
 };
 
-export default DBSync;
+export default DBSynchronizer;

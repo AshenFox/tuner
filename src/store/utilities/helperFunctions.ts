@@ -1,5 +1,5 @@
 import { Note, Tuning } from '../types/state';
-import { ReactNotificationOptions, store } from 'react-notifications-component';
+import { iNotification, Store } from 'react-notifications-component';
 import { v4 as uuidv4 } from 'uuid';
 
 // react-notifications-component
@@ -79,8 +79,8 @@ const all_notes = [
   { sign: false, name: 'B' },
 ];
 
-export const add_custom_notification = (custom_options: ReactNotificationOptions) => {
-  store.addNotification({
+export const add_custom_notification = (custom_options: iNotification) => {
+  Store.addNotification({
     ...custom_options,
     insert: 'top',
     animationIn: ['animate__animated', 'animate__fadeIn'],
