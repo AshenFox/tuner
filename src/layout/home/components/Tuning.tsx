@@ -9,20 +9,20 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const Tuning: React.FC<Props> = (props) => {
+const Tuning: React.FC<Props> = props => {
   const {
     tunings,
     most_freq_fr,
     settings: { auto_tuning },
-  } = useAppSelector((state) => state.main);
-
-  useEffect(() => {
-    if (auto_tuning) dispatch(auto_set_active_note()); // a
-  }, [most_freq_fr, auto_tuning]);
+  } = useAppSelector(state => state.main);
 
   const dispatch = useAppDispatch();
 
-  const activeTuning = tunings.find((tuning) => tuning.active);
+  useEffect(() => {
+    if (auto_tuning) dispatch(auto_set_active_note()); // a
+  }, [most_freq_fr, auto_tuning, dispatch]);
+
+  const activeTuning = tunings.find(tuning => tuning.active);
 
   const strings = activeTuning?.data || [];
 

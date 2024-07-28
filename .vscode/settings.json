@@ -1,0 +1,8 @@
+{
+  "cSpell.words": ["Registrator"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.stylelint": "always"
+  },
+  "stylelint.validate": ["css", "scss"]
+}

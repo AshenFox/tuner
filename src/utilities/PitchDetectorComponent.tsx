@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useAppDispatch } from '../store/store';
 import { set_fr } from '../store/actions/mainActions';
 import { PitchDetector } from 'pitchy';
@@ -15,7 +15,7 @@ let mediaStreamSource: MediaStreamAudioSourceNode;
 let detector: PitchDetector<Float64Array>;
 let inputFloat32Array: Float32Array;
 
-const PitchDetectorComponent: React.FC<Props> = (props) => {
+const PitchDetectorComponent: React.FC<Props> = props => {
   const dispatch = useAppDispatch();
 
   // Declare functions
@@ -24,7 +24,30 @@ const PitchDetectorComponent: React.FC<Props> = (props) => {
   // ==============================
   // ==============================
 
-  const setup = async () => {
+  const updatePitch = useCallback(
+    (
+      analyserNode: AnalyserNode,
+      detector: PitchDetector<Float64Array>,
+      inputFloat32Array: Float32Array,
+      sampleRate: number
+    ) => {
+      analyserNode.getFloatTimeDomainData(inputFloat32Array);
+      const [fr] = detector.findPitch(inputFloat32Array, sampleRate);
+
+      dispatch(set_fr(fr));
+
+      const isMuted = !stream.getTracks()[0].enabled;
+
+      if (!isMuted)
+        window.setTimeout(
+          () => updatePitch(analyserNode, detector, inputFloat32Array, sampleRate),
+          100
+        );
+    },
+    [dispatch]
+  );
+
+  const setup = useCallback(async () => {
     if (!stream) {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     } else {
@@ -43,27 +66,7 @@ const PitchDetectorComponent: React.FC<Props> = (props) => {
     if (!inputFloat32Array) inputFloat32Array = new Float32Array(detector.inputLength);
 
     updatePitch(analyserNode, detector, inputFloat32Array, audioContext.sampleRate);
-  };
-
-  const updatePitch = (
-    analyserNode: AnalyserNode,
-    detector: PitchDetector<Float64Array>,
-    inputFloat32Array: Float32Array,
-    sampleRate: number
-  ) => {
-    analyserNode.getFloatTimeDomainData(inputFloat32Array);
-    const [fr] = detector.findPitch(inputFloat32Array, sampleRate);
-
-    dispatch(set_fr(fr));
-
-    const isMuted = !stream.getTracks()[0].enabled;
-
-    if (!isMuted)
-      window.setTimeout(
-        () => updatePitch(analyserNode, detector, inputFloat32Array, sampleRate),
-        100
-      );
-  };
+  }, [updatePitch]);
 
   // ==============================
   // ==============================
@@ -76,7 +79,7 @@ const PitchDetectorComponent: React.FC<Props> = (props) => {
     return () => {
       stream.getTracks()[0].enabled = false;
     };
-  }, []);
+  }, [setup]);
 
   return <></>;
 };

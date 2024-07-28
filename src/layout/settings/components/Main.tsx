@@ -8,10 +8,10 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const Main: React.FC<Props> = (props) => {
+const Main: React.FC<Props> = props => {
   const {
     settings: { auto_tuning, language },
-  } = useAppSelector((state) => state.main);
+  } = useAppSelector(state => state.main);
 
   const dispatch = useAppDispatch();
 
@@ -19,16 +19,16 @@ const Main: React.FC<Props> = (props) => {
 
   return (
     <div className='container'>
-      <h1 className='settings__header'>{language.settigns.main.header}</h1>
+      <h1 className='settings__header'>{language.settings.main.header}</h1>
       <div className='settings__menu'>
         <Link to='/settings/tunings-list'>
           <div className='settings__menu-item settings__menu-item--clickable'>
-            <span>{language.settigns.main.options.tunings_list}</span>
+            <span>{language.settings.main.options.tunings_list}</span>
           </div>
         </Link>
 
         <div className='settings__menu-item'>
-          <span>{language.settigns.main.options.auto_tuning}</span>
+          <span>{language.settings.main.options.auto_tuning}</span>
           <div className='settings__menu-toggle'>
             <input
               className='toggle-checkbox'

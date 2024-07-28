@@ -8,11 +8,11 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const TuningsList: React.FC<Props> = (props) => {
+const TuningsList: React.FC<Props> = props => {
   const {
     tunings,
     settings: { language },
-  } = useAppSelector((state) => state.main);
+  } = useAppSelector(state => state.main);
 
   const dispatch = useAppDispatch();
 
@@ -24,7 +24,7 @@ const TuningsList: React.FC<Props> = (props) => {
 
   return (
     <div className='container'>
-      <h1 className='settings__header'>{language.settigns.tunings_list.header}</h1>
+      <h1 className='settings__header'>{language.settings.tunings_list.header}</h1>
       <div className='tunings-list'>
         {tunings.map((tuning, i) => (
           <ListItem key={tuning.id} number={i + 1} data={tuning} />
@@ -34,7 +34,7 @@ const TuningsList: React.FC<Props> = (props) => {
         )}
       </div>
       <AddButton clickHandler={addTuningClickHandler}>
-        {language.settigns.tunings_list.add_button}
+        {language.settings.tunings_list.add_button}
       </AddButton>
     </div>
   );

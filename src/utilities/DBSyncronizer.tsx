@@ -11,7 +11,7 @@ const DBSync: React.FC<Props> = () => {
 
   useEffect(() => {
     dispatch(sync_with_db());
-  }, []);
+  }, [dispatch]);
 
   return <></>;
 };

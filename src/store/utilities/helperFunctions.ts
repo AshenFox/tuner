@@ -2,6 +2,9 @@ import { Note, Tuning } from '../types/state';
 import { ReactNotificationOptions, store } from 'react-notifications-component';
 import { v4 as uuidv4 } from 'uuid';
 
+// react-notifications-component
+// react-select
+
 // ==============================
 // ==============================
 // ==============================

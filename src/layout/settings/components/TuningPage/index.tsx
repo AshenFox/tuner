@@ -13,17 +13,17 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const TuningsPage: React.FC<Props> = (props) => {
+const TuningsPage: React.FC<Props> = props => {
   const dispatch = useAppDispatch();
 
   const {
     tunings,
     settings: { language },
-  } = useAppSelector((state) => state.main);
+  } = useAppSelector(state => state.main);
 
   const { id } = useParams<urlParams>();
 
-  const { name, data = [] } = tunings.find((tuning) => tuning.id === id) || {};
+  const { name, data = [] } = tunings.find(tuning => tuning.id === id) || {};
 
   const addStringClickHandler = (e: React.MouseEvent) => {
     dispatch(add_string(id));
@@ -57,7 +57,7 @@ const TuningsPage: React.FC<Props> = (props) => {
         ))}
       </div>
       <AddButton clickHandler={addStringClickHandler} isActive={isAddActive}>
-        {language.settigns.tuning_page.add_button}
+        {language.settings.tuning_page.add_button}
       </AddButton>
     </div>
   );
