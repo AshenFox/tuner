@@ -18,8 +18,6 @@ const set_up_db = async () => {
   // Setting up the db
   const db = await openDB<MyDB>('db', 5, {
     upgrade(db, oldVersion, newVersion, tx) {
-      console.log('New version', oldVersion, newVersion);
-
       if (oldVersion === 0) {
         db.createObjectStore('tunings', { keyPath: 'id' });
         db.createObjectStore('settings', { keyPath: 'id' });

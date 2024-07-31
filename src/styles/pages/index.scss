@@ -1,0 +1,7 @@
+.page {
+  padding-bottom: 9rem;
+
+  @media (max-width: 1100px) {
+    padding-bottom: 0;
+  }
+}

@@ -10,7 +10,7 @@ type Props = OwnProps;
 
 const Home: React.FC<Props> = (props) => {
   return (
-    <div className="home">
+    <div className="page home">
       <div className="container">
         <Dial />
         <TuningSelect />

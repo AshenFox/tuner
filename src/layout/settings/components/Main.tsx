@@ -17,8 +17,6 @@ const Main: React.FC<Props> = (props) => {
 
   const onToggleClick = (e: React.MouseEvent) => dispatch(toggle_auto_tuning());
 
-  console.log({ language });
-
   return (
     <div className="container">
       <h1 className="settings__header">{language.settings.main.header}</h1>

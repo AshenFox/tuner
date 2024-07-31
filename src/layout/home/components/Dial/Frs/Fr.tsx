@@ -16,8 +16,6 @@ const Fr: React.FC<Props> = ({ deg }) => {
 
   let k = 10;
 
-  // console.log("==========");
-
   let value = calcValues(deg, position, k, most_freq_fr, 0);
 
   if (value > 48) {

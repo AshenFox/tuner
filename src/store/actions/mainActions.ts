@@ -264,7 +264,6 @@ export const delete_tuning = (id: string) => <ThunkActionApp>(async (
   });
 
 export const set_fr = (detected_fr: number): MainActions => {
-  // console.log('fire');
   return {
     type: SET_FR,
     payload: { detected_fr },

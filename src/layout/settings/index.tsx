@@ -11,7 +11,7 @@ type Props = OwnProps;
 
 const Settings: React.FC<Props> = (props) => {
   return (
-    <div className="settings">
+    <div className="page settings">
       <LanguageSelect />
       <Switch>
         <Route path="/settings/tuning-page/:id" exact component={TuningsPage} />

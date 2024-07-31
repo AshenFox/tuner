@@ -247,7 +247,5 @@ const get_most_frequent = (arr: number[]) => {
     return acc;
   }, {});
 
-  // console.log(acc);
-
   return most_freq;
 };

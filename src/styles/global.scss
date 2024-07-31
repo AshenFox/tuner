@@ -21,6 +21,14 @@ body {
   overflow-x: hidden !important; /* !!!!!!!!!!!!!!!! */
 
   background-color: #200952;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  @supports (min-height: 100dvh) and (width: 100dvw) {
+    width: 100dvw;
+    min-height: 100dvh;
+  }
 }
 
 h1,

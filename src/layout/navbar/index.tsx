@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useAppSelector } from '../../store/store';
 import Hamburger from './components/Hamburger';
 import NavBarItem from './components/NavbarItem';
@@ -7,25 +7,43 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const NavBar: React.FC<Props> = (props) => {
+const NavBar: React.FC<Props> = () => {
   const {
     settings: { language },
   } = useAppSelector((state) => state.main);
 
   const [isActive, setIsActive] = useState(false);
 
-  const hamburgerClick = (e: React.MouseEvent) => setIsActive(!isActive);
-  const closeNavbar = useRef(() => setIsActive(false));
+  const hamburgerClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsActive(true);
+  };
+
+  const stopPropagation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
 
   useEffect(() => {
-    isActive
-      ? document.addEventListener('click', closeNavbar.current)
-      : document.removeEventListener('click', closeNavbar.current);
-  }, [isActive]);
+    const closeNavbar = () => setIsActive(false);
+    const itemElements = document.querySelectorAll('.navbar__item');
+
+    document.addEventListener('click', closeNavbar);
+    itemElements.forEach((el) => el.addEventListener('click', closeNavbar));
+
+    return () => {
+      document.removeEventListener('click', closeNavbar);
+      itemElements.forEach((el) =>
+        el.removeEventListener('click', closeNavbar)
+      );
+    };
+  }, []);
 
   return (
     <>
-      <div className={`navbar ${isActive ? 'active' : ''}`}>
+      <div
+        className={`navbar ${isActive ? 'active' : ''}`}
+        onClick={stopPropagation}
+      >
         <div className="container">
           <div className="navbar__menu">
             <NavBarItem to={'/'} icon={'tuning-fork'}>
@@ -42,4 +60,4 @@ const NavBar: React.FC<Props> = (props) => {
   );
 };
 
-export default NavBar;
+export default memo(NavBar);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { switch_language } from '../../../store/actions/mainActions';
 import Select from 'react-select';
@@ -17,11 +17,7 @@ const optionsOctaveSelect: LanguageSelectOption[] = [
   { value: 'ENG', label: 'ENG' },
 ];
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const LanguageSelect: React.FC<Props> = (props) => {
+const LanguageSelect = () => {
   const {
     settings: { language },
   } = useAppSelector((state) => state.main);
@@ -49,8 +45,9 @@ const LanguageSelect: React.FC<Props> = (props) => {
       value={activeOption}
       instanceId="react-select-created"
       styles={StylesSmall}
+      menuPlacement="auto"
     />
   );
 };
 
-export default LanguageSelect;
+export default memo(LanguageSelect);
