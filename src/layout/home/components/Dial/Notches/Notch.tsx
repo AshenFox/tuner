@@ -12,7 +12,7 @@ const Notch: React.FC<Props> = ({ deg }) => {
 
   return (
     <div className={`dial__notch-cont ${isBig && 'big'}`} style={style}>
-      <div className='dial__notch'></div>
+      <div className="dial__notch"></div>
     </div>
   );
 };

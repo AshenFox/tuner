@@ -24,8 +24,10 @@ export const create_note = (
 ) => {
   const octave = typeof new_octave === 'number' ? new_octave : data.octave;
   const value = typeof new_value === 'number' ? new_value : data.value;
-  const name = typeof new_value === 'number' ? all_notes[new_value - 1].name : data.name;
-  const sign = typeof new_value === 'number' ? all_notes[new_value - 1].sign : data.sign;
+  const name =
+    typeof new_value === 'number' ? all_notes[new_value - 1].name : data.name;
+  const sign =
+    typeof new_value === 'number' ? all_notes[new_value - 1].sign : data.sign;
 
   const fr = baseFR * 2 ** ((octave * 12 + (value - 1)) / 12);
 

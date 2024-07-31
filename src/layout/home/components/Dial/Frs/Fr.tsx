@@ -7,7 +7,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const Fr: React.FC<Props> = memo(({ deg }) => {
+const Fr: React.FC<Props> = ({ deg }) => {
   const { most_freq_fr } = useAppSelector((state) => state.main);
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
@@ -53,15 +53,15 @@ const Fr: React.FC<Props> = memo(({ deg }) => {
   // console.log("==========");
 
   return (
-    <div className='dial__fr-cont' style={style}>
+    <div className="dial__fr-cont" style={style}>
       {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
-      <span className='dial__fr'>{value}</span>
+      <span className="dial__fr">{value}</span>
       {/* <span className="dial__deg-test">{deg}</span> */}
     </div>
   );
-});
+};
 
-export default Fr;
+export default memo(Fr);
 
 const calcValues = (
   deg: number,

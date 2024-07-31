@@ -27,8 +27,9 @@ import {
   add_custom_notification,
 } from '../utilities/helperFunctions';
 
-export const switch_language = (value: 'RU' | 'ENG') =>
-  <ThunkActionApp>(async dispatch => {
+export const switch_language = (value: 'RU' | 'ENG') => <ThunkActionApp>(async (
+    dispatch
+  ) => {
     try {
       (await db_methods).switch_language(value);
 
@@ -43,7 +44,7 @@ export const switch_language = (value: 'RU' | 'ENG') =>
     }
   });
 
-export const sync_with_db = () => <ThunkActionApp>(async dispatch => {
+export const sync_with_db = () => <ThunkActionApp>(async (dispatch) => {
     try {
       const data = await (await db_methods).get_all_data();
 
@@ -51,14 +52,18 @@ export const sync_with_db = () => <ThunkActionApp>(async dispatch => {
 
       const { tunings, settings } = data;
 
-      const main_settings = settings.find(item => item.id === 'main-settings');
+      const main_settings = settings.find(
+        (item) => item.id === 'main-settings'
+      );
 
       if (!main_settings) throw new Error("Main settings haven't been found");
 
       dispatch({
         type: SYNC_WITH_DB,
         payload: {
-          tunings: tunings.sort((first, second) => first.created - second.created),
+          tunings: tunings.sort(
+            (first, second) => first.created - second.created
+          ),
           settings: main_settings,
         },
       });
@@ -67,7 +72,7 @@ export const sync_with_db = () => <ThunkActionApp>(async dispatch => {
     }
   });
 
-export const toggle_auto_tuning = () => <ThunkActionApp>(async dispatch => {
+export const toggle_auto_tuning = () => <ThunkActionApp>(async (dispatch) => {
     try {
       (await db_methods).toggle_auto_tuning();
 
@@ -80,7 +85,7 @@ export const toggle_auto_tuning = () => <ThunkActionApp>(async dispatch => {
   }); // addd set auto tuning
 
 export const delete_string = (tuning_id: string, string_id: string) =>
-  <ThunkActionApp>(async dispatch => {
+  <ThunkActionApp>(async (dispatch) => {
     try {
       (await db_methods).delete_string(tuning_id, string_id);
 
@@ -96,7 +101,7 @@ export const delete_string = (tuning_id: string, string_id: string) =>
     }
   });
 
-export const add_string = (id: string) => <ThunkActionApp>(async dispatch => {
+export const add_string = (id: string) => <ThunkActionApp>(async (dispatch) => {
     try {
       const new_string = create_note();
 
@@ -116,10 +121,8 @@ export const add_string = (id: string) => <ThunkActionApp>(async dispatch => {
 
 let notif_id: string = '';
 
-export const edit_tuning_name = (id: string, value: string) => <ThunkActionApp>(async (
-    dispatch,
-    getState
-  ) => {
+export const edit_tuning_name = (id: string, value: string) =>
+  <ThunkActionApp>(async (dispatch, getState) => {
     try {
       const {
         main: {
@@ -176,7 +179,7 @@ export const edit_tuning_name = (id: string, value: string) => <ThunkActionApp>(
   });
 
 export const set_octave = (tuning_id: string, data: Note, octave: number) =>
-  <ThunkActionApp>(async dispatch => {
+  <ThunkActionApp>(async (dispatch) => {
     try {
       const new_note = create_note(null, octave, data);
 
@@ -195,7 +198,7 @@ export const set_octave = (tuning_id: string, data: Note, octave: number) =>
   });
 
 export const set_note = (tuning_id: string, data: Note, value: number) =>
-  <ThunkActionApp>(async dispatch => {
+  <ThunkActionApp>(async (dispatch) => {
     try {
       const new_note = create_note(value, null, data);
 
@@ -228,8 +231,9 @@ export const add_tuning = () => <ThunkActionApp>(async (dispatch, getState) => {
       } = getState();
 
       const number =
-        tunings.filter(tuning => new RegExp(`^${language.tunings.new}`).test(tuning.name))
-          .length + 1;
+        tunings.filter((tuning) =>
+          new RegExp(`^${language.tunings.new}`).test(tuning.name)
+        ).length + 1;
 
       const new_tuning = create_tuning(number, language.tunings.new);
 
@@ -244,7 +248,9 @@ export const add_tuning = () => <ThunkActionApp>(async (dispatch, getState) => {
     }
   });
 
-export const delete_tuning = (id: string) => <ThunkActionApp>(async dispatch => {
+export const delete_tuning = (id: string) => <ThunkActionApp>(async (
+    dispatch
+  ) => {
     try {
       (await db_methods).delete_tuning(id);
 

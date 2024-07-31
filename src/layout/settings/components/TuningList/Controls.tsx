@@ -15,7 +15,8 @@ const Controls: React.FC<Props> = ({ data }) => {
 
   const dispatch = useAppDispatch();
 
-  const deleteTuningClickHandler = (e: React.MouseEvent) => dispatch(delete_tuning(id));
+  const deleteTuningClickHandler = (e: React.MouseEvent) =>
+    dispatch(delete_tuning(id));
 
   const editIcon = (
     <svg className={`tunings-list__edit-icon ${is_default ? '' : 'active'}`}>
@@ -24,13 +25,19 @@ const Controls: React.FC<Props> = ({ data }) => {
   );
 
   return (
-    <div className='tunings-list__controls'>
-      {is_default ? editIcon : <Link to={`/settings/tuning-page/${id}`}>{editIcon}</Link>}
+    <div className="tunings-list__controls">
+      {is_default ? (
+        editIcon
+      ) : (
+        <Link to={`/settings/tuning-page/${id}`}>{editIcon}</Link>
+      )}
       <svg
         className={`tunings-list__delete-icon ${is_default ? '' : 'active'}`}
         onClick={is_default ? () => {} : deleteTuningClickHandler}
       >
-        <use href={`${window.location.origin}/svg/sprite.svg#icon__delete`}></use>
+        <use
+          href={`${window.location.origin}/svg/sprite.svg#icon__delete`}
+        ></use>
       </svg>
     </div>
   );

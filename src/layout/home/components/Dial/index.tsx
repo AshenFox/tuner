@@ -32,24 +32,24 @@ const Dial: React.FC<Props> = (props) => {
       : false;
 
   return (
-    <div className='dial__container'>
-      <div className='dial'>
-        <div className='dial__inner' style={style}>
+    <div className="dial__container">
+      <div className="dial">
+        <div className="dial__inner" style={style}>
           <Notches num={notchesNum} />
           <Frs num={notchesNum} />
           <Notes fr={most_freq_fr} />
         </div>
-        <div className='dial__housing'>
-          <div className='dial__housing-bottom'></div>
+        <div className="dial__housing">
+          <div className="dial__housing-bottom"></div>
         </div>
         <div className={`dial__center ${isTuned && 'active'}`}></div>
         <div className={`dial__hand-cont ${isTuned && 'active'}`}>
-          <div className='dial__hand1'></div>
-          <div className='dial__hand2'></div>
+          <div className="dial__hand1"></div>
+          <div className="dial__hand2"></div>
         </div>
 
-        <div className='dial__background-top'></div>
-        <div className='dial__background-bottom'></div>
+        <div className="dial__background-top"></div>
+        <div className="dial__background-bottom"></div>
         <Indicator />
       </div>
     </div>

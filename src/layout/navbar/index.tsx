@@ -26,8 +26,8 @@ const NavBar: React.FC<Props> = (props) => {
   return (
     <>
       <div className={`navbar ${isActive ? 'active' : ''}`}>
-        <div className='container'>
-          <div className='navbar__menu'>
+        <div className="container">
+          <div className="navbar__menu">
             <NavBarItem to={'/'} icon={'tuning-fork'}>
               {language.navbar.options.tuner}
             </NavBarItem>

@@ -2,7 +2,10 @@ import React, { memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { set_active_tuning } from '../../../store/actions/mainActions';
 import Select from 'react-select';
-import { createTheme, StylesSmall } from '../../../utilities/SelectComponentStyles';
+import {
+  createTheme,
+  StylesSmall,
+} from '../../../utilities/SelectComponentStyles';
 
 interface TuningSelectOption {
   value: string;
@@ -50,7 +53,7 @@ const TuningSelect: React.FC<Props> = (props) => {
       isSearchable={false}
       onChange={onSelectChange}
       value={activeOption}
-      instanceId='react-select-created'
+      instanceId="react-select-created"
       styles={StylesSmall}
     />
   );

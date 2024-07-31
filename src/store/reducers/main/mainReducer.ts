@@ -17,7 +17,10 @@ import {
 } from './../../types/actions';
 import initialState from './mainInitState';
 
-const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
+const MainReducer = (
+  state = initialState,
+  action: MainActions
+): mainStateInterface => {
   switch (action.type) {
     case SWITCH_LANGUAGE:
       return {
@@ -121,13 +124,19 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case DELETE_TUNING:
       return {
         ...state,
-        tunings: state.tunings.filter((tuning) => tuning.id !== action.payload.id),
+        tunings: state.tunings.filter(
+          (tuning) => tuning.id !== action.payload.id
+        ),
       };
 
     case SET_FR:
       return {
         ...state,
-        ...calc_fr(state.fr_arr, action.payload.detected_fr, state.most_freq_fr),
+        ...calc_fr(
+          state.fr_arr,
+          action.payload.detected_fr,
+          state.most_freq_fr
+        ),
       };
 
     case AUTO_SET_ACTIVE_NOTE:

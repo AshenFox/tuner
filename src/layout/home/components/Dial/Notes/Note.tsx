@@ -20,15 +20,15 @@ const Note: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <div className='dial__note-cont' style={style}>
-      <div className='dial__note-holder'>
-        <span className='dial__note'>{name}</span>
-        <div className='dial__note-info'>
-          <span className='dial__note-sharp'>{sign && '#'}</span>
-          <span className='dial__note-octave'>{octave}</span>
+    <div className="dial__note-cont" style={style}>
+      <div className="dial__note-holder">
+        <span className="dial__note">{name}</span>
+        <div className="dial__note-info">
+          <span className="dial__note-sharp">{sign && '#'}</span>
+          <span className="dial__note-octave">{octave}</span>
         </div>
       </div>
-      <div className='dial__note-fr'>
+      <div className="dial__note-fr">
         {Number(fr.toFixed(1))}
         <span>Hz</span>
       </div>

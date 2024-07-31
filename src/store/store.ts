@@ -1,6 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk, { ThunkAction, ThunkDispatch, ThunkMiddleware } from 'redux-thunk';
+import thunk, {
+  ThunkAction,
+  ThunkDispatch,
+  ThunkMiddleware,
+} from 'redux-thunk';
 import rootReducer from './reducers';
 import { AppActions } from './types/actions';
 import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';

@@ -18,8 +18,8 @@ const App = () => {
         <SWRegistrator />
         <Router>
           <Switch>
-            <Route path='/settings' component={Settings} />
-            <Route path='/' component={Home} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/" component={Home} />
           </Switch>
           <NavBar />
         </Router>

@@ -26,7 +26,7 @@ export type Tuning = {
     | 'new_tuning';
 };
 
-export type Language = typeof languages['ENG'];
+export type Language = (typeof languages)['ENG'];
 
 export type Settings = {
   id: string;

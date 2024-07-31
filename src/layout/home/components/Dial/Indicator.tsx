@@ -35,12 +35,12 @@ const Indicator: React.FC<Props> = (props) => {
 
   return (
     <div className={`dial__indicator-cont ${isTuned && 'active'}`}>
-      <div className='dial__indicator'>
+      <div className="dial__indicator">
         {value}
         {value % 1 ? '' : '.0'}
         <span>Hz</span>
       </div>
-      <div className='dial__indicator-tip'>{tipText}</div>
+      <div className="dial__indicator-tip">{tipText}</div>
     </div>
   );
 };

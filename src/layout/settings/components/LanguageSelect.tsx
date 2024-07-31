@@ -2,7 +2,10 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { switch_language } from '../../../store/actions/mainActions';
 import Select from 'react-select';
-import { createTheme, StylesSmall } from '../../../utilities/SelectComponentStyles';
+import {
+  createTheme,
+  StylesSmall,
+} from '../../../utilities/SelectComponentStyles';
 
 interface LanguageSelectOption {
   value: 'RU' | 'ENG';
@@ -44,7 +47,7 @@ const LanguageSelect: React.FC<Props> = (props) => {
       isSearchable={false}
       onChange={onSelectChange}
       value={activeOption}
-      instanceId='react-select-created'
+      instanceId="react-select-created"
       styles={StylesSmall}
     />
   );

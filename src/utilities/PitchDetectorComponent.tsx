@@ -7,7 +7,8 @@ interface OwnProps {}
 
 type Props = OwnProps;
 
-const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+const AudioContextConstructor =
+  window.AudioContext || window.webkitAudioContext;
 let stream: MediaStream;
 let audioContext: AudioContext;
 let analyserNode: AnalyserNode;
@@ -15,7 +16,7 @@ let mediaStreamSource: MediaStreamAudioSourceNode;
 let detector: PitchDetector<Float64Array>;
 let inputFloat32Array: Float32Array;
 
-const PitchDetectorComponent: React.FC<Props> = props => {
+const PitchDetectorComponent: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
   // Declare functions
@@ -40,7 +41,8 @@ const PitchDetectorComponent: React.FC<Props> = props => {
 
       if (!isMuted)
         window.setTimeout(
-          () => updatePitch(analyserNode, detector, inputFloat32Array, sampleRate),
+          () =>
+            updatePitch(analyserNode, detector, inputFloat32Array, sampleRate),
           100
         );
     },
@@ -62,10 +64,17 @@ const PitchDetectorComponent: React.FC<Props> = props => {
       mediaStreamSource.connect(analyserNode);
     }
 
-    if (!detector) detector = PitchDetector.forFloat32Array(analyserNode.fftSize);
-    if (!inputFloat32Array) inputFloat32Array = new Float32Array(detector.inputLength);
+    if (!detector)
+      detector = PitchDetector.forFloat32Array(analyserNode.fftSize);
+    if (!inputFloat32Array)
+      inputFloat32Array = new Float32Array(detector.inputLength);
 
-    updatePitch(analyserNode, detector, inputFloat32Array, audioContext.sampleRate);
+    updatePitch(
+      analyserNode,
+      detector,
+      inputFloat32Array,
+      audioContext.sampleRate
+    );
   }, [updatePitch]);
 
   // ==============================
@@ -77,7 +86,7 @@ const PitchDetectorComponent: React.FC<Props> = props => {
     setup();
 
     return () => {
-      stream.getTracks()[0].enabled = false;
+      if (stream) stream.getTracks()[0].enabled = false;
     };
   }, [setup]);
 

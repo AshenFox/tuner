@@ -8,7 +8,11 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const AddButton: React.FC<Props> = ({ children, clickHandler, isActive = true }) => {
+const AddButton: React.FC<Props> = ({
+  children,
+  clickHandler,
+  isActive = true,
+}) => {
   const onClickDefault = () => {};
 
   return (
@@ -17,7 +21,7 @@ const AddButton: React.FC<Props> = ({ children, clickHandler, isActive = true })
       onClick={isActive ? clickHandler : onClickDefault}
     >
       <span>{children}</span>
-      <svg className='settings__add-icon'>
+      <svg className="settings__add-icon">
         <use href={`${window.location.origin}/svg/sprite.svg#icon__add`}></use>
       </svg>
     </div>

@@ -18,7 +18,11 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const TuningPageString: React.FC<Props> = ({ number, data, isDeleteActive }) => {
+const TuningPageString: React.FC<Props> = ({
+  number,
+  data,
+  isDeleteActive,
+}) => {
   const dispatch = useAppDispatch();
 
   const { id: tuning_id } = useParams<urlParams>();
@@ -30,20 +34,22 @@ const TuningPageString: React.FC<Props> = ({ number, data, isDeleteActive }) => 
   };
 
   return (
-    <div className='tuning-page__string'>
-      <span className='tuning-page__number'>{number}.</span>
-      <div className='tuning-page__line'></div>
-      <div className='tuning-page__info'>
+    <div className="tuning-page__string">
+      <span className="tuning-page__number">{number}.</span>
+      <div className="tuning-page__line"></div>
+      <div className="tuning-page__info">
         <NoteSelect data={data} />
         <OctaveSelect data={data} />
       </div>
-      <div className='tuning-page__line'></div>
-      <div className='tuning-page__controls'>
+      <div className="tuning-page__line"></div>
+      <div className="tuning-page__controls">
         <svg
           className={`tuning-page__delete-icon ${isDeleteActive ? 'active' : ''}`}
           onClick={onClickDelete}
         >
-          <use href={`${window.location.origin}/svg/sprite.svg#icon__delete`}></use>
+          <use
+            href={`${window.location.origin}/svg/sprite.svg#icon__delete`}
+          ></use>
         </svg>
       </div>
     </div>

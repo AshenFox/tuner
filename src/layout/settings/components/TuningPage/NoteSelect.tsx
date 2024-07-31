@@ -4,7 +4,10 @@ import { set_note } from '../../../../store/actions/mainActions';
 import Select from 'react-select';
 import { Note } from '../../../../store/types/state';
 import { useParams } from 'react-router-dom';
-import { createTheme, Styles } from '../../../../utilities/SelectComponentStyles';
+import {
+  createTheme,
+  Styles,
+} from '../../../../utilities/SelectComponentStyles';
 
 interface NoteSelectOption {
   value: number;
@@ -58,7 +61,7 @@ const NoteSelect: React.FC<Props> = ({ data }) => {
       isSearchable={false}
       onChange={onSelectChange}
       value={optionsNoteSelect[value - 1]}
-      instanceId='react-select-created'
+      instanceId="react-select-created"
       styles={Styles}
     />
   );

@@ -4,7 +4,10 @@ import { set_octave } from '../../../../store/actions/mainActions';
 import Select from 'react-select';
 import { Note } from '../../../../store/types/state';
 import { useParams } from 'react-router-dom';
-import { createTheme, Styles } from '../../../../utilities/SelectComponentStyles';
+import {
+  createTheme,
+  Styles,
+} from '../../../../utilities/SelectComponentStyles';
 
 interface OctaveSelectOption {
   value: number;
@@ -54,7 +57,7 @@ const OctaveSelect: React.FC<Props> = ({ data }) => {
       isSearchable={false}
       onChange={onSelectChange}
       value={optionsOctaveSelect[octave]}
-      instanceId='react-select-created'
+      instanceId="react-select-created"
       styles={Styles}
     />
   );

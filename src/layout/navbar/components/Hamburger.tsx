@@ -11,10 +11,10 @@ const Hamburger: React.FC<Props> = ({ clickHandler }) => {
     <button
       onClick={clickHandler}
       className={`btn hamburger hamburger--spring`}
-      type='button'
+      type="button"
     >
-      <span className='hamburger__box'>
-        <span className='hamburger__inner'></span>
+      <span className="hamburger__box">
+        <span className="hamburger__inner"></span>
       </span>
     </button>
   );

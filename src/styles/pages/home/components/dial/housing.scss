@@ -29,7 +29,12 @@
     transform-origin: 0 0;
     transform: rotate(35deg);
 
-    background: linear-gradient(0deg, $primary 0%, $primary 85%, rgba($primary, 0) 100%);
+    background: linear-gradient(
+      0deg,
+      $primary 0%,
+      $primary 85%,
+      rgba($primary, 0) 100%
+    );
   }
 
   &__housing::before {
@@ -45,7 +50,12 @@
     transform-origin: right top;
     transform: rotate(325deg);
 
-    background: linear-gradient(0deg, $primary 0%, $primary 85%, rgba($primary, 0) 100%);
+    background: linear-gradient(
+      0deg,
+      $primary 0%,
+      $primary 85%,
+      rgba($primary, 0) 100%
+    );
   }
 
   &__housing-bottom {
@@ -59,6 +69,11 @@
     transform-origin: right top;
     z-index: 25;
 
-    background: linear-gradient(0deg, $primary 0%, $primary 95%, rgba($primary, 0) 100%);
+    background: linear-gradient(
+      0deg,
+      $primary 0%,
+      $primary 95%,
+      rgba($primary, 0) 100%
+    );
   }
 }

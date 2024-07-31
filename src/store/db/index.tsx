@@ -85,7 +85,10 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', id);
 
       if (tuning)
-        return db.put('tunings', { ...tuning, data: [...tuning.data, new_string] });
+        return db.put('tunings', {
+          ...tuning,
+          data: [...tuning.data, new_string],
+        });
     } catch (error) {
       console.log(error);
     }
@@ -126,7 +129,10 @@ const set_up_db = async () => {
       const settings = await db.get('settings', 'main-settings');
 
       if (settings) {
-        return db.put('settings', { ...settings, auto_tuning: !settings.auto_tuning });
+        return db.put('settings', {
+          ...settings,
+          auto_tuning: !settings.auto_tuning,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -230,7 +236,12 @@ const default_tunings: Tunings = [
   {
     name: 'ukulele',
     id: 'aa5520af-cdc9-4977-8bdb-478be826fe2d',
-    data: [create_note(8, 4), create_note(1, 4), create_note(5, 4), create_note(10, 4)],
+    data: [
+      create_note(8, 4),
+      create_note(1, 4),
+      create_note(5, 4),
+      create_note(10, 4),
+    ],
     active: false,
     is_default: true,
     created: 1628083569744,
