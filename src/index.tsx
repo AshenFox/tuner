@@ -1,25 +1,20 @@
 import React from 'react';
-import App from './App';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
 import 'normalize.css';
+import 'animate.css';
 import './styles/index.scss';
 import 'react-notifications-component/dist/theme.css';
-import 'animate.css';
-import { createRoot } from 'react-dom/client';
 
-const root = createRoot(document.getElementById('root') as HTMLElement);
+const APP_ROOT = document.getElementById('root');
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-
-// mkcert -cert-file ./.cert/cert.pem -key-file ./.cert/key.pem localhost
-// HTTPS=true SSL_CRT_FILE=./.cert/cert.pem SSL_KEY_FILE=./.cert/key.pem npm run dev
+if (APP_ROOT) {
+  createRoot(APP_ROOT).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}
 
 declare global {
   interface Window {

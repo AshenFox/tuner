@@ -1,20 +1,18 @@
 module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
   extends: [
-    'react-app',
-    'react-app/jest',
     'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
   ],
-  plugins: ['react', 'react-hooks'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh'],
   rules: {
-    '@typescript-eslint/consistent-type-assertions': 'off',
-    'react/no-unescaped-entities': 'warn',
-    'prettier/prettier': [
+    'react-refresh/only-export-components': [
       'warn',
-      {
-        endOfLine: 'auto',
-      },
+      { allowConstantExport: true },
     ],
   },
-};
+}

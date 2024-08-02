@@ -1,4 +1,4 @@
-import React, { memo, ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type NavBarItemProps = {

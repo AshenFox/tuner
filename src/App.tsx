@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import Home from './layout/home';
@@ -12,6 +12,7 @@ import SWRegistrator from './utilities/SWRegistrator';
 const App = () => {
   return (
     <>
+      {/* <SWRegistrator /> */}
       <Provider store={store}>
         <ReactNotifications isMobile={true} />
         <DBSynchronizer />
