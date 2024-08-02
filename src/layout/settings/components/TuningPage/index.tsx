@@ -1,9 +1,6 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import {
-  edit_tuning_name,
-  add_string,
-} from '../../../../store/actions/mainActions';
+import React, { memo } from 'react';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { edit_tuning_name, add_string } from '@store/actions/mainActions';
 import AddButton from '../AddButton';
 import TuningPageString from './String';
 import { useParams } from 'react-router-dom';
@@ -12,11 +9,7 @@ type urlParams = {
   id: string;
 };
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const TuningsPage: React.FC<Props> = (props) => {
+const TuningsPage = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -66,4 +59,4 @@ const TuningsPage: React.FC<Props> = (props) => {
   );
 };
 
-export default TuningsPage;
+export default memo(TuningsPage);

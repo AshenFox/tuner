@@ -1,16 +1,13 @@
 import React, { memo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { switch_language } from '../../../store/actions/mainActions';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { switch_language } from '@store/actions/mainActions';
 import Select from 'react-select';
-import {
-  createTheme,
-  StylesSmall,
-} from '../../../utilities/SelectComponentStyles';
+import { createTheme, StylesSmall } from '@utilities/SelectComponentStyles';
 
-interface LanguageSelectOption {
+type LanguageSelectOption = {
   value: 'RU' | 'ENG';
   label: 'RU' | 'ENG';
-}
+};
 
 const optionsOctaveSelect: LanguageSelectOption[] = [
   { value: 'RU', label: 'RU' },

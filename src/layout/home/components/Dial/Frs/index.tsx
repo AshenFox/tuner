@@ -1,13 +1,11 @@
 import React, { memo } from 'react';
 import Fr from './Fr';
 
-interface OwnProps {
+type FrsProps = {
   num: number;
-}
+};
 
-type Props = OwnProps;
-
-const Frs: React.FC<Props> = ({ num }) => {
+const Frs = ({ num }: FrsProps) => {
   return (
     <>
       {[...new Array(num / 5)].map((_, i) => (

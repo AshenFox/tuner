@@ -87,13 +87,13 @@
   } */
 
   &__string.active {
-    border: 1px solid #ec3000;
+    border: 1px solid $tertiary;
 
-    box-shadow: 0px 0px 1px 1px #ec3000;
+    box-shadow: 0px 0px 1px 1px $tertiary;
   }
 
   &__string.active span {
-    color: #ec3000;
+    color: $tertiary;
   }
 
   &.active {
@@ -101,7 +101,7 @@
       cursor: pointer;
 
       &:hover {
-        color: #ec3000;
+        color: $tertiary;
       }
     }
   }

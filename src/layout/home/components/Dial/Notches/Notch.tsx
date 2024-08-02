@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-interface OwnProps {
+type NotchProps = {
   deg: number;
-}
+};
 
-type Props = OwnProps;
-
-const Notch: React.FC<Props> = ({ deg }) => {
+const Notch = ({ deg }: NotchProps) => {
   let style = { transform: `rotate(${deg * 1.5}deg)` };
   let isBig = !((deg * 1.5) % 7.5);
 
@@ -17,4 +15,4 @@ const Notch: React.FC<Props> = ({ deg }) => {
   );
 };
 
-export default Notch;
+export default memo(Notch);

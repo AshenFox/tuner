@@ -1,11 +1,7 @@
-import React from 'react';
-import { useAppSelector } from '../../../../store/store';
+import React, { memo } from 'react';
+import { useAppSelector } from '@store/store';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Indicator: React.FC<Props> = (props) => {
+const Indicator = () => {
   const {
     most_freq_fr,
     tunings,
@@ -45,4 +41,4 @@ const Indicator: React.FC<Props> = (props) => {
   );
 };
 
-export default Indicator;
+export default memo(Indicator);

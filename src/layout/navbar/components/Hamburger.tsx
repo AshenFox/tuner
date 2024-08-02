@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-interface OwnProps {
+type HamburgerProps = {
   clickHandler: (e: React.MouseEvent) => void;
-}
+};
 
-type Props = OwnProps;
-
-const Hamburger: React.FC<Props> = ({ clickHandler }) => {
+const Hamburger = ({ clickHandler }: HamburgerProps) => {
   return (
     <button
       onClick={clickHandler}
@@ -20,8 +18,4 @@ const Hamburger: React.FC<Props> = ({ clickHandler }) => {
   );
 };
 
-export default Hamburger;
-
-/* 
-active
-*/
+export default memo(Hamburger);

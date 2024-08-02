@@ -1,23 +1,16 @@
 import React, { memo } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { set_active_tuning } from '../../../store/actions/mainActions';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { set_active_tuning } from '@store/actions/mainActions';
 import Select from 'react-select';
-import {
-  createTheme,
-  StylesSmall,
-} from '../../../utilities/SelectComponentStyles';
+import { createTheme, StylesSmall } from '@utilities/SelectComponentStyles';
 
-interface TuningSelectOption {
+type TuningSelectOption = {
   value: string;
   label: string;
   active: boolean;
-}
+};
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const TuningSelect: React.FC<Props> = (props) => {
+const TuningSelect = () => {
   const {
     tunings,
     settings: { language },

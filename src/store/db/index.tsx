@@ -1,6 +1,6 @@
 import { openDB, DBSchema } from 'idb';
 import { Tuning, Settings, Note, Tunings } from '../types/state';
-import languages from '../../utilities/lang.json';
+import languages from '@utilities/lang.json';
 import { create_note } from '../utilities/helperFunctions';
 
 interface MyDB extends DBSchema {

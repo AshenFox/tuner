@@ -1,13 +1,9 @@
 import React, { useState, useEffect, memo } from 'react';
-import { useAppSelector } from '../../store/store';
+import { useAppSelector } from '@store/store';
 import Hamburger from './components/Hamburger';
 import NavBarItem from './components/NavbarItem';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const NavBar: React.FC<Props> = () => {
+const NavBar = () => {
   const {
     settings: { language },
   } = useAppSelector((state) => state.main);

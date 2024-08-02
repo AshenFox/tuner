@@ -11,14 +11,11 @@
   min-height: 90rem;
   min-width: 90rem;
 
-  /* background-color: #ec3000; */
-
   position: relative;
 
   &__container {
     width: 90rem;
     height: 55rem;
-    /* height: 90rem; */
     overflow: hidden !important;
 
     margin-bottom: 1rem;
@@ -42,9 +39,9 @@
 
     background: linear-gradient(
       90deg,
-      rgba(32, 9, 82, 1) 0%,
-      rgba(236, 48, 0, 1) 50%,
-      rgba(32, 9, 82, 1) 100%
+      $primary 0%,
+      $tertiary 50%,
+      $primary 100%
     );
 
     z-index: 1;
@@ -64,7 +61,7 @@
 
     transform: translate(-50%, -50%);
 
-    background-color: #200952;
+    background-color: $primary;
 
     z-index: 2;
   }

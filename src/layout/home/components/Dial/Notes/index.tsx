@@ -1,12 +1,11 @@
 import React, { memo } from 'react';
 import Note from './Note';
-interface OwnProps {
+
+type NotesProps = {
   fr: number;
-}
+};
 
-type Props = OwnProps;
-
-const Notes: React.FC<Props> = ({ fr }) => {
+const Notes = ({ fr }: NotesProps) => {
   // const { most_freq_fr } = main;
 
   //   12*Math.log2(440/16.351597831287414)
@@ -20,24 +19,24 @@ const Notes: React.FC<Props> = ({ fr }) => {
   const notesArr = [];
 
   let offsetUp = 6;
-  let offestDown = 6;
+  let offsetDown = 6;
 
   if (fr >= 300) {
     offsetUp = 4;
-    offestDown = 4;
+    offsetDown = 4;
   }
 
   if (fr >= 1000) {
     offsetUp = 3;
-    offestDown = 3;
+    offsetDown = 3;
   }
 
   if (fr >= 1500) {
     offsetUp = 2;
-    offestDown = 2;
+    offsetDown = 2;
   }
 
-  for (let z = closest - offestDown + 1; z < closest + offsetUp; z++) {
+  for (let z = closest - offsetDown + 1; z < closest + offsetUp; z++) {
     const i = z % 12;
 
     const octave = Math.floor(z / 12);
@@ -59,7 +58,7 @@ const Notes: React.FC<Props> = ({ fr }) => {
   );
 };
 
-const areEqual = (prev: Props, current: Props) =>
+const areEqual = (prev: NotesProps, current: NotesProps) =>
   Math.floor(prev.fr) === Math.floor(current.fr);
 
 export default memo(Notes, areEqual);

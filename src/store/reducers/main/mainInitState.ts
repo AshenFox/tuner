@@ -1,5 +1,5 @@
 import { mainStateInterface } from '../../types/state';
-import languages from '../../../utilities/lang.json';
+import languages from '@utilities/lang.json';
 
 const mainInitState: mainStateInterface = {
   tunings: [],

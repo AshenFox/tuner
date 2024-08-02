@@ -1,18 +1,15 @@
-import React from 'react';
-import { useAppDispatch } from '../../../../store/store';
-import { set_octave } from '../../../../store/actions/mainActions';
+import React, { memo } from 'react';
+import { useAppDispatch } from '@store/store';
+import { set_octave } from '@store/actions/mainActions';
 import Select from 'react-select';
-import { Note } from '../../../../store/types/state';
+import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
-import {
-  createTheme,
-  Styles,
-} from '../../../../utilities/SelectComponentStyles';
+import { createTheme, Styles } from '@utilities/SelectComponentStyles';
 
-interface OctaveSelectOption {
+type OctaveSelectOption = {
   value: number;
   label: string;
-}
+};
 
 type urlParams = {
   id: string;
@@ -29,13 +26,11 @@ const optionsOctaveSelect: OctaveSelectOption[] = [
   { value: 7, label: '7' },
 ];
 
-interface OwnProps {
+type OctaveSelectProps = {
   data: Note;
-}
+};
 
-type Props = OwnProps;
-
-const OctaveSelect: React.FC<Props> = ({ data }) => {
+const OctaveSelect = ({ data }: OctaveSelectProps) => {
   const dispatch = useAppDispatch();
 
   const { id: tuningID } = useParams<urlParams>();
@@ -63,4 +58,4 @@ const OctaveSelect: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default OctaveSelect;
+export default memo(OctaveSelect);

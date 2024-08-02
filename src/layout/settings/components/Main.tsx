@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { toggle_auto_tuning } from '../../../store/actions/mainActions';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { toggle_auto_tuning } from '@store/actions/mainActions';
 import { Link } from 'react-router-dom';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Main: React.FC<Props> = (props) => {
+const Main = () => {
   const {
     settings: { auto_tuning, language },
   } = useAppSelector((state) => state.main);
@@ -40,7 +36,6 @@ const Main: React.FC<Props> = (props) => {
             <label
               className="toggle-frame"
               htmlFor="toggle"
-              /* onClick={clickAllSave} */
               onClick={onToggleClick}
             ></label>
             <div className="toggle-switch"></div>
@@ -51,4 +46,4 @@ const Main: React.FC<Props> = (props) => {
   );
 };
 
-export default Main;
+export default memo(Main);

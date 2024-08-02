@@ -1,18 +1,15 @@
-import React from 'react';
-import { useAppDispatch } from '../../../../store/store';
-import { set_note } from '../../../../store/actions/mainActions';
+import React, { memo } from 'react';
+import { useAppDispatch } from '@store/store';
+import { set_note } from '@store/actions/mainActions';
 import Select from 'react-select';
-import { Note } from '../../../../store/types/state';
+import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
-import {
-  createTheme,
-  Styles,
-} from '../../../../utilities/SelectComponentStyles';
+import { createTheme, Styles } from '@utilities/SelectComponentStyles';
 
-interface NoteSelectOption {
+type NoteSelectOption = {
   value: number;
   label: string;
-}
+};
 
 type urlParams = {
   id: string;
@@ -33,13 +30,11 @@ const optionsNoteSelect: NoteSelectOption[] = [
   { value: 12, label: 'B' },
 ];
 
-interface OwnProps {
+type NoteSelectProps = {
   data: Note;
-}
+};
 
-type Props = OwnProps;
-
-const NoteSelect: React.FC<Props> = ({ data }) => {
+const NoteSelect = ({ data }: NoteSelectProps) => {
   const dispatch = useAppDispatch();
 
   const { id: tuningID } = useParams<urlParams>();
@@ -67,4 +62,4 @@ const NoteSelect: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default NoteSelect;
+export default memo(NoteSelect);

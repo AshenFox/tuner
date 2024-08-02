@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import AddButton from '../AddButton';
 import ListItem from './ListItem';
-import { useAppDispatch, useAppSelector } from '../../../../store/store';
-import { add_tuning } from '../../../../store/actions/mainActions';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { add_tuning } from '@store/actions/mainActions';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const TuningsList: React.FC<Props> = (props) => {
+const TuningsList = () => {
   const {
     tunings,
     settings: { language },
@@ -44,4 +40,4 @@ const TuningsList: React.FC<Props> = (props) => {
   );
 };
 
-export default TuningsList;
+export default memo(TuningsList);

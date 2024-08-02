@@ -1,4 +1,4 @@
-import languages from '../../utilities/lang.json';
+import languages from '@utilities/lang.json';
 
 export type Note = {
   id: string;

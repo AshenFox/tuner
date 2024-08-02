@@ -1,16 +1,14 @@
 import React from 'react';
-import { useAppSelector } from '../../../../store/store';
-import { Tuning } from '../../../../store/types/state';
+import { useAppSelector } from '@store/store';
+import { Tuning } from '@store/types/state';
 import Controls from './Controls';
 
-interface OwnProps {
+type ListItemProps = {
   number: number;
   data: Tuning;
-}
+};
 
-type Props = OwnProps;
-
-const ListItem: React.FC<Props> = ({ number, data }) => {
+const ListItem = ({ number, data }: ListItemProps) => {
   const {
     settings: { language },
   } = useAppSelector((state) => state.main);

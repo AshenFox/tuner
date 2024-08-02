@@ -1,11 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { useAppDispatch } from '../store/store';
 import { set_fr } from '../store/actions/mainActions';
 import { PitchDetector } from 'pitchy';
-
-interface OwnProps {}
-
-type Props = OwnProps;
 
 const AudioContextConstructor =
   window.AudioContext || window.webkitAudioContext;
@@ -16,7 +12,7 @@ let mediaStreamSource: MediaStreamAudioSourceNode;
 let detector: PitchDetector<Float64Array>;
 let inputFloat32Array: Float32Array;
 
-const PitchDetectorComponent: React.FC<Props> = (props) => {
+const PitchDetectorComponent = () => {
   const dispatch = useAppDispatch();
 
   // Declare functions
@@ -93,4 +89,4 @@ const PitchDetectorComponent: React.FC<Props> = (props) => {
   return <></>;
 };
 
-export default PitchDetectorComponent;
+export default memo(PitchDetectorComponent);

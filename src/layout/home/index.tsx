@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Dial from './components/Dial';
-import PitchDetector from '../../utilities/PitchDetectorComponent';
+import PitchDetector from '@utilities/PitchDetectorComponent';
 import Tuning from './components/Tuning';
 import TuningSelect from './components/TuningSelect';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Home: React.FC<Props> = (props) => {
+const Home = () => {
   return (
     <div className="page home">
       <div className="container">
@@ -21,4 +17,4 @@ const Home: React.FC<Props> = (props) => {
   );
 };
 
-export default Home;
+export default memo(Home);

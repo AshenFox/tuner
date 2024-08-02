@@ -1,28 +1,26 @@
-import React from 'react';
-import { useAppDispatch } from '../../../../store/store';
-import { delete_string } from '../../../../store/actions/mainActions';
+import React, { memo } from 'react';
+import { useAppDispatch } from '@store/store';
+import { delete_string } from '@store/actions/mainActions';
 import NoteSelect from './NoteSelect';
 import OctaveSelect from './OctaveSelect';
-import { Note } from '../../../../store/types/state';
+import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
 
 type urlParams = {
   id: string;
 };
 
-interface OwnProps {
+type TuningPageStringProps = {
   number: number;
   data: Note;
   isDeleteActive: boolean;
-}
+};
 
-type Props = OwnProps;
-
-const TuningPageString: React.FC<Props> = ({
+const TuningPageString = ({
   number,
   data,
   isDeleteActive,
-}) => {
+}: TuningPageStringProps) => {
   const dispatch = useAppDispatch();
 
   const { id: tuning_id } = useParams<urlParams>();
@@ -56,4 +54,4 @@ const TuningPageString: React.FC<Props> = ({
   );
 };
 
-export default TuningPageString;
+export default memo(TuningPageString);

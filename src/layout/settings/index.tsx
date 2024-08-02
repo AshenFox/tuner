@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import TuningsPage from './components/TuningPage';
 import TuningsList from './components/TuningList';
 import Main from './components/Main';
 import LanguageSelect from './components/LanguageSelect';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Settings: React.FC<Props> = (props) => {
+const Settings = () => {
   return (
     <div className="page settings">
       <LanguageSelect />
@@ -22,4 +18,4 @@ const Settings: React.FC<Props> = (props) => {
   );
 };
 
-export default Settings;
+export default memo(Settings);

@@ -41,8 +41,8 @@ export const create_note = (
   };
 };
 
-export const create_tuning = (nubmer: number, title: string): Tuning => {
-  const name = `${title} ${nubmer}`;
+export const create_tuning = (number: number, title: string): Tuning => {
+  const name = `${title} ${number}`;
 
   const id = uuidv4();
 

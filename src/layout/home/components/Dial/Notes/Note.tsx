@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-interface OwnProps {
+type NoteProps = {
   data: {
     name: string;
     sign: boolean;
@@ -8,11 +8,9 @@ interface OwnProps {
     fr: number;
     angle: number;
   };
-}
+};
 
-type Props = OwnProps;
-
-const Note: React.FC<Props> = ({ data }) => {
+const Note = ({ data }: NoteProps) => {
   const { name, sign, octave, fr, angle } = data;
 
   const style = {
@@ -36,4 +34,4 @@ const Note: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default Note;
+export default memo(Note);

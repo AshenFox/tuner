@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { memo, MouseEvent, ReactNode } from 'react';
 
-interface OwnProps {
-  children: React.ReactNode;
-  clickHandler: (e: React.MouseEvent) => void;
+type AddButtonProps = {
+  children: ReactNode;
+  clickHandler: (e: MouseEvent) => void;
   isActive?: boolean;
-}
+};
 
-type Props = OwnProps;
-
-const AddButton: React.FC<Props> = ({
+const AddButton = ({
   children,
   clickHandler,
   isActive = true,
-}) => {
+}: AddButtonProps) => {
   const onClickDefault = () => {};
 
   return (
@@ -28,4 +26,4 @@ const AddButton: React.FC<Props> = ({
   );
 };
 
-export default AddButton;
+export default memo(AddButton);

@@ -1,13 +1,11 @@
 import React, { memo } from 'react';
-import { useAppSelector } from '../../../../../store/store';
+import { useAppSelector } from '@store/store';
 
-interface OwnProps {
+type FrProps = {
   deg: number;
-}
+};
 
-type Props = OwnProps;
-
-const Fr: React.FC<Props> = ({ deg }) => {
+const Fr = ({ deg }: FrProps) => {
   const { most_freq_fr } = useAppSelector((state) => state.main);
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
@@ -48,13 +46,9 @@ const Fr: React.FC<Props> = ({ deg }) => {
     value = calcValues(deg, position, k, most_freq_fr, 720);
   }
 
-  // console.log("==========");
-
   return (
     <div className="dial__fr-cont" style={style}>
-      {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
       <span className="dial__fr">{value}</span>
-      {/* <span className="dial__deg-test">{deg}</span> */}
     </div>
   );
 };

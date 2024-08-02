@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import React, { memo, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@store/store';
 import {
   set_active_note,
   auto_set_active_note,
-} from '../../../store/actions/mainActions';
+} from '@store/actions/mainActions';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Tuning: React.FC<Props> = (props) => {
+const Tuning = () => {
   const {
     tunings,
     most_freq_fr,
@@ -19,14 +15,12 @@ const Tuning: React.FC<Props> = (props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (auto_tuning) dispatch(auto_set_active_note()); // a
+    if (auto_tuning) dispatch(auto_set_active_note());
   }, [most_freq_fr, auto_tuning, dispatch]);
 
   const activeTuning = tunings.find((tuning) => tuning.active);
 
   const strings = activeTuning?.data || [];
-
-  // const activeNote = activeTuning?.data.find(({ active }) => active);???????
 
   const onClickHandler =
     (id: string, active: boolean) => (e: React.MouseEvent) => {
@@ -56,4 +50,4 @@ const Tuning: React.FC<Props> = (props) => {
   );
 };
 
-export default Tuning;
+export default memo(Tuning);

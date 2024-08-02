@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../../../store/store';
-import { delete_tuning } from '../../../../store/actions/mainActions';
-import { Tuning } from '../../../../store/types/state';
+import { useAppDispatch } from '@store/store';
+import { delete_tuning } from '@store/actions/mainActions';
+import { Tuning } from '@store/types/state';
 
-interface OwnProps {
+type ControlsProps = {
   data: Tuning;
-}
+};
 
-type Props = OwnProps;
-
-const Controls: React.FC<Props> = ({ data }) => {
+const Controls = ({ data }: ControlsProps) => {
   const { id, is_default } = data;
 
   const dispatch = useAppDispatch();
@@ -43,4 +41,4 @@ const Controls: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default Controls;
+export default memo(Controls);

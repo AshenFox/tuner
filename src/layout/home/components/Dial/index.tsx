@@ -1,5 +1,5 @@
-import React from 'react';
-import { useAppSelector } from '../../../../store/store';
+import React, { memo } from 'react';
+import { useAppSelector } from '@store/store';
 import Indicator from './Indicator';
 import Notes from './Notes';
 import Frs from './Frs';
@@ -7,11 +7,7 @@ import Notches from './Notches';
 
 const notchesNum = 240;
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Dial: React.FC<Props> = (props) => {
+const Dial = () => {
   const { most_freq_fr, tunings } = useAppSelector((state) => state.main);
 
   const activeTuning = tunings.find((tuning) => tuning.active);
@@ -78,4 +74,4 @@ const degs: { max: number; k: number }[] = [
   { max: 520, k: 1 },
 ];
 
-export default Dial;
+export default memo(Dial);

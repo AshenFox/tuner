@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { memo, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
-interface OwnProps {
+type NavBarItemProps = {
   to: string;
   icon: string;
-  children: React.ReactNode;
-}
+  children: ReactNode;
+};
 
-type Props = OwnProps;
-
-const NavBarItem: React.FC<Props> = ({ to, icon, children }) => {
+const NavBarItem = ({ to, icon, children }: NavBarItemProps) => {
   return (
     <NavLink to={to} exact activeClassName="selected" className="navbar__item">
       <svg className={`navbar__icon navbar__icon-${icon}`}>
@@ -20,4 +18,4 @@ const NavBarItem: React.FC<Props> = ({ to, icon, children }) => {
   );
 };
 
-export default NavBarItem;
+export default memo(NavBarItem);

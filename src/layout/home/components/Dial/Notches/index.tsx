@@ -1,13 +1,11 @@
 import React, { memo } from 'react';
 import Notch from './Notch';
 
-interface OwnProps {
+type NotchesProps = {
   num: number;
-}
+};
 
-type Props = OwnProps;
-
-const Notches: React.FC<Props> = ({ num }) => {
+const Notches = ({ num }: NotchesProps) => {
   return (
     <>
       {[...new Array(num)].map((_, i) => (
