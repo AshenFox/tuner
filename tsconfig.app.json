@@ -33,5 +33,5 @@
       "@utilities/*": ["src/utilities/*"]
     }
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src"]
 }
