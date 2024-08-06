@@ -1,6 +1,5 @@
-import React, { memo, useCallback, useEffect } from 'react';
-import { useAppDispatch } from '../store/store';
-import { set_fr } from '../store/actions/mainActions';
+import { memo, useCallback, useEffect } from 'react';
+import { useActions } from '@store/hooks';
 import { PitchDetector } from 'pitchy';
 
 const AudioContextConstructor =
@@ -13,7 +12,7 @@ let detector: PitchDetector<Float64Array>;
 let inputFloat32Array: Float32Array;
 
 const PitchDetectorComponent = () => {
-  const dispatch = useAppDispatch();
+  const { set_fr } = useActions();
 
   // Declare functions
 
@@ -31,7 +30,7 @@ const PitchDetectorComponent = () => {
       analyserNode.getFloatTimeDomainData(inputFloat32Array);
       const [fr] = detector.findPitch(inputFloat32Array, sampleRate);
 
-      dispatch(set_fr(fr));
+      set_fr(fr);
 
       const isMuted = !stream.getTracks()[0].enabled;
 
@@ -42,7 +41,7 @@ const PitchDetectorComponent = () => {
           100
         );
     },
-    [dispatch]
+    [set_fr]
   );
 
   const setup = useCallback(async () => {

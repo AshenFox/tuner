@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { useAppDispatch } from '@store/store';
-import { set_note } from '@store/actions/mainActions';
+import { memo } from 'react';
+import { useActions } from '@store/hooks';
 import Select from 'react-select';
 import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
@@ -35,7 +34,7 @@ type NoteSelectProps = {
 };
 
 const NoteSelect = ({ data }: NoteSelectProps) => {
-  const dispatch = useAppDispatch();
+  const { set_note } = useActions();
 
   const { id: tuningID } = useParams<urlParams>();
 
@@ -44,7 +43,7 @@ const NoteSelect = ({ data }: NoteSelectProps) => {
   const onSelectChange = (value: NoteSelectOption | null) => {
     if (!value) return;
 
-    dispatch(set_note(tuningID, data, value.value));
+    set_note(tuningID, data, value.value);
   };
 
   return (

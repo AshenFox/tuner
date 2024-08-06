@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { useAppDispatch } from '@store/store';
-import { set_octave } from '@store/actions/mainActions';
+import { memo } from 'react';
+import { useActions } from '@store/hooks';
 import Select from 'react-select';
 import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
@@ -31,7 +30,7 @@ type OctaveSelectProps = {
 };
 
 const OctaveSelect = ({ data }: OctaveSelectProps) => {
-  const dispatch = useAppDispatch();
+  const { set_octave } = useActions();
 
   const { id: tuningID } = useParams<urlParams>();
 
@@ -40,7 +39,7 @@ const OctaveSelect = ({ data }: OctaveSelectProps) => {
   const onSelectChange = (value: OctaveSelectOption | null) => {
     if (!value) return;
 
-    dispatch(set_octave(tuningID, data, value.value));
+    set_octave(tuningID, data, value.value);
   };
 
   return (

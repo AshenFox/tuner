@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { switch_language } from '@store/actions/mainActions';
+import { memo } from 'react';
+import { useActions, useAppSelector } from '@store/hooks';
 import Select from 'react-select';
 import { createTheme, StylesSmall } from '@utilities/SelectComponentStyles';
 
@@ -19,7 +18,7 @@ const LanguageSelect = () => {
     settings: { language },
   } = useAppSelector((state) => state.main);
 
-  const dispatch = useAppDispatch();
+  const { switch_language } = useActions();
 
   const activeOption = optionsOctaveSelect.find(
     (option) => option.value === language.language
@@ -28,7 +27,7 @@ const LanguageSelect = () => {
   const onSelectChange = (value: LanguageSelectOption | null) => {
     if (!value) return;
 
-    dispatch(switch_language(value.value));
+    switch_language(value.value);
   };
 
   return (

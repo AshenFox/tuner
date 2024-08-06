@@ -1,8 +1,7 @@
-import React, { memo } from 'react';
+import { memo, MouseEventHandler } from 'react';
 import AddButton from '../AddButton';
 import ListItem from './ListItem';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { add_tuning } from '@store/actions/mainActions';
+import { useActions, useAppSelector } from '@store/hooks';
 
 const TuningsList = () => {
   const {
@@ -10,10 +9,10 @@ const TuningsList = () => {
     settings: { language },
   } = useAppSelector((state) => state.main);
 
-  const dispatch = useAppDispatch();
+  const { add_tuning } = useActions();
 
-  const addTuningClickHandler = (e: React.MouseEvent) => {
-    dispatch(add_tuning());
+  const addTuningClickHandler: MouseEventHandler = () => {
+    add_tuning();
 
     setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0);
   };

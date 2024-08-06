@@ -1,7 +1,6 @@
-import React, { memo } from 'react';
+import { memo, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '@store/store';
-import { delete_tuning } from '@store/actions/mainActions';
+import { useActions } from '@store/hooks';
 import { Tuning } from '@store/types/state';
 
 type ControlsProps = {
@@ -11,10 +10,9 @@ type ControlsProps = {
 const Controls = ({ data }: ControlsProps) => {
   const { id, is_default } = data;
 
-  const dispatch = useAppDispatch();
+  const { delete_tuning } = useActions();
 
-  const deleteTuningClickHandler = (e: React.MouseEvent) =>
-    dispatch(delete_tuning(id));
+  const deleteTuningClickHandler: MouseEventHandler = () => delete_tuning(id);
 
   const editIcon = (
     <svg className={`tunings-list__edit-icon ${is_default ? '' : 'active'}`}>

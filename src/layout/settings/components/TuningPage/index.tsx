@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { edit_tuning_name, add_string } from '@store/actions/mainActions';
+import React, { memo, MouseEventHandler } from 'react';
+import { useActions, useAppSelector } from '@store/hooks';
 import AddButton from '../AddButton';
 import TuningPageString from './String';
 import { useParams } from 'react-router-dom';
@@ -10,7 +9,7 @@ type urlParams = {
 };
 
 const TuningsPage = () => {
-  const dispatch = useAppDispatch();
+  const { add_string, edit_tuning_name } = useActions();
 
   const {
     tunings,
@@ -21,14 +20,14 @@ const TuningsPage = () => {
 
   const { name, data = [] } = tunings.find((tuning) => tuning.id === id) || {};
 
-  const addStringClickHandler = (e: React.MouseEvent) => {
-    dispatch(add_string(id));
+  const addStringClickHandler: MouseEventHandler = () => {
+    add_string(id);
 
     setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 0);
   };
 
   const onChangeHeaderHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    dispatch(edit_tuning_name(id, e.target.value));
+    edit_tuning_name(id, e.target.value);
 
   const stringsNumber = data.length;
 

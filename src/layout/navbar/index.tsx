@@ -1,5 +1,5 @@
-import React, { useState, useEffect, memo } from 'react';
-import { useAppSelector } from '@store/store';
+import { useState, useEffect, memo, MouseEventHandler } from 'react';
+import { useAppSelector } from '@store/hooks';
 import Hamburger from './components/Hamburger';
 import NavBarItem from './components/NavbarItem';
 
@@ -10,12 +10,12 @@ const NavBar = () => {
 
   const [isActive, setIsActive] = useState(false);
 
-  const hamburgerClick = (e: React.MouseEvent) => {
+  const hamburgerClick: MouseEventHandler = (e) => {
     e.stopPropagation();
     setIsActive(true);
   };
 
-  const stopPropagation = (e: React.MouseEvent) => {
+  const stopPropagation: MouseEventHandler = (e) => {
     e.stopPropagation();
   };
 

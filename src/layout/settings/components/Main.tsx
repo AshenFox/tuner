@@ -1,7 +1,6 @@
-import React, { memo } from 'react';
+import { memo, MouseEventHandler } from 'react';
 
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { toggle_auto_tuning } from '@store/actions/mainActions';
+import { useActions, useAppSelector } from '@store/hooks';
 import { Link } from 'react-router-dom';
 
 const Main = () => {
@@ -9,9 +8,9 @@ const Main = () => {
     settings: { auto_tuning, language },
   } = useAppSelector((state) => state.main);
 
-  const dispatch = useAppDispatch();
+  const { toggle_auto_tuning } = useActions();
 
-  const onToggleClick = (e: React.MouseEvent) => dispatch(toggle_auto_tuning());
+  const onToggleClick: MouseEventHandler = () => toggle_auto_tuning();
 
   return (
     <div className="container">

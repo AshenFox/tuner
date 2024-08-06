@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { set_active_tuning } from '@store/actions/mainActions';
+import { memo } from 'react';
+import { useActions, useAppSelector } from '@store/hooks';
 import Select from 'react-select';
 import { createTheme, StylesSmall } from '@utilities/SelectComponentStyles';
 
@@ -16,7 +15,7 @@ const TuningSelect = () => {
     settings: { language },
   } = useAppSelector((state) => state.main);
 
-  const dispatch = useAppDispatch();
+  const { set_active_tuning } = useActions();
 
   const optionsTuningSelect: TuningSelectOption[] = tunings.map(
     ({ id, name, active, is_default, default_key }) => ({
@@ -35,7 +34,7 @@ const TuningSelect = () => {
   const onSelectChange = (tuning: TuningSelectOption | null) => {
     if (!tuning) return;
 
-    dispatch(set_active_tuning(tuning.value));
+    set_active_tuning(tuning.value);
   };
 
   return (

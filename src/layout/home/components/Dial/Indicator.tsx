@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { useAppSelector } from '@store/store';
+import { memo } from 'react';
+import { useAppSelector } from '@store/hooks';
 
 const Indicator = () => {
   const {

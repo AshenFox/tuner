@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAppSelector } from '@store/store';
+import { useAppSelector } from '@store/hooks';
 import { Tuning } from '@store/types/state';
 import Controls from './Controls';
+import { memo } from 'react';
 
 type ListItemProps = {
   number: number;
@@ -33,4 +33,4 @@ const ListItem = ({ number, data }: ListItemProps) => {
   );
 };
 
-export default ListItem;
+export default memo(ListItem);

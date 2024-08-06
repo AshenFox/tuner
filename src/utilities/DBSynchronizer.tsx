@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch } from '../store/store';
-import { sync_with_db } from '../store/actions/mainActions';
+import React, { memo, useEffect } from 'react';
+import { useActions } from '@store/hooks';
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
 const DBSynchronizer: React.FC<Props> = () => {
-  const dispatch = useAppDispatch();
+  const { sync_with_db } = useActions();
 
   useEffect(() => {
-    dispatch(sync_with_db());
-  }, [dispatch]);
+    sync_with_db();
+  }, [sync_with_db]);
 
   return <></>;
 };
 
-export default DBSynchronizer;
+export default memo(DBSynchronizer);

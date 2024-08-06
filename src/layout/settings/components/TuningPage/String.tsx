@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
-import { useAppDispatch } from '@store/store';
-import { delete_string } from '@store/actions/mainActions';
+import { memo, MouseEventHandler } from 'react';
+import { useActions } from '@store/hooks';
 import NoteSelect from './NoteSelect';
 import OctaveSelect from './OctaveSelect';
 import { Note } from '@store/types/state';
@@ -21,14 +20,14 @@ const TuningPageString = ({
   data,
   isDeleteActive,
 }: TuningPageStringProps) => {
-  const dispatch = useAppDispatch();
+  const { delete_string } = useActions();
 
   const { id: tuning_id } = useParams<urlParams>();
 
   const { id: string_id } = data;
 
-  const onClickDelete = (e: React.MouseEvent) => {
-    if (isDeleteActive) dispatch(delete_string(tuning_id, string_id));
+  const onClickDelete: MouseEventHandler = () => {
+    if (isDeleteActive) delete_string(tuning_id, string_id);
   };
 
   return (
@@ -42,7 +41,9 @@ const TuningPageString = ({
       <div className="tuning-page__line"></div>
       <div className="tuning-page__controls">
         <svg
-          className={`tuning-page__delete-icon ${isDeleteActive ? 'active' : ''}`}
+          className={`tuning-page__delete-icon ${
+            isDeleteActive ? 'active' : ''
+          }`}
           onClick={onClickDelete}
         >
           <use

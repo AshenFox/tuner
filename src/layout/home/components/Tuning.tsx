@@ -1,9 +1,5 @@
-import React, { memo, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import {
-  set_active_note,
-  auto_set_active_note,
-} from '@store/actions/mainActions';
+import { memo, MouseEventHandler, useEffect } from 'react';
+import { useActions, useAppSelector } from '@store/hooks';
 
 const Tuning = () => {
   const {
@@ -12,19 +8,19 @@ const Tuning = () => {
     settings: { auto_tuning },
   } = useAppSelector((state) => state.main);
 
-  const dispatch = useAppDispatch();
+  const { set_active_note, auto_set_active_note } = useActions();
 
   useEffect(() => {
-    if (auto_tuning) dispatch(auto_set_active_note());
-  }, [most_freq_fr, auto_tuning, dispatch]);
+    if (auto_tuning) auto_set_active_note();
+  }, [most_freq_fr, auto_tuning, auto_set_active_note]);
 
   const activeTuning = tunings.find((tuning) => tuning.active);
 
   const strings = activeTuning?.data || [];
 
-  const onClickHandler =
-    (id: string, active: boolean) => (e: React.MouseEvent) => {
-      if (!active && !auto_tuning) dispatch(set_active_note(id));
+  const onClickHandler: (id: string, active: boolean) => MouseEventHandler =
+    (id, active) => () => {
+      if (!active && !auto_tuning) set_active_note(id);
     };
 
   return (
