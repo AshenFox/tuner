@@ -1,12 +1,12 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 type NotchProps = {
   deg: number;
 };
 
 const Notch = ({ deg }: NotchProps) => {
-  let style = { transform: `rotate(${deg * 1.5}deg)` };
-  let isBig = !((deg * 1.5) % 7.5);
+  const style = { transform: `rotate(${deg * 1.5}deg)` };
+  const isBig = !((deg * 1.5) % 7.5);
 
   return (
     <div className={`dial__notch-cont ${isBig && 'big'}`} style={style}>

@@ -1,4 +1,4 @@
-import { mainStateInterface } from '../../types/state';
+import { mainStateInterface } from '@store/types/state';
 import languages from '@utilities/lang.json';
 
 const mainInitState: mainStateInterface = {

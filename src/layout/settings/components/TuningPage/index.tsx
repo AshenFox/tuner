@@ -1,4 +1,4 @@
-import React, { memo, MouseEventHandler } from 'react';
+import { memo, MouseEventHandler } from 'react';
 import { useActions, useAppSelector } from '@store/hooks';
 import AddButton from '../AddButton';
 import TuningPageString from './String';

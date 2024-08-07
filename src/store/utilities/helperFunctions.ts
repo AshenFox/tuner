@@ -1,4 +1,4 @@
-import { Note, Tuning } from '../types/state';
+import { Note, Tuning } from '@store/types/state';
 import { iNotification, Store } from 'react-notifications-component';
 import { v4 as uuidv4 } from 'uuid';
 

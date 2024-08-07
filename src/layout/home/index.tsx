@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import Dial from './components/Dial';
 import PitchDetector from '@utilities/PitchDetectorComponent';
 import Tuning from './components/Tuning';

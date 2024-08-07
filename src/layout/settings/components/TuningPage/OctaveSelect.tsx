@@ -3,7 +3,9 @@ import { useActions } from '@store/hooks';
 import Select from 'react-select';
 import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
-import { createTheme, Styles } from '@utilities/SelectComponentStyles';
+import { createTheme, createStyles } from '@utilities/SelectComponentStyles';
+
+const Styles = createStyles<OctaveSelectOption>();
 
 type OctaveSelectOption = {
   value: number;

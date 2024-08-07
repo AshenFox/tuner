@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import { memo, MouseEventHandler } from 'react';
 
 type HamburgerProps = {
-  clickHandler: (e: React.MouseEvent) => void;
+  clickHandler: MouseEventHandler;
 };
 
 const Hamburger = ({ clickHandler }: HamburgerProps) => {

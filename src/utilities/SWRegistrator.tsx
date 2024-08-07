@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 interface OwnProps {}
 
 type Props = OwnProps;
@@ -21,4 +21,4 @@ const SWRegistrator: React.FC<Props> = () => {
   return <></>;
 };
 
-export default SWRegistrator;
+export default memo(SWRegistrator);

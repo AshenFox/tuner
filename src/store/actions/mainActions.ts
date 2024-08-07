@@ -1,6 +1,6 @@
-import { Note } from './../types/state';
-import { ThunkActionApp } from './../store';
-import { MainActions } from './../types/actions';
+import { Note } from '@store/types/state';
+import { ThunkActionApp } from '@store/store';
+import { MainActions } from '@store/types/actions';
 import {
   SET_FR,
   AUTO_SET_ACTIVE_NOTE,
@@ -16,16 +16,16 @@ import {
   TOGGLE_AUTO_TUNING,
   SYNC_WITH_DB,
   SWITCH_LANGUAGE,
-} from '../types/actions';
+} from '@store/types/actions';
 import { Store } from 'react-notifications-component';
-import db_methods from '../db';
+import db_methods from '@store/db';
 import { v4 as uuidv4 } from 'uuid';
-import languages from '../../utilities/lang.json';
+import languages from '@utilities/lang.json';
 import {
   create_note,
   create_tuning,
   add_custom_notification,
-} from '../utilities/helperFunctions';
+} from '@store/utilities/helperFunctions';
 
 export const switch_language = (value: 'RU' | 'ENG') => <ThunkActionApp>(async (
     dispatch

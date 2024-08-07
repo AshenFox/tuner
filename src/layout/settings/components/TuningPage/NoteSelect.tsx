@@ -3,7 +3,9 @@ import { useActions } from '@store/hooks';
 import Select from 'react-select';
 import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
-import { createTheme, Styles } from '@utilities/SelectComponentStyles';
+import { createStyles, createTheme } from '@utilities/SelectComponentStyles';
+
+const Styles = createStyles<NoteSelectOption>();
 
 type NoteSelectOption = {
   value: number;
@@ -47,7 +49,7 @@ const NoteSelect = ({ data }: NoteSelectProps) => {
   };
 
   return (
-    <Select
+    <Select<NoteSelectOption>
       id={`note-select-${noteID}`}
       className={'tuning-page__note-select'}
       theme={createTheme}

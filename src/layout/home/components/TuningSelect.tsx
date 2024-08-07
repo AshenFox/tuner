@@ -1,7 +1,12 @@
 import { memo } from 'react';
 import { useActions, useAppSelector } from '@store/hooks';
 import Select from 'react-select';
-import { createTheme, StylesSmall } from '@utilities/SelectComponentStyles';
+import {
+  createTheme,
+  createStylesSmall,
+} from '@utilities/SelectComponentStyles';
+
+const Style = createStylesSmall<TuningSelectOption>();
 
 type TuningSelectOption = {
   value: string;
@@ -46,7 +51,7 @@ const TuningSelect = () => {
       onChange={onSelectChange}
       value={activeOption}
       instanceId="react-select-created"
-      styles={StylesSmall}
+      styles={Style}
     />
   );
 };

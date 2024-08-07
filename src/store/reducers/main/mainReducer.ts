@@ -1,4 +1,4 @@
-import { mainStateInterface, Note } from './../../types/state';
+import { mainStateInterface, Note } from '@store/types/state';
 import {
   MainActions,
   SET_FR,
@@ -14,7 +14,7 @@ import {
   AUTO_SET_ACTIVE_NOTE,
   SYNC_WITH_DB,
   SWITCH_LANGUAGE,
-} from './../../types/actions';
+} from '@store/types/actions';
 import initialState from './mainInitState';
 
 const MainReducer = (
@@ -185,7 +185,7 @@ const calc_fr = (
   if (most_freq_fr_prev < 100) sensitivity = 15;
 
   // Filter our harmonics fr
-  let harmonic_offset = Math.min(
+  const harmonic_offset = Math.min(
     Math.abs(detected_fr - most_freq_fr_prev * 2),
     Math.abs(detected_fr - most_freq_fr_prev * 3),
     Math.abs(detected_fr - most_freq_fr_prev * 4)
@@ -195,7 +195,7 @@ const calc_fr = (
   const fr_arr =
     is_harmonic || isTooLow
       ? fr_arr_prev
-      : [...fr_arr_prev.filter((el, i) => i !== 0), detected_fr];
+      : [...fr_arr_prev.filter((_, i) => i !== 0), detected_fr];
 
   const most_freq_fr =
     is_harmonic || isTooLow
@@ -225,27 +225,26 @@ const activate_closest_note = (notes: Note[], most_freq_fr: number) => {
 };
 
 const get_most_frequent = (arr: number[]) => {
-  let compare = '';
+  let compare = 0;
   let most_freq = 0;
+  const key_freq: Record<number, number> = {};
 
-  arr.reduce((acc: any, val) => {
+  arr.forEach((val) => {
     const floored = Math.floor(val);
 
-    if (floored in acc) {
+    if (floored in key_freq) {
       // if key already exists
-      acc[floored]++; // then increment it by 1
+      key_freq[floored]++; // then increment it by 1
     } else {
-      acc[floored] = 1; // or else create a key with value 1
+      key_freq[floored] = 1; // or else create a key with value 1
     }
-    if (acc[floored] >= compare) {
+    if (key_freq[floored] >= compare) {
       // if value of that key is greater
       // than the compare value.
-      compare = acc[floored]; // than make it a new compare value.
+      compare = key_freq[floored]; // than make it a new compare value.
       most_freq = val; // also make that key most frequent.
     }
-
-    return acc;
-  }, {});
+  });
 
   return most_freq;
 };
