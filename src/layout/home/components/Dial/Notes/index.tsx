@@ -6,12 +6,6 @@ type NotesProps = {
 };
 
 const Notes = ({ fr }: NotesProps) => {
-  // const { most_freq_fr } = main;
-
-  //   12*Math.log2(440/16.351597831287414)
-
-  //16.351597831287414*(2 ** (71/12))
-
   const steps = 12 * Math.log2(fr / baseFR);
 
   const closest = Math.floor(steps);

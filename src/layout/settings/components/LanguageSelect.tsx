@@ -19,14 +19,12 @@ const optionsOctaveSelect: LanguageSelectOption[] = [
 ];
 
 const LanguageSelect = () => {
-  const {
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const { switch_language } = useActions();
 
   const activeOption = optionsOctaveSelect.find(
-    (option) => option.value === language.language
+    option => option.value === language.language
   );
 
   const onSelectChange = (value: LanguageSelectOption | null) => {

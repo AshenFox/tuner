@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import TuningsPage from './components/TuningPage';
 import TuningsList from './components/TuningList';

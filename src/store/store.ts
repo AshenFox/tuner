@@ -1,16 +1,12 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk, {
-  ThunkAction,
-  ThunkDispatch,
-  ThunkMiddleware,
-} from 'redux-thunk';
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { thunk, ThunkAction, ThunkDispatch } from 'redux-thunk';
 import rootReducer from './reducers';
 import { AppActions } from './types/actions';
 
 const initialState = {};
 
-const middleware = [thunk as ThunkMiddleware<AppState, AppActions>];
+const middlewares = [thunk];
 
 const composeEnhancers = composeWithDevTools({
   trace: true,
@@ -20,7 +16,7 @@ const composeEnhancers = composeWithDevTools({
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(...middleware))
+  composeEnhancers(applyMiddleware(...middlewares))
 );
 
 export default store;

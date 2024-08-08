@@ -53,12 +53,12 @@ const MainReducer = (
     case DELETE_STRING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.tuning_id === tuning.id
             ? {
                 ...tuning,
                 data: tuning.data.filter(
-                  (string) => action.payload.string_id !== string.id
+                  string => action.payload.string_id !== string.id
                 ),
               }
             : tuning
@@ -68,7 +68,7 @@ const MainReducer = (
     case ADD_STRING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.id === tuning.id
             ? {
                 ...tuning,
@@ -81,7 +81,7 @@ const MainReducer = (
     case EDIT_TUNING_NAME:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           tuning.id === action.payload.id
             ? { ...tuning, name: action.payload.value }
             : tuning
@@ -91,11 +91,11 @@ const MainReducer = (
     case EDIT_STRING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.tuning_id === tuning.id
             ? {
                 ...tuning,
-                data: tuning.data.map((string) =>
+                data: tuning.data.map(string =>
                   action.payload.new_note.id === string.id
                     ? action.payload.new_note
                     : string
@@ -108,7 +108,7 @@ const MainReducer = (
     case SET_ACTIVE_TUNING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.id === tuning.id
             ? { ...tuning, active: true }
             : { ...tuning, active: false }
@@ -125,7 +125,7 @@ const MainReducer = (
       return {
         ...state,
         tunings: state.tunings.filter(
-          (tuning) => tuning.id !== action.payload.id
+          tuning => tuning.id !== action.payload.id
         ),
       };
 
@@ -142,7 +142,7 @@ const MainReducer = (
     case AUTO_SET_ACTIVE_NOTE:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           tuning.active
             ? {
                 ...tuning,
@@ -155,11 +155,11 @@ const MainReducer = (
     case SET_ACTIVE_NOTE:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           tuning.active
             ? {
                 ...tuning,
-                data: tuning.data.map((string) => ({
+                data: tuning.data.map(string => ({
                   ...string,
                   active: string.id === action.payload.id,
                 })),
@@ -218,7 +218,7 @@ const activate_closest_note = (notes: Note[], most_freq_fr: number) => {
     { id: '', diff: 10000 }
   );
 
-  return notes.map((string) => ({
+  return notes.map(string => ({
     ...string,
     active: string.id === result.id,
   }));
@@ -229,7 +229,7 @@ const get_most_frequent = (arr: number[]) => {
   let most_freq = 0;
   const key_freq: Record<number, number> = {};
 
-  arr.forEach((val) => {
+  arr.forEach(val => {
     const floored = Math.floor(val);
 
     if (floored in key_freq) {

@@ -42,7 +42,7 @@
     },
     "tunings": {
       "default": {
-        "guitar_standart": "Guitar",
+        "guitar_standard": "Guitar",
         "guitar_drop_d": "Guitar drop D",
         "guitar_b1": "Guitar -1t.",
         "guitar_b2": "Guitar -2t.",
@@ -96,7 +96,7 @@
     },
     "tunings": {
       "default": {
-        "guitar_standart": "Гитара",
+        "guitar_standard": "Гитара",
         "guitar_drop_d": "Гитара drop D",
         "guitar_b1": "Гитара -1т.",
         "guitar_b2": "Гитара -2т.",

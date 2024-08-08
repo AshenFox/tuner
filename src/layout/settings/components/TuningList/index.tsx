@@ -4,10 +4,8 @@ import ListItem from './ListItem';
 import { useActions, useAppSelector } from '@store/hooks';
 
 const TuningsList = () => {
-  const {
-    tunings,
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const tunings = useAppSelector(s => s.main.tunings);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const { add_tuning } = useActions();
 

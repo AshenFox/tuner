@@ -6,7 +6,7 @@ type FrProps = {
 };
 
 const Fr = ({ deg }: FrProps) => {
-  const { most_freq_fr } = useAppSelector((state) => state.main);
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
 

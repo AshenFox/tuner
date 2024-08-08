@@ -4,9 +4,8 @@ import { useActions, useAppSelector } from '@store/hooks';
 import { Link } from 'react-router-dom';
 
 const Main = () => {
-  const {
-    settings: { auto_tuning, language },
-  } = useAppSelector((state) => state.main);
+  const auto_tuning = useAppSelector(s => s.main.settings.auto_tuning);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const { toggle_auto_tuning } = useActions();
 

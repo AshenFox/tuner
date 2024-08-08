@@ -26,7 +26,7 @@ const set_up_db = async () => {
       const tunings_store = tx.objectStore('tunings');
       const settings_store = tx.objectStore('settings');
 
-      default_tunings.map((tuning) => tunings_store.put(tuning));
+      default_tunings.map(tuning => tunings_store.put(tuning));
 
       settings_store.put({
         id: 'main-settings',
@@ -99,7 +99,7 @@ const set_up_db = async () => {
       if (tuning)
         return db.put('tunings', {
           ...tuning,
-          data: tuning.data.map((string) =>
+          data: tuning.data.map(string =>
             new_note.id === string.id ? new_note : string
           ),
         });
@@ -115,7 +115,7 @@ const set_up_db = async () => {
       if (tuning)
         return db.put('tunings', {
           ...tuning,
-          data: tuning.data.filter((string) => string_id !== string.id),
+          data: tuning.data.filter(string => string_id !== string.id),
         });
     } catch (error) {
       console.log(error);
@@ -168,7 +168,7 @@ const set_up_db = async () => {
 
 const default_tunings: Tunings = [
   {
-    name: 'guitar_standart',
+    name: 'guitar_standard',
     id: '76d9ccac-d184-413d-a3ba-12f183e4e9f0',
     data: [
       create_note(5, 2),
@@ -181,7 +181,7 @@ const default_tunings: Tunings = [
     active: true,
     is_default: true,
     created: 1628083499901,
-    default_key: 'guitar_standart',
+    default_key: 'guitar_standard',
   },
   {
     name: 'guitar_drop_d',

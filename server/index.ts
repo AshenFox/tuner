@@ -1,4 +1,3 @@
-// const express = require('express');
 import express, { Application, Request, Response } from 'express';
 import path from 'path';
 

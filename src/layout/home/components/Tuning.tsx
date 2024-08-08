@@ -2,11 +2,9 @@ import { memo, MouseEventHandler, useEffect } from 'react';
 import { useActions, useAppSelector } from '@store/hooks';
 
 const Tuning = () => {
-  const {
-    tunings,
-    most_freq_fr,
-    settings: { auto_tuning },
-  } = useAppSelector((state) => state.main);
+  const tunings = useAppSelector(s => s.main.tunings);
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
+  const auto_tuning = useAppSelector(s => s.main.settings.auto_tuning);
 
   const { set_active_note, auto_set_active_note } = useActions();
 
@@ -14,7 +12,7 @@ const Tuning = () => {
     if (auto_tuning) auto_set_active_note();
   }, [most_freq_fr, auto_tuning, auto_set_active_note]);
 
-  const activeTuning = tunings.find((tuning) => tuning.active);
+  const activeTuning = tunings.find(tuning => tuning.active);
 
   const strings = activeTuning?.data || [];
 

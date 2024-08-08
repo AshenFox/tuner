@@ -21,12 +21,12 @@ export const createStyles: <T>() => StylesConfig<
   false,
   GroupBase<T>
 > = () => ({
-  dropdownIndicator: (provided) => ({
+  dropdownIndicator: provided => ({
     ...provided,
     paddingLeft: 3,
     paddingRight: 3,
   }),
-  menuList: (provided) => ({
+  menuList: provided => ({
     ...provided,
     height: 150,
   }),
@@ -42,12 +42,12 @@ export const createStylesSmall: <T>() => StylesConfig<
   false,
   GroupBase<T>
 > = () => ({
-  dropdownIndicator: (provided) => ({
+  dropdownIndicator: provided => ({
     ...provided,
     paddingLeft: 3,
     paddingRight: 3,
   }),
-  menuList: (provided) => ({
+  menuList: provided => ({
     ...provided,
     maxHeight: 100,
   }),

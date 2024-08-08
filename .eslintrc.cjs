@@ -14,5 +14,6 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'arrow-parens': 'as-needed',
   },
-}
+};

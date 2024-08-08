@@ -9,9 +9,7 @@ type ListItemProps = {
 };
 
 const ListItem = ({ number, data }: ListItemProps) => {
-  const {
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const { name, is_default, default_key } = data;
 

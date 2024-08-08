@@ -11,14 +11,12 @@ type urlParams = {
 const TuningsPage = () => {
   const { add_string, edit_tuning_name } = useActions();
 
-  const {
-    tunings,
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const tunings = useAppSelector(s => s.main.tunings);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const { id } = useParams<urlParams>();
 
-  const { name, data = [] } = tunings.find((tuning) => tuning.id === id) || {};
+  const { name, data = [] } = tunings.find(tuning => tuning.id === id) || {};
 
   const addStringClickHandler: MouseEventHandler = () => {
     add_string(id);

@@ -15,10 +15,8 @@ type TuningSelectOption = {
 };
 
 const TuningSelect = () => {
-  const {
-    tunings,
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const tunings = useAppSelector(s => s.main.tunings);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const { set_active_tuning } = useActions();
 
@@ -34,7 +32,7 @@ const TuningSelect = () => {
     })
   );
 
-  const activeOption = optionsTuningSelect.find((option) => option.active);
+  const activeOption = optionsTuningSelect.find(option => option.active);
 
   const onSelectChange = (tuning: TuningSelectOption | null) => {
     if (!tuning) return;

@@ -2,15 +2,13 @@ import { memo } from 'react';
 import { useAppSelector } from '@store/hooks';
 
 const Indicator = () => {
-  const {
-    most_freq_fr,
-    tunings,
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
+  const tunings = useAppSelector(s => s.main.tunings);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
-  const activeTuning = tunings.find((tuning) => tuning.active);
+  const activeTuning = tunings.find(tuning => tuning.active);
   const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
 
   let sensitivity = 0.5;

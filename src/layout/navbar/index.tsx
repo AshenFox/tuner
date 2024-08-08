@@ -4,18 +4,16 @@ import Hamburger from './components/Hamburger';
 import NavBarItem from './components/NavbarItem';
 
 const NavBar = () => {
-  const {
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+  const language = useAppSelector(s => s.main.settings.language);
 
   const [isActive, setIsActive] = useState(false);
 
-  const hamburgerClick: MouseEventHandler = (e) => {
+  const hamburgerClick: MouseEventHandler = e => {
     e.stopPropagation();
     setIsActive(true);
   };
 
-  const stopPropagation: MouseEventHandler = (e) => {
+  const stopPropagation: MouseEventHandler = e => {
     e.stopPropagation();
   };
 
@@ -24,13 +22,11 @@ const NavBar = () => {
     const itemElements = document.querySelectorAll('.navbar__item');
 
     document.addEventListener('click', closeNavbar);
-    itemElements.forEach((el) => el.addEventListener('click', closeNavbar));
+    itemElements.forEach(el => el.addEventListener('click', closeNavbar));
 
     return () => {
       document.removeEventListener('click', closeNavbar);
-      itemElements.forEach((el) =>
-        el.removeEventListener('click', closeNavbar)
-      );
+      itemElements.forEach(el => el.removeEventListener('click', closeNavbar));
     };
   }, []);
 

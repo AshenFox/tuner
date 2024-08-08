@@ -18,7 +18,7 @@ export type Tuning = {
   created: number;
   is_default: boolean;
   default_key:
-    | 'guitar_standart'
+    | 'guitar_standard'
     | 'guitar_drop_d'
     | 'guitar_b1'
     | 'guitar_b2'

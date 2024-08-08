@@ -8,9 +8,10 @@ import Notches from './Notches';
 const notchesNum = 240;
 
 const Dial = () => {
-  const { most_freq_fr, tunings } = useAppSelector((state) => state.main);
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
+  const tunings = useAppSelector(s => s.main.tunings);
 
-  const activeTuning = tunings.find((tuning) => tuning.active);
+  const activeTuning = tunings.find(tuning => tuning.active);
   const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
 
   const angle = calcAngle(most_freq_fr);
