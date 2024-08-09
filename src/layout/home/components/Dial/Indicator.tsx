@@ -5,11 +5,14 @@ const Indicator = () => {
   const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
   const tunings = useAppSelector(s => s.main.tunings);
   const language = useAppSelector(s => s.main.settings.language);
+  const active_note_id = useAppSelector(s => s.main.active_note_id);
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
   const activeTuning = tunings.find(tuning => tuning.active);
-  const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
+  const activeStringFr = activeTuning?.data.find(
+    ({ id }) => id === active_note_id
+  )?.fr;
 
   let sensitivity = 0.5;
   if (most_freq_fr > 200) sensitivity = 1;

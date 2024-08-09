@@ -1,7 +1,7 @@
 import { memo, MouseEventHandler } from 'react';
 import { useActions, useAppSelector } from '@store/hooks';
 import AddButton from '../AddButton';
-import TuningPageString from './String';
+import TuningPageString from './components/String';
 import { useParams } from 'react-router-dom';
 
 type urlParams = {

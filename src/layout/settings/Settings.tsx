@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import TuningsPage from './components/TuningPage';
-import TuningsList from './components/TuningList';
+import TuningsPage from './components/TuningsPage';
+import TuningsList from './components/TuningsList';
 import Main from './components/Main';
 import LanguageSelect from './components/LanguageSelect';
 

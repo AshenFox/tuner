@@ -19,7 +19,6 @@ export const create_note = (
     sign: false,
     octave: 2,
     fr: 82.4068892282175,
-    active: false,
   }
 ) => {
   const octave = typeof new_octave === 'number' ? new_octave : data.octave;

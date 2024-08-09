@@ -3,16 +3,19 @@ import { useAppSelector } from '@store/hooks';
 import Indicator from './Indicator';
 import Notes from './Notes';
 import Frs from './Frs';
-import Notches from './Notches';
+import Notches from './Notches/Notches';
 
 const notchesNum = 240;
 
 const Dial = () => {
   const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
   const tunings = useAppSelector(s => s.main.tunings);
+  const active_note_id = useAppSelector(s => s.main.active_note_id);
 
   const activeTuning = tunings.find(tuning => tuning.active);
-  const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
+  const activeStringFr = activeTuning?.data.find(
+    ({ id }) => id === active_note_id
+  )?.fr;
 
   const angle = calcAngle(most_freq_fr);
 

@@ -142,30 +142,16 @@ const MainReducer = (
     case AUTO_SET_ACTIVE_NOTE:
       return {
         ...state,
-        tunings: state.tunings.map(tuning =>
-          tuning.active
-            ? {
-                ...tuning,
-                data: activate_closest_note(tuning.data, state.most_freq_fr),
-              }
-            : tuning
+        active_note_id: find_closest_note(
+          state.tunings.find(tuning => tuning.active)?.data ?? [],
+          state.most_freq_fr
         ),
       };
 
     case SET_ACTIVE_NOTE:
       return {
         ...state,
-        tunings: state.tunings.map(tuning =>
-          tuning.active
-            ? {
-                ...tuning,
-                data: tuning.data.map(string => ({
-                  ...string,
-                  active: string.id === action.payload.id,
-                })),
-              }
-            : tuning
-        ),
+        active_note_id: action.payload.id,
       };
 
     default:
@@ -208,20 +194,17 @@ const calc_fr = (
   };
 };
 
-const activate_closest_note = (notes: Note[], most_freq_fr: number) => {
-  const result = notes.reduce(
+const find_closest_note = (notes: Note[], most_freq_fr: number) => {
+  const result = notes.reduce<{ id: null | string; diff: number }>(
     (result, note) => {
       const new_diff = Math.abs(most_freq_fr - note.fr);
 
       return new_diff < result.diff ? { id: note.id, diff: new_diff } : result;
     },
-    { id: '', diff: 10000 }
+    { id: null, diff: 10000 }
   );
 
-  return notes.map(string => ({
-    ...string,
-    active: string.id === result.id,
-  }));
+  return result.id;
 };
 
 const get_most_frequent = (arr: number[]) => {

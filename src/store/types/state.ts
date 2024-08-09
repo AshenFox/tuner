@@ -7,7 +7,6 @@ export type Note = {
   sign: boolean;
   octave: number;
   fr: number;
-  active: boolean;
 };
 
 export type Tuning = {
@@ -40,5 +39,6 @@ export interface mainStateInterface {
   fr_arr: number[];
   most_freq_fr: number;
   tunings: Tunings;
+  active_note_id: string | null;
   settings: Settings;
 }

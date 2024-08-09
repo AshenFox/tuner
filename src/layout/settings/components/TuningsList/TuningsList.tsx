@@ -1,6 +1,6 @@
 import { memo, MouseEventHandler } from 'react';
 import AddButton from '../AddButton';
-import ListItem from './ListItem';
+import ListItem from './components/ListItem';
 import { useActions, useAppSelector } from '@store/hooks';
 
 const TuningsList = () => {
