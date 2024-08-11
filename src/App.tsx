@@ -9,23 +9,19 @@ import { ReactNotifications } from 'react-notifications-component';
 import DBSynchronizer from '@utilities/DBSynchronizer';
 import SWRegistrator from '@utilities/SWRegistrator';
 
-const App = () => {
-  return (
-    <>
-      <Provider store={store}>
-        <ReactNotifications isMobile={true} />
-        <DBSynchronizer />
-        <SWRegistrator />
-        <Router>
-          <Switch>
-            <Route path="/settings" component={Settings} />
-            <Route path="/" component={Home} />
-          </Switch>
-          <NavBar />
-        </Router>
-      </Provider>
-    </>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <ReactNotifications isMobile />
+    <DBSynchronizer />
+    <SWRegistrator />
+    <Router>
+      <Switch>
+        <Route path="/settings" component={Settings} />
+        <Route path="/" component={Home} />
+      </Switch>
+      <NavBar />
+    </Router>
+  </Provider>
+);
 
 export default memo(App);

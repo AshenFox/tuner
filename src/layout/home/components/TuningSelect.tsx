@@ -17,22 +17,27 @@ type TuningSelectOption = {
 const TuningSelect = () => {
   const tunings = useAppSelector(s => s.main.tunings);
   const language = useAppSelector(s => s.main.settings.language);
+  const active_tuning_id = useAppSelector(s => s.main.active_tuning_id);
 
   const { set_active_tuning } = useActions();
 
   const optionsTuningSelect: TuningSelectOption[] = tunings.map(
-    ({ id, name, active, is_default, default_key }) => ({
-      value: id,
-      label: name
-        ? is_default
-          ? language.tunings.default[default_key]
-          : name
-        : language.tunings.title_placeholder,
-      active,
-    })
+    ({ id, name, is_default, default_key }) => {
+      const defaultLabel = is_default
+        ? language.tunings.default[default_key]
+        : name;
+
+      return {
+        value: id,
+        label: name ? defaultLabel : language.tunings.title_placeholder,
+        active: id === active_tuning_id,
+      };
+    }
   );
 
-  const activeOption = optionsTuningSelect.find(option => option.active);
+  const activeOption = optionsTuningSelect.find(
+    ({ value: id }) => id === active_tuning_id
+  );
 
   const onSelectChange = (tuning: TuningSelectOption | null) => {
     if (!tuning) return;
@@ -42,7 +47,7 @@ const TuningSelect = () => {
 
   return (
     <Select
-      className={'tuning-select'}
+      className="tuning-select"
       theme={createTheme}
       options={optionsTuningSelect}
       isSearchable={false}

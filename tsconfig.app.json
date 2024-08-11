@@ -33,5 +33,5 @@
       "@utilities/*": ["src/utilities/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", ".eslintrc.cjs"]
 }

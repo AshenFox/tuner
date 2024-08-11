@@ -5,58 +5,6 @@ type NotesProps = {
   fr: number;
 };
 
-const Notes = ({ fr }: NotesProps) => {
-  const steps = 12 * Math.log2(fr / baseFR);
-
-  const closest = Math.floor(steps);
-
-  const notesArr = [];
-
-  let offsetUp = 6;
-  let offsetDown = 6;
-
-  if (fr >= 300) {
-    offsetUp = 4;
-    offsetDown = 4;
-  }
-
-  if (fr >= 1000) {
-    offsetUp = 3;
-    offsetDown = 3;
-  }
-
-  if (fr >= 1500) {
-    offsetUp = 2;
-    offsetDown = 2;
-  }
-
-  for (let z = closest - offsetDown + 1; z < closest + offsetUp; z++) {
-    const i = z % 12;
-
-    const octave = Math.floor(z / 12);
-    const fr = baseFR * 2 ** (z / 12);
-
-    if (fr < 16.3 || fr > 3000) continue;
-
-    const angle = calcAngle(fr);
-
-    notesArr.push({ ...notesValuesArr[i], octave, fr, angle });
-  }
-
-  return (
-    <>
-      {notesArr.map((data, i) => (
-        <Note data={data} key={i} />
-      ))}
-    </>
-  );
-};
-
-const areEqual = (prev: NotesProps, current: NotesProps) =>
-  Math.floor(prev.fr) === Math.floor(current.fr);
-
-export default memo(Notes, areEqual);
-
 const baseFR = 16.351597831287414;
 
 const notesValuesArr = [
@@ -110,6 +58,14 @@ const notesValuesArr = [
   },
 ];
 
+const degs: { max: number; k: number }[] = [
+  { max: 48, k: 10 },
+  { max: 12, k: 5 },
+  { max: 60, k: 2.5 },
+  { max: 80, k: 2 },
+  { max: 520, k: 1 },
+];
+
 const calcAngle = (fr: number) =>
   degs.reduce((result, deg, i) => {
     if (fr <= 0) return result;
@@ -124,10 +80,54 @@ const calcAngle = (fr: number) =>
     return result;
   }, 0);
 
-const degs: { max: number; k: number }[] = [
-  { max: 48, k: 10 },
-  { max: 12, k: 5 },
-  { max: 60, k: 2.5 },
-  { max: 80, k: 2 },
-  { max: 520, k: 1 },
-];
+const Notes = ({ fr }: NotesProps) => {
+  const steps = 12 * Math.log2(fr / baseFR);
+
+  const closest = Math.floor(steps);
+
+  const notesArr = [];
+
+  let offsetUp = 6;
+  let offsetDown = 6;
+
+  if (fr >= 300) {
+    offsetUp = 4;
+    offsetDown = 4;
+  }
+
+  if (fr >= 1000) {
+    offsetUp = 3;
+    offsetDown = 3;
+  }
+
+  if (fr >= 1500) {
+    offsetUp = 2;
+    offsetDown = 2;
+  }
+
+  for (let z = closest - offsetDown + 1; z < closest + offsetUp; z++) {
+    const i = z % 12;
+
+    const octave = Math.floor(z / 12);
+    const fr = baseFR * 2 ** (z / 12);
+
+    if (fr < 16.3 || fr > 3000) continue;
+
+    const angle = calcAngle(fr);
+
+    notesArr.push({ ...notesValuesArr[i], octave, fr, angle });
+  }
+
+  return (
+    <>
+      {notesArr.map(data => (
+        <Note data={data} key={data.fr} />
+      ))}
+    </>
+  );
+};
+
+const areEqual = (prev: NotesProps, current: NotesProps) =>
+  Math.floor(prev.fr) === Math.floor(current.fr);
+
+export default memo(Notes, areEqual);

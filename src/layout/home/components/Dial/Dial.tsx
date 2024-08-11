@@ -11,8 +11,9 @@ const Dial = () => {
   const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
   const tunings = useAppSelector(s => s.main.tunings);
   const active_note_id = useAppSelector(s => s.main.active_note_id);
+  const active_tuning_id = useAppSelector(s => s.main.active_tuning_id);
 
-  const activeTuning = tunings.find(tuning => tuning.active);
+  const activeTuning = tunings.find(({ id }) => id === active_tuning_id);
   const activeStringFr = activeTuning?.data.find(
     ({ id }) => id === active_note_id
   )?.fr;

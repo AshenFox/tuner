@@ -108,11 +108,16 @@ const MainReducer = (
     case SET_ACTIVE_TUNING:
       return {
         ...state,
-        tunings: state.tunings.map(tuning =>
-          action.payload.id === tuning.id
-            ? { ...tuning, active: true }
-            : { ...tuning, active: false }
-        ),
+        /* tunings: state.tunings.map(tuning => {
+          const res =
+            action.payload.id === tuning.id
+              ? { ...tuning, active: true }
+              : { ...tuning, active: false };
+
+          return res;
+        }), */
+        active_tuning_id:
+          state.tunings.find(({ id }) => action.payload.id === id)?.id ?? null,
       };
 
     case ADD_TUNING:
@@ -143,7 +148,8 @@ const MainReducer = (
       return {
         ...state,
         active_note_id: find_closest_note(
-          state.tunings.find(tuning => tuning.active)?.data ?? [],
+          state.tunings.find(({ id }) => id === state.active_tuning_id)?.data ??
+            [],
           state.most_freq_fr
         ),
       };
@@ -190,7 +196,7 @@ const calc_fr = (
 
   return {
     fr_arr,
-    most_freq_fr: most_freq_fr,
+    most_freq_fr,
   };
 };
 

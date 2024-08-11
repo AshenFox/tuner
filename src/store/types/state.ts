@@ -13,7 +13,7 @@ export type Tuning = {
   id: string;
   name: string;
   data: Note[];
-  active: boolean;
+  // active: boolean;
   created: number;
   is_default: boolean;
   default_key:
@@ -40,5 +40,6 @@ export interface mainStateInterface {
   most_freq_fr: number;
   tunings: Tunings;
   active_note_id: string | null;
+  active_tuning_id: string | null;
   settings: Settings;
 }

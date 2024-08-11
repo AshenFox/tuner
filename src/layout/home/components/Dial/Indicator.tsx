@@ -6,10 +6,11 @@ const Indicator = () => {
   const tunings = useAppSelector(s => s.main.tunings);
   const language = useAppSelector(s => s.main.settings.language);
   const active_note_id = useAppSelector(s => s.main.active_note_id);
+  const active_tuning_id = useAppSelector(s => s.main.active_tuning_id);
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
-  const activeTuning = tunings.find(tuning => tuning.active);
+  const activeTuning = tunings.find(({ id }) => id === active_tuning_id);
   const activeStringFr = activeTuning?.data.find(
     ({ id }) => id === active_note_id
   )?.fr;

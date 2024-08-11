@@ -34,12 +34,13 @@ const PitchDetectorComponent = () => {
 
       const isMuted = !stream.getTracks()[0].enabled;
 
-      if (!isMuted)
+      if (!isMuted) {
         window.setTimeout(
           () =>
             updatePitch(analyserNode, detector, inputFloat32Array, sampleRate),
           100
         );
+      }
     },
     [set_fr]
   );
