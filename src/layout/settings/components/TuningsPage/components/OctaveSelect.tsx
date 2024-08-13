@@ -47,7 +47,7 @@ const OctaveSelect = ({ data }: OctaveSelectProps) => {
   return (
     <Select
       id={`note-select-${noteID}`}
-      className={'tuning-page__octave-select'}
+      className="tuning-page__octave-select"
       theme={createTheme}
       options={optionsOctaveSelect}
       isSearchable={false}

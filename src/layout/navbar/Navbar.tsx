@@ -38,10 +38,10 @@ const NavBar = () => {
       >
         <div className="container">
           <div className="navbar__menu">
-            <NavBarItem to={'/'} icon={'tuning-fork'}>
+            <NavBarItem to="/" icon="tuning-fork">
               {language.navbar.options.tuner}
             </NavBarItem>
-            <NavBarItem to={'/settings'} icon={'settings-2'}>
+            <NavBarItem to="/settings" icon="settings-2">
               {language.navbar.options.settings}
             </NavBarItem>
           </div>

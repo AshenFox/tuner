@@ -78,8 +78,6 @@ const calcValues = (
   if (k === 2.5 && fr > 200 && fr < 260 && deg >= 110 && deg <= 170) {
     n = 1;
     k = 2.5;
-
-    //(deg <= 20 || deg >= 200)
   }
 
   if (k === 1 && fr > 720 && fr < 840 && deg >= 60 && deg <= 120) {

@@ -31,7 +31,7 @@ const set_up_db = async () => {
       settings_store.put({
         id: 'main-settings',
         auto_tuning: true,
-        language: languages['ENG'],
+        language: languages.ENG,
       });
     },
   });
@@ -48,15 +48,15 @@ const set_up_db = async () => {
         settings,
       };
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
   const add_tuning = async (new_tuning: Tuning) => {
     try {
-      return db.put('tunings', new_tuning);
+      return await db.put('tunings', new_tuning);
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -66,15 +66,15 @@ const set_up_db = async () => {
 
       if (tuning) db.put('tunings', { ...tuning, name: value });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
   const delete_tuning = async (id: string) => {
     try {
-      return db.delete('tunings', id);
+      return await db.delete('tunings', id);
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -83,12 +83,12 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', id);
 
       if (tuning)
-        return db.put('tunings', {
+        return await db.put('tunings', {
           ...tuning,
           data: [...tuning.data, new_string],
         });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -97,14 +97,14 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', id);
 
       if (tuning)
-        return db.put('tunings', {
+        return await db.put('tunings', {
           ...tuning,
           data: tuning.data.map(string =>
             new_note.id === string.id ? new_note : string
           ),
         });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -113,12 +113,12 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', tuning_id);
 
       if (tuning)
-        return db.put('tunings', {
+        return await db.put('tunings', {
           ...tuning,
           data: tuning.data.filter(string => string_id !== string.id),
         });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -127,13 +127,13 @@ const set_up_db = async () => {
       const settings = await db.get('settings', 'main-settings');
 
       if (settings) {
-        return db.put('settings', {
+        return await db.put('settings', {
           ...settings,
           auto_tuning: !settings.auto_tuning,
         });
       }
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -142,10 +142,13 @@ const set_up_db = async () => {
       const settings = await db.get('settings', 'main-settings');
 
       if (settings) {
-        return db.put('settings', { ...settings, language: languages[value] });
+        return await db.put('settings', {
+          ...settings,
+          language: languages[value],
+        });
       }
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 

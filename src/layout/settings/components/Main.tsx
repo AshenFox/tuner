@@ -35,8 +35,8 @@ const Main = () => {
               className="toggle-frame"
               htmlFor="toggle"
               onClick={onToggleClick}
-            ></label>
-            <div className="toggle-switch"></div>
+            />
+            <div className="toggle-switch" />
           </div>
         </div>
       </div>

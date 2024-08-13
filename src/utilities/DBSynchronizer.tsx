@@ -12,7 +12,7 @@ const DBSynchronizer: React.FC<Props> = () => {
     sync_with_db();
   }, [sync_with_db]);
 
-  return <></>;
+  return null;
 };
 
 export default memo(DBSynchronizer);

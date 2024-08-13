@@ -1,9 +1,9 @@
 import { memo, MouseEventHandler } from 'react';
 import { useActions } from '@store/hooks';
-import NoteSelect from './NoteSelect';
-import OctaveSelect from './OctaveSelect';
 import { Note } from '@store/types/state';
 import { useParams } from 'react-router-dom';
+import NoteSelect from './NoteSelect';
+import OctaveSelect from './OctaveSelect';
 
 type urlParams = {
   id: string;
@@ -32,13 +32,13 @@ const TuningPageString = ({
 
   return (
     <div className="tuning-page__string">
-      <span className="tuning-page__number">{number}.</span>
-      <div className="tuning-page__line"></div>
+      <span className="tuning-page__number">{`${number}.`}</span>
+      <div className="tuning-page__line" />
       <div className="tuning-page__info">
         <NoteSelect data={data} />
         <OctaveSelect data={data} />
       </div>
-      <div className="tuning-page__line"></div>
+      <div className="tuning-page__line" />
       <div className="tuning-page__controls">
         <svg
           className={`tuning-page__delete-icon ${
@@ -46,9 +46,7 @@ const TuningPageString = ({
           }`}
           onClick={onClickDelete}
         >
-          <use
-            href={`${window.location.origin}/svg/sprite.svg#icon__delete`}
-          ></use>
+          <use href={`${window.location.origin}/svg/sprite.svg#icon__delete`} />
         </svg>
       </div>
     </div>

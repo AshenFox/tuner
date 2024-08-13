@@ -56,7 +56,6 @@ export const create_tuning = (number: number, title: string): Tuning => {
       create_note(12, 3),
       create_note(5, 4),
     ],
-    active: false,
     is_default: false,
     default_key: 'new_tuning',
     created: Date.now(),

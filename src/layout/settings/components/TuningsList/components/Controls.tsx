@@ -16,7 +16,7 @@ const Controls = ({ data }: ControlsProps) => {
 
   const editIcon = (
     <svg className={`tunings-list__edit-icon ${is_default ? '' : 'active'}`}>
-      <use href={`${window.location.origin}/svg/sprite.svg#icon__edit`}></use>
+      <use href={`${window.location.origin}/svg/sprite.svg#icon__edit`} />
     </svg>
   );
 
@@ -31,9 +31,7 @@ const Controls = ({ data }: ControlsProps) => {
         className={`tunings-list__delete-icon ${is_default ? '' : 'active'}`}
         onClick={is_default ? () => {} : deleteTuningClickHandler}
       >
-        <use
-          href={`${window.location.origin}/svg/sprite.svg#icon__delete`}
-        ></use>
+        <use href={`${window.location.origin}/svg/sprite.svg#icon__delete`} />
       </svg>
     </div>
   );

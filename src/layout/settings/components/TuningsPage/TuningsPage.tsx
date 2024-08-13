@@ -1,8 +1,8 @@
 import { memo, MouseEventHandler } from 'react';
 import { useActions, useAppSelector } from '@store/hooks';
+import { useParams } from 'react-router-dom';
 import AddButton from '../AddButton';
 import TuningPageString from './components/String';
-import { useParams } from 'react-router-dom';
 
 type urlParams = {
   id: string;
@@ -42,7 +42,7 @@ const TuningsPage = () => {
       <div className="tuning-page__list">
         {data?.map((string, i) => (
           <TuningPageString
-            key={i}
+            key={string.id}
             number={i + 1}
             data={string}
             isDeleteActive={isDeleteActive}

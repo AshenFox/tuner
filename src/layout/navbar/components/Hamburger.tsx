@@ -4,18 +4,16 @@ type HamburgerProps = {
   clickHandler: MouseEventHandler;
 };
 
-const Hamburger = ({ clickHandler }: HamburgerProps) => {
-  return (
-    <button
-      onClick={clickHandler}
-      className={`btn hamburger hamburger--spring`}
-      type="button"
-    >
-      <span className="hamburger__box">
-        <span className="hamburger__inner"></span>
-      </span>
-    </button>
-  );
-};
+const Hamburger = ({ clickHandler }: HamburgerProps) => (
+  <button
+    onClick={clickHandler}
+    className="btn hamburger hamburger--spring"
+    type="button"
+  >
+    <span className="hamburger__box">
+      <span className="hamburger__inner" />
+    </span>
+  </button>
+);
 
 export default memo(Hamburger);

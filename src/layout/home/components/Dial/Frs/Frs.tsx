@@ -5,14 +5,13 @@ type FrsProps = {
   num: number;
 };
 
-const Frs = ({ num }: FrsProps) => {
-  return (
-    <>
-      {[...new Array(num / 5)].map((_, i) => (
-        <Fr key={i * 5} deg={i * 5} />
-      ))}
-    </>
-  );
-};
+const Frs = ({ num }: FrsProps) => (
+  <>
+    {[...new Array(num / 5)].map((_, i) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <Fr key={i * 5} deg={i * 5} />
+    ))}
+  </>
+);
 
 export default memo(Frs);

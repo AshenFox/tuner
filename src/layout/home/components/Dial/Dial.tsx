@@ -41,16 +41,16 @@ const Dial = () => {
           <Notes fr={most_freq_fr} />
         </div>
         <div className="dial__housing">
-          <div className="dial__housing-bottom"></div>
+          <div className="dial__housing-bottom" />
         </div>
-        <div className={`dial__center ${isTuned && 'active'}`}></div>
+        <div className={`dial__center ${isTuned && 'active'}`} />
         <div className={`dial__hand-cont ${isTuned && 'active'}`}>
-          <div className="dial__hand1"></div>
-          <div className="dial__hand2"></div>
+          <div className="dial__hand1" />
+          <div className="dial__hand2" />
         </div>
 
-        <div className="dial__background-top"></div>
-        <div className="dial__background-bottom"></div>
+        <div className="dial__background-top" />
+        <div className="dial__background-bottom" />
         <Indicator />
       </div>
     </div>
@@ -63,7 +63,8 @@ const calcAngle = (fr: number) =>
 
     const { max, k } = deg;
 
-    fr > max ? (result += max * k) : (result += fr * k);
+    if (fr > max) result += max * k;
+    else result += fr * k;
 
     fr -= max;
 

@@ -51,7 +51,7 @@ const NoteSelect = ({ data }: NoteSelectProps) => {
   return (
     <Select<NoteSelectOption>
       id={`note-select-${noteID}`}
-      className={'tuning-page__note-select'}
+      className="tuning-page__note-select"
       theme={createTheme}
       options={optionsNoteSelect}
       isSearchable={false}

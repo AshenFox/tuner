@@ -35,8 +35,8 @@ const LanguageSelect = () => {
 
   return (
     <Select<LanguageSelectOption>
-      id={`language-select`}
-      className={'settings__language-select'}
+      id="language-select"
+      className="settings__language-select"
       theme={createTheme}
       options={optionsOctaveSelect}
       isSearchable={false}

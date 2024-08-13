@@ -86,7 +86,7 @@ const PitchDetectorComponent = () => {
     };
   }, [setup]);
 
-  return <></>;
+  return null;
 };
 
 export default memo(PitchDetectorComponent);

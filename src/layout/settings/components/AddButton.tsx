@@ -20,7 +20,7 @@ const AddButton = ({
     >
       <span>{children}</span>
       <svg className="settings__add-icon">
-        <use href={`${window.location.origin}/svg/sprite.svg#icon__add`}></use>
+        <use href={`${window.location.origin}/svg/sprite.svg#icon__add`} />
       </svg>
     </div>
   );

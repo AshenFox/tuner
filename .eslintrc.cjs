@@ -9,6 +9,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'prettier',
   ],
   overrides: [
     {
@@ -48,18 +49,19 @@ module.exports = {
       },
     ],
     'arrow-parens': ['error', 'as-needed'],
-    '@typescript-eslint/indent': [
-      'error',
-      2,
-      {
-        ignoredNodes: ['TSTypeParameterInstantiation'],
-      },
-    ],
+    '@typescript-eslint/indent': 'off',
     '@typescript-eslint/naming-convention': [
       'error',
       {
         selector: 'variableLike',
-        format: ['camelCase', 'PascalCase', 'strictCamelCase', 'snake_case'],
+        format: [
+          'camelCase',
+          'PascalCase',
+          'strictCamelCase',
+          'snake_case',
+          'UPPER_CASE',
+        ],
+        leadingUnderscore: 'allow',
       },
     ],
     'no-console': [
@@ -81,5 +83,22 @@ module.exports = {
     curly: 'off',
     'operator-linebreak': 'off',
     'nonblock-statement-body-position': 'off',
+    '@typescript-eslint/no-use-before-define': [
+      'warn',
+      {
+        functions: false,
+        classes: false,
+        variables: false,
+        allowNamedExports: true,
+      },
+    ],
+    'no-param-reassign': 'off',
+    'no-continue': 'off',
+    '@typescript-eslint/no-shadow': 'off',
+    'no-plusplus': 'off',
+    'react/require-default-props': 'off',
+    'consistent-return': 'off',
+    '@typescript-eslint/default-param-last': 'off',
+    'react/destructuring-assignment': 'off',
   },
 };
