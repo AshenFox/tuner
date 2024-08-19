@@ -100,5 +100,17 @@ module.exports = {
     'consistent-return': 'off',
     '@typescript-eslint/default-param-last': 'off',
     'react/destructuring-assignment': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
+    'jsx-a11y/no-noninteractive-element-to-interactive-role': [
+      'error',
+      {
+        label: ['button'],
+      },
+    ],
   },
 };

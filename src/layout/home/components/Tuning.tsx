@@ -22,7 +22,9 @@ const Tuning = () => {
   const strings = activeTuning?.data || [];
 
   const onClickHandler: (id: string) => MouseEventHandler = id => () => {
-    if (id !== active_note_id && !auto_tuning) set_active_note(id);
+    if (id !== active_note_id && !auto_tuning) {
+      set_active_note(id);
+    }
   };
 
   return (
@@ -33,9 +35,10 @@ const Tuning = () => {
         return (
           <div className="tuning__string-cont" key={id}>
             <div className="tuning__string-number">{`${stringNumber}.`}</div>
-            <div
-              className={`tuning__string ${id === active_tuning_id && 'active'}`}
+            <button
+              className={`tuning__string ${id === active_note_id && 'active'}`}
               onClick={onClickHandler(id)}
+              type="button"
             >
               <div className="tuning__note-holder">
                 <span className="tuning__note">{name}</span>
@@ -44,7 +47,7 @@ const Tuning = () => {
                   {sign && <span className="tuning__note-sharp">#</span>}
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         );
       })}

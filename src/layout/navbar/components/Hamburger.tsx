@@ -7,7 +7,7 @@ type HamburgerProps = {
 const Hamburger = ({ clickHandler }: HamburgerProps) => (
   <button
     onClick={clickHandler}
-    className="btn hamburger hamburger--spring"
+    className="hamburger hamburger--spring"
     type="button"
   >
     <span className="hamburger__box">

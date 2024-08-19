@@ -57,7 +57,7 @@ input:focus {
   outline: none;
 }
 
-.btn {
+button {
   background: none;
   border: none;
   padding: 0;
@@ -65,6 +65,7 @@ input:focus {
   font-family: inherit;
   cursor: pointer;
   transition: all 0.1s linear;
+  color: inherit;
 
   &:focus {
     outline: none;

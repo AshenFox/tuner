@@ -108,14 +108,6 @@ const MainReducer = (
     case SET_ACTIVE_TUNING:
       return {
         ...state,
-        /* tunings: state.tunings.map(tuning => {
-          const res =
-            action.payload.id === tuning.id
-              ? { ...tuning, active: true }
-              : { ...tuning, active: false };
-
-          return res;
-        }), */
         active_tuning_id:
           state.tunings.find(({ id }) => action.payload.id === id)?.id ?? null,
       };

@@ -16,7 +16,7 @@ interface MyDB extends DBSchema {
 
 const set_up_db = async () => {
   // Setting up the db
-  const db = await openDB<MyDB>('db', 5, {
+  const db = await openDB<MyDB>('db', 6, {
     upgrade(db, oldVersion, newVersion, tx) {
       if (oldVersion === 0) {
         db.createObjectStore('tunings', { keyPath: 'id' });

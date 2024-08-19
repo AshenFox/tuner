@@ -1,4 +1,4 @@
-import { memo, MouseEventHandler } from 'react';
+import { KeyboardEventHandler, memo, MouseEventHandler } from 'react';
 
 import { useActions, useAppSelector } from '@store/hooks';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ const Main = () => {
   const { toggle_auto_tuning } = useActions();
 
   const onToggleClick: MouseEventHandler = () => toggle_auto_tuning();
+  const onToggleKeyDown: KeyboardEventHandler = () => toggle_auto_tuning();
 
   return (
     <div className="container">
@@ -24,18 +25,21 @@ const Main = () => {
         <div className="settings__menu-item">
           <span>{language.settings.main.options.auto_tuning}</span>
           <div className="settings__menu-toggle">
-            <input
-              className="toggle-checkbox"
-              type="checkbox"
-              id="toggle"
-              checked={auto_tuning}
-              readOnly
-            />
             <label
               className="toggle-frame"
               htmlFor="toggle"
               onClick={onToggleClick}
-            />
+              onKeyDown={onToggleKeyDown}
+              role="button"
+            >
+              <input
+                className="toggle-checkbox"
+                type="checkbox"
+                id="toggle"
+                checked={auto_tuning}
+                readOnly
+              />
+            </label>
             <div className="toggle-switch" />
           </div>
         </div>
