@@ -1,22 +1,18 @@
-import React, { memo } from 'react';
-import { useAppSelector } from '../../../../../store/store';
+import { memo } from 'react';
+import { useAppSelector } from '@store/hooks';
 
-interface OwnProps {
+type FrProps = {
   deg: number;
-}
+};
 
-type Props = OwnProps;
-
-const Fr: React.FC<Props> = memo(({ deg }) => {
-  const { most_freq_fr } = useAppSelector((state) => state.main);
+const Fr = ({ deg }: FrProps) => {
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
 
   const style = { transform: `rotate(${deg * 1.5}deg)` };
 
   let position = deg;
 
   let k = 10;
-
-  // console.log("==========");
 
   let value = calcValues(deg, position, k, most_freq_fr, 0);
 
@@ -50,18 +46,14 @@ const Fr: React.FC<Props> = memo(({ deg }) => {
     value = calcValues(deg, position, k, most_freq_fr, 720);
   }
 
-  // console.log("==========");
-
   return (
-    <div className='dial__fr-cont' style={style}>
-      {/* <span className="dial__fr">{n_k > 4 ? value : value_k}</span> */}
-      <span className='dial__fr'>{value}</span>
-      {/* <span className="dial__deg-test">{deg}</span> */}
+    <div className="dial__fr-cont" style={style}>
+      <span className="dial__fr">{value}</span>
     </div>
   );
-});
+};
 
-export default Fr;
+export default memo(Fr);
 
 const calcValues = (
   deg: number,
@@ -86,8 +78,6 @@ const calcValues = (
   if (k === 2.5 && fr > 200 && fr < 260 && deg >= 110 && deg <= 170) {
     n = 1;
     k = 2.5;
-
-    //(deg <= 20 || deg >= 200)
   }
 
   if (k === 1 && fr > 720 && fr < 840 && deg >= 60 && deg <= 120) {

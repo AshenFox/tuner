@@ -1,6 +1,9 @@
-import { Note, Tuning } from '../types/state';
-import { ReactNotificationOptions, store } from 'react-notifications-component';
+import { Note, Tuning } from '@store/types/state';
+import { iNotification, Store } from 'react-notifications-component';
 import { v4 as uuidv4 } from 'uuid';
+
+// react-notifications-component
+// react-select
 
 // ==============================
 // ==============================
@@ -16,13 +19,14 @@ export const create_note = (
     sign: false,
     octave: 2,
     fr: 82.4068892282175,
-    active: false,
   }
 ) => {
   const octave = typeof new_octave === 'number' ? new_octave : data.octave;
   const value = typeof new_value === 'number' ? new_value : data.value;
-  const name = typeof new_value === 'number' ? all_notes[new_value - 1].name : data.name;
-  const sign = typeof new_value === 'number' ? all_notes[new_value - 1].sign : data.sign;
+  const name =
+    typeof new_value === 'number' ? all_notes[new_value - 1].name : data.name;
+  const sign =
+    typeof new_value === 'number' ? all_notes[new_value - 1].sign : data.sign;
 
   const fr = baseFR * 2 ** ((octave * 12 + (value - 1)) / 12);
 
@@ -36,8 +40,8 @@ export const create_note = (
   };
 };
 
-export const create_tuning = (nubmer: number, title: string): Tuning => {
-  const name = `${title} ${nubmer}`;
+export const create_tuning = (number: number, title: string): Tuning => {
+  const name = `${title} ${number}`;
 
   const id = uuidv4();
 
@@ -52,7 +56,6 @@ export const create_tuning = (nubmer: number, title: string): Tuning => {
       create_note(12, 3),
       create_note(5, 4),
     ],
-    active: false,
     is_default: false,
     default_key: 'new_tuning',
     created: Date.now(),
@@ -76,8 +79,8 @@ const all_notes = [
   { sign: false, name: 'B' },
 ];
 
-export const add_custom_notification = (custom_options: ReactNotificationOptions) => {
-  store.addNotification({
+export const add_custom_notification = (custom_options: iNotification) => {
+  Store.addNotification({
     ...custom_options,
     insert: 'top',
     animationIn: ['animate__animated', 'animate__fadeIn'],

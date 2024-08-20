@@ -1,20 +1,18 @@
-import React from 'react';
+import { memo } from 'react';
 
-interface OwnProps {
+type NotchProps = {
   deg: number;
-}
+};
 
-type Props = OwnProps;
-
-const Notch: React.FC<Props> = ({ deg }) => {
-  let style = { transform: `rotate(${deg * 1.5}deg)` };
-  let isBig = !((deg * 1.5) % 7.5);
+const Notch = ({ deg }: NotchProps) => {
+  const style = { transform: `rotate(${deg * 1.5}deg)` };
+  const isBig = !((deg * 1.5) % 7.5);
 
   return (
     <div className={`dial__notch-cont ${isBig && 'big'}`} style={style}>
-      <div className='dial__notch'></div>
+      <div className="dial__notch" />
     </div>
   );
 };
 
-export default Notch;
+export default memo(Notch);

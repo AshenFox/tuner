@@ -1,4 +1,4 @@
-import { mainStateInterface, Note } from './../../types/state';
+import { mainStateInterface, Note } from '@store/types/state';
 import {
   MainActions,
   SET_FR,
@@ -14,10 +14,13 @@ import {
   AUTO_SET_ACTIVE_NOTE,
   SYNC_WITH_DB,
   SWITCH_LANGUAGE,
-} from './../../types/actions';
+} from '@store/types/actions';
 import initialState from './mainInitState';
 
-const MainReducer = (state = initialState, action: MainActions): mainStateInterface => {
+const MainReducer = (
+  state = initialState,
+  action: MainActions
+): mainStateInterface => {
   switch (action.type) {
     case SWITCH_LANGUAGE:
       return {
@@ -50,12 +53,12 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case DELETE_STRING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.tuning_id === tuning.id
             ? {
                 ...tuning,
                 data: tuning.data.filter(
-                  (string) => action.payload.string_id !== string.id
+                  string => action.payload.string_id !== string.id
                 ),
               }
             : tuning
@@ -65,7 +68,7 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case ADD_STRING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.id === tuning.id
             ? {
                 ...tuning,
@@ -78,7 +81,7 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case EDIT_TUNING_NAME:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           tuning.id === action.payload.id
             ? { ...tuning, name: action.payload.value }
             : tuning
@@ -88,11 +91,11 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case EDIT_STRING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
+        tunings: state.tunings.map(tuning =>
           action.payload.tuning_id === tuning.id
             ? {
                 ...tuning,
-                data: tuning.data.map((string) =>
+                data: tuning.data.map(string =>
                   action.payload.new_note.id === string.id
                     ? action.payload.new_note
                     : string
@@ -105,11 +108,8 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case SET_ACTIVE_TUNING:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
-          action.payload.id === tuning.id
-            ? { ...tuning, active: true }
-            : { ...tuning, active: false }
-        ),
+        active_tuning_id:
+          state.tunings.find(({ id }) => action.payload.id === id)?.id ?? null,
       };
 
     case ADD_TUNING:
@@ -121,42 +121,35 @@ const MainReducer = (state = initialState, action: MainActions): mainStateInterf
     case DELETE_TUNING:
       return {
         ...state,
-        tunings: state.tunings.filter((tuning) => tuning.id !== action.payload.id),
+        tunings: state.tunings.filter(
+          tuning => tuning.id !== action.payload.id
+        ),
       };
 
     case SET_FR:
       return {
         ...state,
-        ...calc_fr(state.fr_arr, action.payload.detected_fr, state.most_freq_fr),
+        ...calc_fr(
+          state.fr_arr,
+          action.payload.detected_fr,
+          state.most_freq_fr
+        ),
       };
 
     case AUTO_SET_ACTIVE_NOTE:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
-          tuning.active
-            ? {
-                ...tuning,
-                data: activate_closest_note(tuning.data, state.most_freq_fr),
-              }
-            : tuning
+        active_note_id: find_closest_note(
+          state.tunings.find(({ id }) => id === state.active_tuning_id)?.data ??
+            [],
+          state.most_freq_fr
         ),
       };
 
     case SET_ACTIVE_NOTE:
       return {
         ...state,
-        tunings: state.tunings.map((tuning) =>
-          tuning.active
-            ? {
-                ...tuning,
-                data: tuning.data.map((string) => ({
-                  ...string,
-                  active: string.id === action.payload.id,
-                })),
-              }
-            : tuning
-        ),
+        active_note_id: action.payload.id,
       };
 
     default:
@@ -176,7 +169,7 @@ const calc_fr = (
   if (most_freq_fr_prev < 100) sensitivity = 15;
 
   // Filter our harmonics fr
-  let harmonic_offset = Math.min(
+  const harmonic_offset = Math.min(
     Math.abs(detected_fr - most_freq_fr_prev * 2),
     Math.abs(detected_fr - most_freq_fr_prev * 3),
     Math.abs(detected_fr - most_freq_fr_prev * 4)
@@ -186,7 +179,7 @@ const calc_fr = (
   const fr_arr =
     is_harmonic || isTooLow
       ? fr_arr_prev
-      : [...fr_arr_prev.filter((el, i) => i !== 0), detected_fr];
+      : [...fr_arr_prev.filter((_, i) => i !== 0), detected_fr];
 
   const most_freq_fr =
     is_harmonic || isTooLow
@@ -195,50 +188,44 @@ const calc_fr = (
 
   return {
     fr_arr,
-    most_freq_fr: most_freq_fr,
+    most_freq_fr,
   };
 };
 
-const activate_closest_note = (notes: Note[], most_freq_fr: number) => {
-  const result = notes.reduce(
+const find_closest_note = (notes: Note[], most_freq_fr: number) => {
+  const result = notes.reduce<{ id: null | string; diff: number }>(
     (result, note) => {
       const new_diff = Math.abs(most_freq_fr - note.fr);
 
       return new_diff < result.diff ? { id: note.id, diff: new_diff } : result;
     },
-    { id: '', diff: 10000 }
+    { id: null, diff: 10000 }
   );
 
-  return notes.map((string) => ({
-    ...string,
-    active: string.id === result.id,
-  }));
+  return result.id;
 };
 
 const get_most_frequent = (arr: number[]) => {
-  let compare = '';
+  let compare = 0;
   let most_freq = 0;
+  const key_freq: Record<number, number> = {};
 
-  arr.reduce((acc: any, val) => {
+  arr.forEach(val => {
     const floored = Math.floor(val);
 
-    if (floored in acc) {
+    if (floored in key_freq) {
       // if key already exists
-      acc[floored]++; // then increment it by 1
+      key_freq[floored]++; // then increment it by 1
     } else {
-      acc[floored] = 1; // or else create a key with value 1
+      key_freq[floored] = 1; // or else create a key with value 1
     }
-    if (acc[floored] >= compare) {
+    if (key_freq[floored] >= compare) {
       // if value of that key is greater
       // than the compare value.
-      compare = acc[floored]; // than make it a new compare value.
+      compare = key_freq[floored]; // than make it a new compare value.
       most_freq = val; // also make that key most frequent.
     }
-
-    return acc;
-  }, {});
-
-  // console.log(acc);
+  });
 
   return most_freq;
 };

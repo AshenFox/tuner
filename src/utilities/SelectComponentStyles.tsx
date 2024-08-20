@@ -1,4 +1,11 @@
-export const createTheme = (theme: any) => ({
+import {
+  CSSObjectWithLabel,
+  GroupBase,
+  StylesConfig,
+  Theme,
+} from 'react-select';
+
+export const createTheme = (theme: Theme) => ({
   ...theme,
   colors: {
     ...theme.colors,
@@ -9,26 +16,44 @@ export const createTheme = (theme: any) => ({
   },
 });
 
-export const Styles = {
-  dropdownIndicator: (provided: any) => ({
+export const createStyles: <T>() => StylesConfig<
+  T,
+  false,
+  GroupBase<T>
+> = () => ({
+  dropdownIndicator: provided => ({
     ...provided,
     paddingLeft: 3,
     paddingRight: 3,
   }),
-  menuList: (provided: any) => ({
+  menuList: provided => ({
     ...provided,
     height: 150,
   }),
-};
+  option: (provided, state) => {
+    const res: CSSObjectWithLabel = { ...provided, cursor: 'pointer' };
+    if (state.isSelected) res.color = '#fff';
+    return res;
+  },
+});
 
-export const StylesSmall = {
-  dropdownIndicator: (provided: any) => ({
+export const createStylesSmall: <T>() => StylesConfig<
+  T,
+  false,
+  GroupBase<T>
+> = () => ({
+  dropdownIndicator: provided => ({
     ...provided,
     paddingLeft: 3,
     paddingRight: 3,
   }),
-  menuList: (provided: any) => ({
+  menuList: provided => ({
     ...provided,
     maxHeight: 100,
   }),
-};
+  option: (provided, state) => {
+    const res: CSSObjectWithLabel = { ...provided, cursor: 'pointer' };
+    if (state.isSelected) res.color = '#fff';
+    return res;
+  },
+});

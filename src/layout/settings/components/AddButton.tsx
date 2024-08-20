@@ -1,27 +1,30 @@
-import React from 'react';
+import { memo, MouseEvent, ReactNode } from 'react';
 
-interface OwnProps {
-  children: React.ReactNode;
-  clickHandler: (e: React.MouseEvent) => void;
+type AddButtonProps = {
+  children: ReactNode;
+  clickHandler: (e: MouseEvent) => void;
   isActive?: boolean;
-}
+};
 
-type Props = OwnProps;
-
-const AddButton: React.FC<Props> = ({ children, clickHandler, isActive = true }) => {
+const AddButton = ({
+  children,
+  clickHandler,
+  isActive = true,
+}: AddButtonProps) => {
   const onClickDefault = () => {};
 
   return (
-    <div
+    <button
       className={`settings__add ${isActive ? 'active' : ''}`}
       onClick={isActive ? clickHandler : onClickDefault}
+      type="button"
     >
       <span>{children}</span>
-      <svg className='settings__add-icon'>
-        <use href={`${window.location.origin}/svg/sprite.svg#icon__add`}></use>
+      <svg className="settings__add-icon">
+        <use href={`${window.location.origin}/svg/sprite.svg#icon__add`} />
       </svg>
-    </div>
+    </button>
   );
 };
 
-export default AddButton;
+export default memo(AddButton);

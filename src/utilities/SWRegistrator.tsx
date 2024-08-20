@@ -1,24 +1,21 @@
-import React, { useEffect } from 'react';
-interface OwnProps {}
+import { memo, useEffect } from 'react';
 
-type Props = OwnProps;
-
-const SWRegistrator: React.FC<Props> = () => {
+const SWRegistrator = () => {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
         try {
-          const registration = await navigator.serviceWorker.register('./sw.js');
+          await navigator.serviceWorker.register('./sw.js'); // returns registration
 
-          console.log('Service Worker: Registered');
+          console.info('Service Worker: Registered');
         } catch (error) {
-          console.log(error);
+          console.info(error);
         }
       });
     }
   }, []);
 
-  return <></>;
+  return null;
 };
 
-export default SWRegistrator;
+export default memo(SWRegistrator);

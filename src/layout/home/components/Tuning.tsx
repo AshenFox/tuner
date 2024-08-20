@@ -1,58 +1,58 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import {
-  set_active_note,
-  auto_set_active_note,
-} from '../../../store/actions/mainActions';
+import { memo, MouseEventHandler, useEffect, useMemo } from 'react';
+import { useActions, useAppSelector } from '@store/hooks';
 
-interface OwnProps {}
+const Tuning = () => {
+  const tunings = useAppSelector(s => s.main.tunings);
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
+  const auto_tuning = useAppSelector(s => s.main.settings.auto_tuning);
+  const active_note_id = useAppSelector(s => s.main.active_note_id);
+  const active_tuning_id = useAppSelector(s => s.main.active_tuning_id);
 
-type Props = OwnProps;
-
-const Tuning: React.FC<Props> = (props) => {
-  const {
-    tunings,
-    most_freq_fr,
-    settings: { auto_tuning },
-  } = useAppSelector((state) => state.main);
+  const { set_active_note, auto_set_active_note } = useActions();
 
   useEffect(() => {
-    if (auto_tuning) dispatch(auto_set_active_note()); // a
-  }, [most_freq_fr, auto_tuning]);
+    if (auto_tuning) auto_set_active_note();
+  }, [most_freq_fr, auto_tuning, auto_set_active_note]);
 
-  const dispatch = useAppDispatch();
-
-  const activeTuning = tunings.find((tuning) => tuning.active);
+  const activeTuning = useMemo(
+    () => tunings.find(({ id }) => id === active_tuning_id),
+    [tunings, active_tuning_id]
+  );
 
   const strings = activeTuning?.data || [];
 
-  // const activeNote = activeTuning?.data.find(({ active }) => active);???????
-
-  const onClickHandler = (id: string, active: boolean) => (e: React.MouseEvent) => {
-    if (!active && !auto_tuning) dispatch(set_active_note(id));
+  const onClickHandler: (id: string) => MouseEventHandler = id => () => {
+    if (id !== active_note_id && !auto_tuning) {
+      set_active_note(id);
+    }
   };
 
   return (
     <div className={`tuning ${auto_tuning ? '' : 'active'}`}>
-      {strings.map(({ name, sign, octave, active, id }, i, arr) => (
-        <div className='tuning__string-cont' key={id}>
-          <div className='tuning__string-number'>{arr.length - i}.</div>
-          <div
-            className={`tuning__string ${active && 'active'}`}
-            onClick={onClickHandler(id, active)}
-          >
-            <div className='tuning__note-holder'>
-              <span className='tuning__note'>{name}</span>
-              <div className='tuning__note-info'>
-                <span className='tuning__note-octave'>{octave}</span>
-                {sign && <span className='tuning__note-sharp'>#</span>}
+      {strings.map(({ name, sign, octave, id }, i, arr) => {
+        const stringNumber = arr.length - i;
+
+        return (
+          <div className="tuning__string-cont" key={id}>
+            <div className="tuning__string-number">{`${stringNumber}.`}</div>
+            <button
+              className={`tuning__string ${id === active_note_id && 'active'}`}
+              onClick={onClickHandler(id)}
+              type="button"
+            >
+              <div className="tuning__note-holder">
+                <span className="tuning__note">{name}</span>
+                <div className="tuning__note-info">
+                  <span className="tuning__note-octave">{octave}</span>
+                  {sign && <span className="tuning__note-sharp">#</span>}
+                </div>
               </div>
-            </div>
+            </button>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
 
-export default Tuning;
+export default memo(Tuning);

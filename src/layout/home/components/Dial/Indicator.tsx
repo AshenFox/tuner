@@ -1,21 +1,19 @@
-import React from 'react';
-import { useAppSelector } from '../../../../store/store';
+import { memo } from 'react';
+import { useAppSelector } from '@store/hooks';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Indicator: React.FC<Props> = (props) => {
-  const {
-    most_freq_fr,
-    tunings,
-    settings: { language },
-  } = useAppSelector((state) => state.main);
+const Indicator = () => {
+  const most_freq_fr = useAppSelector(s => s.main.most_freq_fr);
+  const tunings = useAppSelector(s => s.main.tunings);
+  const language = useAppSelector(s => s.main.settings.language);
+  const active_note_id = useAppSelector(s => s.main.active_note_id);
+  const active_tuning_id = useAppSelector(s => s.main.active_tuning_id);
 
   const value: number = Math.round(most_freq_fr * 10) / 10;
 
-  const activeTuning = tunings.find((tuning) => tuning.active);
-  const activeStringFr = activeTuning?.data.find(({ active }) => active)?.fr;
+  const activeTuning = tunings.find(({ id }) => id === active_tuning_id);
+  const activeStringFr = activeTuning?.data.find(
+    ({ id }) => id === active_note_id
+  )?.fr;
 
   let sensitivity = 0.5;
   if (most_freq_fr > 200) sensitivity = 1;
@@ -35,14 +33,14 @@ const Indicator: React.FC<Props> = (props) => {
 
   return (
     <div className={`dial__indicator-cont ${isTuned && 'active'}`}>
-      <div className='dial__indicator'>
+      <div className="dial__indicator">
         {value}
         {value % 1 ? '' : '.0'}
         <span>Hz</span>
       </div>
-      <div className='dial__indicator-tip'>{tipText}</div>
+      <div className="dial__indicator-tip">{tipText}</div>
     </div>
   );
 };
 
-export default Indicator;
+export default memo(Indicator);

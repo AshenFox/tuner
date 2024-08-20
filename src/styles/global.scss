@@ -20,7 +20,15 @@ body {
 
   overflow-x: hidden !important; /* !!!!!!!!!!!!!!!! */
 
-  background-color: #200952;
+  background-color: $primary;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  @supports (min-height: 100dvh) and (width: 100dvw) {
+    width: 100dvw;
+    min-height: 100dvh;
+  }
 }
 
 h1,
@@ -49,7 +57,7 @@ input:focus {
   outline: none;
 }
 
-.btn {
+button {
   background: none;
   border: none;
   padding: 0;
@@ -57,6 +65,7 @@ input:focus {
   font-family: inherit;
   cursor: pointer;
   transition: all 0.1s linear;
+  color: inherit;
 
   &:focus {
     outline: none;

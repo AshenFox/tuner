@@ -1,15 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk, { ThunkDispatch, ThunkMiddleware } from 'redux-thunk';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from '@redux-devtools/extension';
+import { thunk, ThunkAction, ThunkDispatch } from 'redux-thunk';
 import rootReducer from './reducers';
 import { AppActions } from './types/actions';
-import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
 
 const initialState = {};
 
-const middleware = [thunk as ThunkMiddleware<AppState, AppActions>];
-
-/* const store = createStore(rootReducer, initialState, applyMiddleware(...middleware)); */
+const middlewares = [thunk];
 
 const composeEnhancers = composeWithDevTools({
   trace: true,
@@ -19,7 +16,7 @@ const composeEnhancers = composeWithDevTools({
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(...middleware))
+  composeEnhancers(applyMiddleware(...middlewares))
 );
 
 export default store;
@@ -30,6 +27,5 @@ export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch &
   ThunkDispatch<RootState, null, AppActions>;
-// Customized dispatch and selector hooks for the Tuner App
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export type ThunkActionApp = ThunkAction<void, RootState, unknown, AppActions>;

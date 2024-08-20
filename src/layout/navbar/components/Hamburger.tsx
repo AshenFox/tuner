@@ -1,27 +1,19 @@
-import React from 'react';
+import { memo, MouseEventHandler } from 'react';
 
-interface OwnProps {
-  clickHandler: (e: React.MouseEvent) => void;
-}
-
-type Props = OwnProps;
-
-const Hamburger: React.FC<Props> = ({ clickHandler }) => {
-  return (
-    <button
-      onClick={clickHandler}
-      className={`btn hamburger hamburger--spring`}
-      type='button'
-    >
-      <span className='hamburger__box'>
-        <span className='hamburger__inner'></span>
-      </span>
-    </button>
-  );
+type HamburgerProps = {
+  clickHandler: MouseEventHandler;
 };
 
-export default Hamburger;
+const Hamburger = ({ clickHandler }: HamburgerProps) => (
+  <button
+    onClick={clickHandler}
+    className="hamburger hamburger--spring"
+    type="button"
+  >
+    <span className="hamburger__box">
+      <span className="hamburger__inner" />
+    </span>
+  </button>
+);
 
-/* 
-active
-*/
+export default memo(Hamburger);

@@ -1,0 +1,15 @@
+{
+  "cSpell.words": [
+    "degs",
+    "devs",
+    "linebreak",
+    "notif",
+    "Registrator",
+    "uuidv"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.stylelint": "always"
+  },
+  "stylelint.validate": ["css", "scss"]
+}

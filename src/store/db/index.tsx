@@ -1,7 +1,7 @@
 import { openDB, DBSchema } from 'idb';
-import { Tuning, Settings, Note, Tunings } from '../types/state';
-import languages from '../../utilities/lang.json';
-import { create_note } from '../utilities/helperFunctions';
+import { Tuning, Settings, Note, Tunings } from '@store/types/state';
+import languages from '@utilities/lang.json';
+import { create_note } from '@store/utilities/helperFunctions';
 
 interface MyDB extends DBSchema {
   tunings: {
@@ -16,10 +16,8 @@ interface MyDB extends DBSchema {
 
 const set_up_db = async () => {
   // Setting up the db
-  const db = await openDB<MyDB>('db', 5, {
+  const db = await openDB<MyDB>('db', 6, {
     upgrade(db, oldVersion, newVersion, tx) {
-      console.log('New version', oldVersion, newVersion);
-
       if (oldVersion === 0) {
         db.createObjectStore('tunings', { keyPath: 'id' });
         db.createObjectStore('settings', { keyPath: 'id' });
@@ -28,12 +26,12 @@ const set_up_db = async () => {
       const tunings_store = tx.objectStore('tunings');
       const settings_store = tx.objectStore('settings');
 
-      default_tunings.map((tuning) => tunings_store.put(tuning));
+      default_tunings.map(tuning => tunings_store.put(tuning));
 
       settings_store.put({
         id: 'main-settings',
         auto_tuning: true,
-        language: languages['ENG'],
+        language: languages.ENG,
       });
     },
   });
@@ -50,15 +48,15 @@ const set_up_db = async () => {
         settings,
       };
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
   const add_tuning = async (new_tuning: Tuning) => {
     try {
-      return db.put('tunings', new_tuning);
+      return await db.put('tunings', new_tuning);
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -68,15 +66,15 @@ const set_up_db = async () => {
 
       if (tuning) db.put('tunings', { ...tuning, name: value });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
   const delete_tuning = async (id: string) => {
     try {
-      return db.delete('tunings', id);
+      return await db.delete('tunings', id);
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -85,9 +83,12 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', id);
 
       if (tuning)
-        return db.put('tunings', { ...tuning, data: [...tuning.data, new_string] });
+        return await db.put('tunings', {
+          ...tuning,
+          data: [...tuning.data, new_string],
+        });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -96,14 +97,14 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', id);
 
       if (tuning)
-        return db.put('tunings', {
+        return await db.put('tunings', {
           ...tuning,
-          data: tuning.data.map((string) =>
+          data: tuning.data.map(string =>
             new_note.id === string.id ? new_note : string
           ),
         });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -112,12 +113,12 @@ const set_up_db = async () => {
       const tuning = await db.get('tunings', tuning_id);
 
       if (tuning)
-        return db.put('tunings', {
+        return await db.put('tunings', {
           ...tuning,
-          data: tuning.data.filter((string) => string_id !== string.id),
+          data: tuning.data.filter(string => string_id !== string.id),
         });
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -126,10 +127,13 @@ const set_up_db = async () => {
       const settings = await db.get('settings', 'main-settings');
 
       if (settings) {
-        return db.put('settings', { ...settings, auto_tuning: !settings.auto_tuning });
+        return await db.put('settings', {
+          ...settings,
+          auto_tuning: !settings.auto_tuning,
+        });
       }
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -138,10 +142,13 @@ const set_up_db = async () => {
       const settings = await db.get('settings', 'main-settings');
 
       if (settings) {
-        return db.put('settings', { ...settings, language: languages[value] });
+        return await db.put('settings', {
+          ...settings,
+          language: languages[value],
+        });
       }
     } catch (error) {
-      console.log(error);
+      console.info(error);
     }
   };
 
@@ -164,7 +171,7 @@ const set_up_db = async () => {
 
 const default_tunings: Tunings = [
   {
-    name: 'guitar_standart',
+    name: 'guitar_standard',
     id: '76d9ccac-d184-413d-a3ba-12f183e4e9f0',
     data: [
       create_note(5, 2),
@@ -174,10 +181,9 @@ const default_tunings: Tunings = [
       create_note(12, 3),
       create_note(5, 4),
     ],
-    active: true,
     is_default: true,
     created: 1628083499901,
-    default_key: 'guitar_standart',
+    default_key: 'guitar_standard',
   },
   {
     name: 'guitar_drop_d',
@@ -190,7 +196,6 @@ const default_tunings: Tunings = [
       create_note(12, 3),
       create_note(5, 4),
     ],
-    active: false,
     is_default: true,
     created: 1628083569741,
     default_key: 'guitar_drop_d',
@@ -206,7 +211,6 @@ const default_tunings: Tunings = [
       create_note(11, 3),
       create_note(4, 4),
     ],
-    active: false,
     is_default: true,
     created: 1628083569742,
     default_key: 'guitar_b1',
@@ -222,7 +226,6 @@ const default_tunings: Tunings = [
       create_note(10, 3),
       create_note(3, 4),
     ],
-    active: false,
     is_default: true,
     created: 1628083569743,
     default_key: 'guitar_b2',
@@ -230,8 +233,12 @@ const default_tunings: Tunings = [
   {
     name: 'ukulele',
     id: 'aa5520af-cdc9-4977-8bdb-478be826fe2d',
-    data: [create_note(8, 4), create_note(1, 4), create_note(5, 4), create_note(10, 4)],
-    active: false,
+    data: [
+      create_note(8, 4),
+      create_note(1, 4),
+      create_note(5, 4),
+      create_note(10, 4),
+    ],
     is_default: true,
     created: 1628083569744,
     default_key: 'ukulele',

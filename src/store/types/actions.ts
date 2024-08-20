@@ -25,7 +25,7 @@ export const SYNC_WITH_DB = 'SYNC_WITH_DB';
 
 export const SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
 
-export interface SwitchLanguagegAction {
+export interface SwitchLanguageAction {
   type: typeof SWITCH_LANGUAGE;
   payload: {
     language: Language;
@@ -64,7 +64,7 @@ export interface ErrorAction {
   type: typeof ERROR;
 }
 
-export interface EditTuniingNameAction {
+export interface EditTuningNameAction {
   type: typeof EDIT_TUNING_NAME;
   payload: {
     id: string;
@@ -127,12 +127,12 @@ export type MainActions =
   | AddTuningAction
   | SetActiveTuningAction
   | EditStringAction
-  | EditTuniingNameAction
+  | EditTuningNameAction
   | ErrorAction
   | AddStringAction
   | DeleteStringAction
   | ToggleAutoTuningAction
   | SyncWithDBAction
-  | SwitchLanguagegAction; // & ...
+  | SwitchLanguageAction; // & ...
 
 export type AppActions = MainActions; // & ...
