@@ -30,7 +30,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
-    'linebreak-style': [1, 'unix'],
+    'linebreak-style': ['warn', 'windows'],
     'react/react-in-jsx-scope': 0,
     'react/function-component-definition': [
       1,
@@ -112,5 +112,7 @@ module.exports = {
         label: ['button'],
       },
     ],
+    'jsx-a11y/control-has-associated-label': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };
