@@ -14,7 +14,9 @@ app.use(express.urlencoded(options));
 app.use(express.json());
 
 app.use((req, res, next) => {
-  if (/(.ico|.js|.css|.jpg|.png|.map|.svg|.txt)$/i.test(req.path)) {
+  if (
+    /(.ico|.js|.css|.jpg|.png|.map|.svg|.txt|.webmanifest)$/i.test(req.path)
+  ) {
     next();
   } else {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
