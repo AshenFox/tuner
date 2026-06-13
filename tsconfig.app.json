@@ -23,14 +23,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": "./",
     "paths": {
-      "@public/*": ["src/public/*"],
-      "@server/*": ["server/*"],
-      "@layout/*": ["src/layout/*"],
-      "@store/*": ["src/store/*"],
-      "@styles/*": ["src/styles/*"],
-      "@utilities/*": ["src/utilities/*"]
+      "@public/*": ["./src/public/*"],
+      "@server/*": ["./server/*"],
+      "@layout/*": ["./src/layout/*"],
+      "@store/*": ["./src/store/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utilities/*": ["./src/utilities/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs", "vite.config.ts"]
