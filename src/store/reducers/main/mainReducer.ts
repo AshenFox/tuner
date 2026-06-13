@@ -132,7 +132,8 @@ const MainReducer = (
         ...calc_fr(
           state.fr_arr,
           action.payload.detected_fr,
-          state.most_freq_fr
+          state.most_freq_fr,
+          state.reject_count
         ),
       };
 
@@ -159,36 +160,60 @@ const MainReducer = (
 
 export default MainReducer;
 
+// Pitch detector is unreliable below this threshold; readings are ignored
+const PITCH_FLOOR_HZ = 5;
+
+// After this many consecutive "harmonic" rejections we assume the player has
+// genuinely changed notes (not a transient harmonic blip) and force-accept the
+// reading. Roughly matches fr_arr length so a real note change wins quickly.
+const FLUSH_AFTER = 7;
+
 const calc_fr = (
   fr_arr_prev: number[],
   detected_fr: number,
-  most_freq_fr_prev: number
+  most_freq_fr_prev: number,
+  reject_count_prev: number
 ) => {
-  const isTooLow = detected_fr <= 5;
-  let sensitivity = 5;
-  if (most_freq_fr_prev < 100) sensitivity = 15;
+  const isTooLow = detected_fr <= PITCH_FLOOR_HZ;
 
-  // Filter our harmonics fr
+  // ~3% tolerance ≈ ±50 cents, self-calibrating across all frequencies.
+  // Floor keeps the filter meaningful if most_freq_fr ever collapses toward 0.
+  const sensitivity = Math.max(most_freq_fr_prev * 0.03, 1);
+
+  // Filter harmonic multiples (2×–5×) and sub-harmonics (÷2, ÷3)
   const harmonic_offset = Math.min(
     Math.abs(detected_fr - most_freq_fr_prev * 2),
     Math.abs(detected_fr - most_freq_fr_prev * 3),
-    Math.abs(detected_fr - most_freq_fr_prev * 4)
+    Math.abs(detected_fr - most_freq_fr_prev * 4),
+    Math.abs(detected_fr - most_freq_fr_prev * 5)
   );
-  const is_harmonic = harmonic_offset <= sensitivity;
+  const subharmonic_offset = Math.min(
+    Math.abs(detected_fr - most_freq_fr_prev / 2),
+    Math.abs(detected_fr - most_freq_fr_prev / 3)
+  );
+  const looks_harmonic =
+    harmonic_offset <= sensitivity || subharmonic_offset <= sensitivity;
 
-  const fr_arr =
-    is_harmonic || isTooLow
-      ? fr_arr_prev
-      : [...fr_arr_prev.filter((_, i) => i !== 0), detected_fr];
+  // Escape hatch: a sustained run of "harmonic" readings is almost certainly a
+  // real note change near prev/2 or prev/3, so let it through instead of
+  // deadlocking on the old pitch forever.
+  const force_flush = reject_count_prev >= FLUSH_AFTER;
+  const reject = (looks_harmonic && !force_flush) || isTooLow;
 
-  const most_freq_fr =
-    is_harmonic || isTooLow
-      ? most_freq_fr_prev + (Math.random() < 0.5 ? -0.05 : 0.05)
-      : get_most_frequent(fr_arr);
+  const fr_arr = reject
+    ? fr_arr_prev
+    : [...fr_arr_prev.filter((_, i) => i !== 0), detected_fr];
+
+  const most_freq_fr = reject ? most_freq_fr_prev : get_most_frequent(fr_arr);
+
+  // Only count the harmonic-rejection streak; silence (too low) resets it.
+  const reject_count =
+    looks_harmonic && !force_flush && !isTooLow ? reject_count_prev + 1 : 0;
 
   return {
     fr_arr,
     most_freq_fr,
+    reject_count,
   };
 };
 
@@ -206,26 +231,26 @@ const find_closest_note = (notes: Note[], most_freq_fr: number) => {
 };
 
 const get_most_frequent = (arr: number[]) => {
-  let compare = 0;
-  let most_freq = 0;
-  const key_freq: Record<number, number> = {};
+  // Bin size scales with frequency (~1% of value, min 0.5 Hz) so that
+  // low-frequency readings aren't coarsely bucketed into 1 Hz slots.
+  const bins: Record<number, { count: number; sum: number }> = {};
+  let bestKey: number | null = null;
 
   arr.forEach(val => {
-    const floored = Math.floor(val);
+    const binSize = Math.max(val * 0.01, 0.5);
+    const key = Math.round(val / binSize);
 
-    if (floored in key_freq) {
-      // if key already exists
-      key_freq[floored]++; // then increment it by 1
-    } else {
-      key_freq[floored] = 1; // or else create a key with value 1
-    }
-    if (key_freq[floored] >= compare) {
-      // if value of that key is greater
-      // than the compare value.
-      compare = key_freq[floored]; // than make it a new compare value.
-      most_freq = val; // also make that key most frequent.
-    }
+    if (!(key in bins)) bins[key] = { count: 0, sum: 0 };
+
+    const bin = bins[key];
+    bin.count++;
+    bin.sum += val;
+
+    // Strict `>` keeps the first bin to reach the max as the winner, so ties
+    // resolve deterministically instead of favouring later readings.
+    if (bestKey === null || bin.count > bins[bestKey].count) bestKey = key;
   });
 
-  return most_freq;
+  // Return the average of the winning bin for a stable, representative value.
+  return bestKey === null ? 0 : bins[bestKey].sum / bins[bestKey].count;
 };

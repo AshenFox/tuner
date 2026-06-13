@@ -9,7 +9,7 @@ let audioContext: AudioContext;
 let analyserNode: AnalyserNode;
 let mediaStreamSource: MediaStreamAudioSourceNode;
 let detector: PitchDetector<Float64Array>;
-let inputFloat32Array: Float32Array;
+let inputFloat32Array: Float32Array<ArrayBuffer>;
 
 const PitchDetectorComponent = () => {
   const { set_fr } = useActions();
@@ -24,13 +24,13 @@ const PitchDetectorComponent = () => {
     (
       analyserNode: AnalyserNode,
       detector: PitchDetector<Float64Array>,
-      inputFloat32Array: Float32Array,
+      inputFloat32Array: Float32Array<ArrayBuffer>,
       sampleRate: number
     ) => {
       analyserNode.getFloatTimeDomainData(inputFloat32Array);
-      const [fr] = detector.findPitch(inputFloat32Array, sampleRate);
+      const [pitch] = detector.findPitch(inputFloat32Array, sampleRate);
 
-      set_fr(fr);
+      set_fr(pitch);
 
       const isMuted = !stream.getTracks()[0].enabled;
 
@@ -47,13 +47,27 @@ const PitchDetectorComponent = () => {
 
   const setup = useCallback(async () => {
     if (!stream) {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // Disable mobile audio processing: echo cancellation / noise suppression
+      // route the mic through a speech path that high-passes out low string
+      // fundamentals (D2 ~73Hz, E2 ~82Hz) and breaks detection on Android.
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false,
+        },
+      });
     } else {
       stream.getTracks()[0].enabled = true;
     }
 
     if (!audioContext) audioContext = new AudioContextConstructor();
-    if (!analyserNode) analyserNode = audioContext.createAnalyser();
+    if (!analyserNode) {
+      analyserNode = audioContext.createAnalyser();
+      // Larger window so low frequencies get >=2 full periods for reliable
+      // autocorrelation (~170ms @ 48kHz).
+      analyserNode.fftSize = 8192;
+    }
 
     if (!mediaStreamSource) {
       mediaStreamSource = audioContext.createMediaStreamSource(stream);

@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useAppSelector } from '@store/hooks';
+import calcAngle from '@utilities/dialScale';
 import Indicator from './Indicator';
 import Notes from './Notes';
 import Frs from './Frs';
@@ -56,28 +57,5 @@ const Dial = () => {
     </div>
   );
 };
-
-const calcAngle = (fr: number) =>
-  degs.reduce((result, deg, i) => {
-    if (fr <= 0) return result;
-
-    const { max, k } = deg;
-
-    if (fr > max) result += max * k;
-    else result += fr * k;
-
-    fr -= max;
-
-    if (i + 1 === degs.length && fr > 0) result += fr * 0.5;
-    return result;
-  }, 0);
-
-const degs: { max: number; k: number }[] = [
-  { max: 48, k: 10 },
-  { max: 12, k: 5 },
-  { max: 60, k: 2.5 },
-  { max: 80, k: 2 },
-  { max: 520, k: 1 },
-];
 
 export default memo(Dial);
