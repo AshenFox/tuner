@@ -17,6 +17,10 @@ const Note = ({ data }: NoteProps) => {
     transform: `rotate(${angle * 1.5}deg)`,
   };
 
+  // Split the toPrecision string directly so trailing zeros (e.g. "440.0")
+  // are preserved and the decimal span renders consistently.
+  const [intPart, decPart] = fr.toPrecision(4).split('.');
+
   return (
     <div className="dial__note-cont" style={style}>
       <div className="dial__note-holder">
@@ -27,8 +31,9 @@ const Note = ({ data }: NoteProps) => {
         </div>
       </div>
       <div className="dial__note-fr">
-        {Number(fr.toFixed(1))}
-        <span>Hz</span>
+        <span className="dial__note-fr-int">{intPart}</span>
+        {decPart && <span className="dial__note-fr-dec">{`.${decPart}`}</span>}
+        <span className="dial__note-fr-unit">Hz</span>
       </div>
     </div>
   );

@@ -38,6 +38,7 @@ export type Tunings = Tuning[];
 export interface mainStateInterface {
   fr_arr: number[];
   most_freq_fr: number;
+  reject_count: number;
   tunings: Tunings;
   active_note_id: string | null;
   active_tuning_id: string | null;

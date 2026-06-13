@@ -76,7 +76,11 @@
   }
 
   &__note-fr {
-    span {
+    &-dec {
+      font-size: 0.7em;
+    }
+
+    &-unit {
       margin-left: 0.15rem;
     }
   }

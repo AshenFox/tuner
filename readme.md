@@ -1,4 +1,4 @@
-Посмотреть проект можно по ссылке - [Tuner](https://fox-tuner.herokuapp.com/)
+Посмотреть проект можно по ссылке - [Tuner](https://tuner.ashenfox.top/)
 
 # Tuner
 
